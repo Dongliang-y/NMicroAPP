@@ -1,32 +1,29 @@
-# Prerequisites
-*.d
+tests
+publish
+node_modules
+.DS_Store
+node_modules
+/dist
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# local env files
+.env.local
+.env.*.local
 
-# Precompiled Headers
-*.gch
-*.pch
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+package-lock.json
 *.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+obj
+bin
+wwwroot
