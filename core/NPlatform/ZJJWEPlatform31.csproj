@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	  <IsPackable>true</IsPackable>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ZJJWEPlatform</RootNamespace>
+    <AssemblyName>ZJJWEPlatform</AssemblyName>
+    <AssemblyVersion>3.0.6.4</AssemblyVersion>
+    <Description>2021-1-6 V3.0.6.1  增加了DTO 使用 特性进行属性值的校验支持.  增加了分页DTO基类(固定了页码,页大小,排序字段,排序方式),增加了DTO基类.
+特性设置好后, DTO对象只需要使用 obj.Validate()方式即可进行校验.
+2020-12-18 V3.0.5.10 修复oracle 客户端驱动注入的BUG
+2020-12-18 V3.0.5.9 redis 緩存更新
+2020-12-16 V3.0.5.7 更新dapperExt 包</Description>
+    <Version>3.0.6.4</Version>
+    <Authors>DongliangYi</Authors>
+    <Company>长沙中交京纬</Company>
+    <Product>基础框架</Product>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <FileVersion>3.0.6.4</FileVersion>
+    <PackageId>ZJJWEPlatform</PackageId>
+    <PackageReleaseNotes>单元测试通过，试运行。</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>ZJJWEPlatform.xml</DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>ZJJWEPlatform.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Filters\ExpressionFilter.cs" />
+    <Compile Remove="IOC\IOCManagercastle.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Readme.md" />
+    <None Remove="ZJJWEPlatform.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ZJJWEPlatform.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Readme.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="5.0.0" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="DapperExtensions" Version="3.0.0.16" />
+    <PackageReference Include="Lincence.VerifyCore" Version="3.0.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.6" />
+    <PackageReference Include="MySql.Data" Version="8.0.21" />
+    <PackageReference Include="System.Data.OracleClient" Version="1.0.8" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.1" />
+    <PackageReference Include="ZJJWEPlatform.Infrastructure" Version="3.0.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ZJJWEPlatform.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

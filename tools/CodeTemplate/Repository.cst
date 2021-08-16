@@ -1,0 +1,80 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+
+<%@ Assembly Name="SchemaExplorer"%>
+<%@ Assembly Name="System.Data"%>
+<%@ Import Namespace="SchemaExplorer"%>
+<%@ Import Namespace="System.Data"%>
+<%@ Import Namespace="System.Text"%>
+
+/*********************************************************** 
+**项目名称:	 EFrame.Repositories                                                               				   
+**功能描述:	<%=SourceTable.Description %>  
+**作    者: 	此代码由CodeSmith生成。                                         			    
+**版 本 号:	1.0                                           			
+**修改历史： 
+************************************************************/ 
+namespace ZJJWFoundationPlatform.Repositories.<%=GetModuleName(SourceTable)%>
+{ 
+	using System; 
+	using System.Linq; 
+	using ZJJWFoundationPlatform.Domains.Entity.<%=GetModuleName(SourceTable)%>;
+	using ZJJWEPlatform.Domains.IRepositories;
+	using ZJJWEPlatform.Repositories;
+	using ZJJWFoundationPlatform.Domains.IRepositories.<%=GetModuleName(SourceTable)%>;
+
+    /// <summary> 
+    /// <%=GetName(SourceTable)%>仓储操作
+    /// </summary> 
+    public partial class <%=GetName(SourceTable)%>Repository : AggregationRepository<<%=GetName(SourceTable)%>, string>, I<%=GetName(SourceTable)%>Repository
+    { 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%=GetName(SourceTable)%>Repository"/> class.
+        /// </summary>
+        /// <param name="options">
+        /// The options.
+        /// </param>
+        public <%=GetName(SourceTable)%>Repository(IRepositoryOptions options)
+            : base(options)
+        {
+        }
+    } 
+}
+<script runat="template">
+	public string GetModuleName(TableSchema table)
+	{
+		if(table==null)
+		{
+			return null;
+		}	
+		return table.Name.Split('_')[0];
+	}
+
+	public string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+	public override string GetFileName()
+	{
+		return this.GetName(this.SourceTable) + "Repository.cs";
+	}
+</script>

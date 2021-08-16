@@ -27,3 +27,5 @@ package-lock.json
 obj
 bin
 wwwroot
+/tools/consul.exe
+/tools/*.exe

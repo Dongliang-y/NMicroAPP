@@ -1,0 +1,353 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#"  ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Property Name="WestPanle"  Category="Layout"  Type="System.Boolean" Default="true"  Description="West Panle" %>
+<%@ Property Name="EastPanle"  Category="Layout"  Type="System.Boolean" Default="false"  Description="West Panle" %>
+<%@ Property Name="NorthPanle"  Category="Layout"   Type="System.Boolean" Default="false"  Description="North Panle" %>
+<%@ Property Name="SouthPanle"  Category="Layout"  Type="System.Boolean" Default="false"  Description="West Panle" %>
+<%@ Property Name="TreeType" Type="TreeTypeEnum"   Description="左侧树的类型。" %>
+<%@ Property Name="AddWindow" Type="System.Boolean" Default="true"  Description="是否包含新增窗口。" %>
+<%@ Property Name="SingleFileUpload" Type="System.Boolean" Default="false"  Description="是否包含单文件上传(仅包含新增窗口时生效)。" %>
+<%@ Property Name="multiFileUpload" Type="System.Boolean" Default="false"  Description="是否包含批量文件上传(仅包含新增窗口时生效)。" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title><%= GetName(SourceTable)%></title>
+    <script src="../../Scripts/LoadExtJS.js"></script>
+    <script src="../../Scripts/<%=GetMudName(SourceTable.Name) %>/<%=GetMudName(SourceTable.Name) %>ApiMethod.js"></script>
+    <script src="../../Scripts/Public/Grid/Grid.js"></script>
+    <%if(TreeType!=TreeTypeEnum.NULL){ %>
+    <script src="../../Scripts/Public/Tree/<%=TreeType%>.js"></script> 
+    <%} %>
+    <script src="../../Scripts/<%=GetMudName(SourceTable.Name) %>/<%= GetName(SourceTable)%>/<%= GetName(SourceTable)%>.js"></script>
+<%if(SingleFileUpload&&AddWindow){
+        %>
+         <script src="../../Upload/Scripts/plupload.full.js"></script> 
+        <%
+    } %>
+    <%if(multiFileUpload&&AddWindow){
+        %>
+         <script src="../../Upload/UploadQueueControl.js"></script> 
+         <%
+    } %>
+    <!--
+    CodeSmith 自动生成的基于配置的基本布局，请根据实际业务需求进一步调整，并更改此注释为开发人员本身信息。
+    
+    CodeSmith模板版本：V1.0 BY DONGLIANG YI
+    -->
+</head>
+<body class="pad-a5">
+
+</body>
+</html>
+
+<script runat="template">
+
+/// <summary>
+
+/// 定义一个下拉列表的枚举
+
+/// </summary>
+
+public enum TreeTypeEnum
+
+{
+    NULL,
+    treeOrganiz,
+    
+    treeProject,
+    
+    treeOwner,
+    
+    treeSupervisor,
+    
+   treeContract
+}
+
+public string GetMemberVariableName(ColumnSchema column)
+{
+	//string propertyName = GetPropertyName(column);
+	string propertyName = column.Name;
+	string memberVariableName =  propertyName.ToLower();
+	
+	return memberVariableName;
+}
+
+public string GetIsDelete(ColumnSchemaCollection columns)
+{
+    for(int i=0;i<columns.Count;i++)
+    {
+        if(columns[i].Name.ToLower()=="isdeleted")
+        {
+            return ", ILogicDelete";
+        }
+    }
+    return "";
+}
+
+
+public string GetPropertyName(ColumnSchema column)
+{
+	string propertyName = column.Name;
+	
+	if (propertyName == column.Table.Name + "Name") return "Name";
+	if (propertyName == column.Table.Name + "Description") return "Description";
+	
+	if (propertyName.EndsWith("TypeCode")) propertyName = propertyName.Substring(0, propertyName.Length - 4);
+	
+	return propertyName;
+}
+
+public int GetPropertyNameLength(ColumnSchema column)
+{
+	return (GetPropertyName(column)).Length;
+}
+public int GetPropertyNameMaxLength()
+{
+	int ret = 0;
+	foreach(ColumnSchema column in SourceTable.Columns)
+	{
+		ret = ret < GetPropertyNameLength(column)?GetPropertyNameLength(column):ret;
+	}
+	return ret;
+}
+public string GetMudName(string tableName)
+{
+    if(tableName.Contains("_"))
+        return tableName.Split('_')[0];
+    else
+        throw new Exception("数据库表命名错误！");
+}
+public string GetMemberVariableDefaultValue(ColumnSchema column)
+{
+	if(column.IsPrimaryKeyMember)
+	{
+	    return "";
+	}
+	switch (column.DataType)
+	{
+		case DbType.Guid:
+		{
+			return "Guid.Empty";
+		}
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "String.Empty";
+		}
+		default:
+		{
+			return "";
+		}
+	}
+}
+
+public string GetCSharpVariableType(ColumnSchema column)
+{
+	if (column.Name.EndsWith("TypeCode")) return column.Name;
+    if(column.DataType==DbType.Binary)
+    {
+        return column.AllowDBNull?"byte?[]":"byte[]";
+    }
+    
+	string tp="";
+    string isNullTag="";
+	switch (column.DataType)
+	{
+		case DbType.AnsiString:
+            tp= "string" ;
+            break;
+		case DbType.AnsiStringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Boolean:
+            tp= "bool";
+            break;
+		case DbType.Byte:
+            tp= "byte";
+            break;
+		case DbType.Currency: 
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Date:
+            tp= "DateTime";
+            isNullTag="?";
+            break;
+		case DbType.DateTime: 
+            tp= "DateTime";
+            isNullTag="?";
+            break;
+		case DbType.Decimal:
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Double:
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Guid: 
+            tp= "Guid";
+            break;
+		case DbType.Int16: 
+            tp= "short";
+            break;
+		case DbType.Int32: 
+            tp= "int";
+            break;
+		case DbType.Int64: 
+            tp= "long";
+            break;
+		case DbType.Object: 
+            tp= "object";
+            isNullTag="?";
+            break;
+		case DbType.SByte: 
+            tp= "bool";
+            break;
+		case DbType.Single:
+            tp= "float";
+            break;
+		case DbType.String: 
+            tp= "string";
+            break;
+		case DbType.StringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Time:
+            tp= "TimeSpan";
+            isNullTag="?";
+            break;
+		case DbType.UInt16: 
+            tp= "ushort";
+            break;
+		case DbType.UInt32: 
+            tp= "uint";
+            break;
+		case DbType.UInt64: 
+            tp= "ulong";
+            break;
+		case DbType.VarNumeric: 
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		default:
+		{
+			return "__UNKNOWN__" + column.NativeType;
+		}
+	}
+    if(column.AllowDBNull)
+        return tp+isNullTag;
+    else
+        return tp;
+}
+
+public string GetDataAnnotations(ColumnSchema column)
+{
+    string attr=!column.AllowDBNull?"[Required]\r":"";
+    if(column.IsUnique)
+        attr+="[Unique]\r\n";
+        
+    
+	switch (column.DataType)
+	{
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+        case DbType.String: 
+		case DbType.StringFixedLength:
+            attr+="[StringLength("+column.Size+")]\r\n";
+            break;
+	}
+    return attr;
+}
+public string GetReaderMethod(ColumnSchema column)
+{
+	switch (column.DataType)
+	{
+		case DbType.Byte:
+		{
+			return "GetByte";
+		}
+		case DbType.Int16:
+		{
+			return "GetInt16";
+		}
+		case DbType.Int32:
+		{
+			return "GetInt32";
+		}
+		case DbType.Int64:
+		{
+			return "GetInt64";
+		}
+		case DbType.AnsiStringFixedLength:
+		case DbType.AnsiString:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "GetString";
+		}
+		case DbType.Boolean:
+		{
+			return "GetBoolean";
+		}
+		case DbType.Guid:
+		{
+			return "GetGuid";
+		}
+		case DbType.Currency:
+		case DbType.Decimal:
+		{
+			return "GetDecimal";
+		}
+		case DbType.DateTime:
+		case DbType.Date:
+		{
+			return "GetDateTime";
+		}
+		case DbType.Binary:
+		{
+			return "GetBytes";
+		}
+		default:
+		{
+			return "__SQL__" + column.DataType;
+		}
+	}
+}
+
+	public  string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+public override string GetFileName()
+{
+	return this.GetName(this.SourceTable) + ".html";
+}
+</script>

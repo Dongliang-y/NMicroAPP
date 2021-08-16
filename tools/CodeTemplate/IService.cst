@@ -1,0 +1,72 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+
+<%@ Assembly Name="SchemaExplorer"%>
+<%@ Assembly Name="System.Data"%>
+<%@ Import Namespace="SchemaExplorer"%>
+<%@ Import Namespace="System.Data"%>
+<%@ Import Namespace="System.Text"%>
+
+/*********************************************************** 
+**项目名称:	 EFrame.IServices                                                               				   
+**功能描述:	  <%=GetName(SourceTable)%>Services 的摘要说明 
+**作    者: 	此代码由CodeSmith生成。                                         			    
+**版 本 号:	1.0                                           			    
+**创建日期： <%=DateTime.Now.ToString("yyyy-MM-dd HH:mm") %>
+**修改历史： 
+************************************************************/ 
+namespace  ZJJWFoundationPlatform.IService.Services.<%=GetModuleName(SourceTable)%>
+{ 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using ZJJWEPlatform.Applications;
+    using ZJJWFoundationPlatform.DTO.<%=GetModuleName(SourceTable)%>;
+    /// <summary> 
+    ///    <%=GetName(SourceTable)%>  业务层
+    /// </summary> 
+    public partial interface I<%=GetName(SourceTable)%>Service : IApplication
+    {  
+    } 
+} 
+ 
+<script runat="template">
+	public string GetModuleName(TableSchema table)
+	{
+		if(table==null)
+		{
+			return null;
+		}	
+		return table.Name.Split('_')[0];
+	}
+
+	public string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+
+	public override string GetFileName()
+	{
+		return "I"+this.GetName(this.SourceTable) + "Service.cs";
+	}
+</script>

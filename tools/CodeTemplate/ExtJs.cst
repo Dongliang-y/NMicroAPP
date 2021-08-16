@@ -1,0 +1,1141 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#"  ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Property Name="WestPanle"  Category="Layout"  Type="System.Boolean" Default="true"  Description="West Panle" %>
+<%@ Property Name="EastPanle"  Category="Layout"  Type="System.Boolean" Default="false"  Description="West Panle" %>
+<%@ Property Name="NorthPanle"  Category="Layout"   Type="System.Boolean" Default="false"  Description="North Panle" %>
+<%@ Property Name="SouthPanle"  Category="Layout"  Type="System.Boolean" Default="false"  Description="West Panle" %>
+<%@ Property Name="TreeType" Type="TreeTypeEnum"   Description="左侧树的类型。" %>
+<%@ Property Name="AddWindow" Type="System.Boolean" Default="true"  Description="是否包含新增窗口。" %>
+<%@ Property Name="SingleFileUpload" Type="System.Boolean" Default="false"  Description="是否包含单文件上传。" %>
+<%@ Property Name="multiFileUpload" Type="System.Boolean" Default="false"  Description="是否包含批量文件上传。" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+<% 
+string tabName= GetName(SourceTable); 
+string moudName=GetMudName(SourceTable.Name);
+%>
+/***************************** User.js ******************************
+**项目名称:	
+**JS名:	><%=tabName%>
+**功能描述: <%=SourceTable.Description.Replace("\n","").Replace("\r","")%> 
+**作    者: 基于CodeSmith 模板生成，开发人员请更改！
+**版 本 号:	v1.0.0.0
+**创建日期：<%=DateTime.Now.ToString() %>
+**CodeSmith模板版本：V1.0 BY DONGLIANG YI
+****************************** User.js ******************************/
+
+    
+var pageReady=function () {
+
+alert("提示:ui 代码生成后需 调整标有“@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@”处的代码。");
+
+ //#region 属性
+     /* var userInfo = {
+                 Account:data.Account,
+                 CnName:data.CnName,
+                 Roles:data.Roles,
+                 Orgs:data.Orgs,
+                 CurrentRoleId:'',
+                 CurrentOrgCode:'',
+                 Id:''  //userid
+             };*/
+ var userInfo = Ext.JSON.decode(getCookie('UserInfo'));
+ //#endregion
+ 
+ //#region 表格及树
+ 
+	//树
+ <%if(TreeType!=TreeTypeEnum.NULL){ %>
+    <%=TreeType%>.on("itemclick", function (tree, record) {
+        storeGrid<%= tabName%>.loadPage(1);//刷新grid 并加载第一页
+    }); 
+    //展开全部节点
+     <%=TreeType%>.expandAll(); 
+ <%} %>
+ 
+	//表格数据源
+ 
+    //定义列模型
+    Ext.define("modelGrid<%=tabName%>", {
+        extend: 'Ext.data.Model',
+        fields: [
+              <%
+              for (int i = 0; i < SourceTable.Columns.Count; i++) { 
+               if(SourceTable.Columns[i].Name.ToLower()=="isdeleted")continue;
+              %>
+              { name: '<%=SourceTable.Columns[i].Name%>' } <%=(i!=SourceTable.Columns.Count?",":"")%>
+              <%}%>
+                ]
+    });
+    
+    //数据存储
+    var storeGrid<%=tabName%> = Ext.create('Ext.data.Store', {
+        model: "modelGrid<%=tabName%>",
+        proxy: {
+            type: 'ajax',
+            api: {
+                read: <%=moudName.ToLower()%>Config.get<%=tabName%>s
+            },           
+            reader: {
+                //数据格式为json  
+                type: 'json',
+                root: 'rows',
+                //获取数据总数  
+                totalProperty: 'total'
+            }
+        },
+        autoLoad: false 
+    }); 
+    
+    // 查询条件
+    storeGrid<%=tabName%>.on('beforeload', function (store, options) {
+        var new_params = {
+            //xxxxName: Ext.getCmp('txtKeyWord').getValue(),
+            //完善查询条件 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            pageSize: pagesize,//每页显示行数 tree阿萨
+             <%if(TreeType!=TreeTypeEnum.NULL){ 
+                string paramName=TreeType.ToString().Substring(4)+"Code";
+             %>
+             <%=paramName %>:orgCode
+             <%} %>
+        };
+        store.pageSize = pagesize;
+        Ext.apply(store.proxy.extraParams, new_params);
+    }); 
+
+	//分页
+     cmbPageSize.on("select", function (comboBox) {
+        pagesize = comboBox.getValue(); ///改变页面行大小
+        storeGrid<%= tabName%>.loadPage(1);
+    });
+	//工具栏
+    var tbar<%= tabName%> = Ext.create('Ext.toolbar.Toolbar', { 
+        items: [
+            {
+                xtype: 'textfield',
+                id: 'txtKeyWord',
+                name: 'txtKeyWord',
+                selectOnFocus: true, 
+                emptyText: '请完善查询条件', //完善查询条件 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                listeners: {
+                    specialkey: function (field, e) {
+                        if (e.getKey() == Ext.EventObject.ENTER) {
+                            storeGrid<%=tabName%>.loadPage(1);
+                        }
+                    }
+                }
+            }, 
+            {
+                xtype: 'button',
+                text: '查询',
+                iconCls: config.queryCls,
+                handler: function () { 
+                    storeGrid<%=tabName%>.loadPage(1);
+                }
+            },  {
+                id: 'buttonAdd',
+                text: '新增',
+                iconCls: config.addCls,
+                handler: function () {
+                    add<%=tabName%>()
+                }
+            },  {
+                id: 'buttonEdit',
+                text: '修改',
+                iconCls: config.editCls,
+                handler: function () {
+                    edit<%=tabName%>()
+                }
+            }, {
+                id: 'buttonDel',
+                text: '删除',
+                iconCls: config.deleteCls,
+                handler: function () { 
+                    delete<%=tabName%>();
+                } 
+            }
+        ]
+    });
+
+    //分页栏
+    cmbPageSize.setValue(cmbPageSize.store.getAt(0).get('text')); //默认选中第一个
+     
+    //分页栏
+    var bbar<%=tabName%> = new Ext.PagingToolbar({
+        id: "bbar<%=tabName%>",
+        pageSize: pagesize,
+        store: storeGrid<%=tabName%>,
+        displayInfo: true,
+        items: [cmbPageSize]
+    });
+    var grid<%=tabName%> = Ext.create('Ext.grid.Panel', {
+        store: storeGrid<%=tabName%>,
+        viewConfig: {
+            enableTextSelection: true//是否能复制单元格的内容
+        },
+        selModel: {
+            selType: 'checkboxmodel'//显示复选框
+        },
+        columns: [
+        //表头文字需要调整 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            { text: '序号', xtype: 'rownumberer', width: config.sortColWidth, menuDisabled: true, align: 'center', sortable: false },
+                  <%
+              for (int i = 0; i < SourceTable.Columns.Count-1; i++) { 
+			  if(SourceTable.Columns[i].Name.ToLower()=="isdeleted")continue;
+			   if(SourceTable.Columns[i].Name.ToLower()=="id")continue;
+               if(SourceTable.Columns[i].Description=="")continue;
+			  %>
+                { text: '<%=GetDescription(SourceTable.Columns[i].Description)  %>', width: '<%=GetColWith(SourceTable.Columns[i].Name, SourceTable.Columns.Count)%>', dataIndex: '<%=SourceTable.Columns[i].Name%>', sortable: true, align: 'center', menuDisabled: true, renderer: qtipVal },
+              <%}%>
+              <%if(SourceTable.Columns[SourceTable.Columns.Count-1].Name.ToLower()!="isdeleted"){ %>
+              { text: '<%=GetDescription(SourceTable.Columns[SourceTable.Columns.Count-1].Description) %>', width: '<%=GetColWith(SourceTable.Columns[SourceTable.Columns.Count-1].Name, SourceTable.Columns.Count)%>', dataIndex: '<%=SourceTable.Columns[SourceTable.Columns.Count-1].Name%>', sortable: true, align: 'center', menuDisabled: true, renderer: qtipVal },
+              <%} %>
+        ],
+        tbar:  tbar<%= tabName%>,
+        bbar: bbar<%=tabName%>
+    });  
+ 
+ //#endregion
+
+ //#region 布局
+ 
+ //layout
+ var viewport = new Ext.Viewport({
+        layout: 'border',//布局 方式           
+        forceFit: true,
+        defaults: {
+            bodyStyle: "background-color: #FFFFFF;"
+        },
+        items: [
+        <%if( WestPanle) {%>
+        {
+            region: 'west', 
+            tools: [{
+                iconCls: config.refreshCls,
+                handler: function () {
+                <%if(TreeType!=TreeTypeEnum.NULL){ %>
+                store<%=TreeType%>.load({
+                        params: {
+                            parentcode: '0'
+                        }
+                    });
+                    <%=TreeType%>.expandAll(); 
+                <%} %>
+                }
+            }],
+            collapsible: true,//是否能隐藏
+            collapsed: false,//默认是否隐藏 
+            width: config.departTreeWidth,//宽度
+            split: true,//是否有分隔符
+            layout: 'fit', //布局方式
+            scrollable: true,
+            <%if(TreeType!=TreeTypeEnum.NULL){ %>
+            items: [<%=TreeType%>]
+            <%} %>
+        }
+        <%} %>
+         <%if( EastPanle) {%>
+         ,{
+            region: 'east',
+            title:'east',
+            collapsible: false,//是否能隐藏
+            collapsed: false,//默认是否隐藏 
+            layout: 'fit',
+            width:100
+        }
+         <% }%>
+        ,{
+            region: 'center',
+            title: '<%=tabName%>信息',
+            layout: 'fit',
+            items: [grid<%=tabName%>]
+        }
+         <%if( NorthPanle) {%>
+         ,{
+            region: 'north',
+            title:'north',
+            collapsible: false,//是否能隐藏
+            collapsed: false,//默认是否隐藏 
+            layout: 'fit',
+            height:100
+        }
+         <%} %>
+          <%if( SouthPanle) {%>
+         ,{
+            region: 'south',
+            title:'south',
+            collapsible: false,//是否能隐藏
+            collapsed: false,//默认是否隐藏 
+            layout: 'fit',
+            height:100
+        }
+         <%} %>
+        ]
+    });
+ //#endregion
+
+ //#region 窗口
+  var addPanle = Ext.create('Ext.form.Panel', {
+        id: 'addPanle',
+        bodyPadding: 10, 
+        defaults: {
+            anchor: '99%'
+        },
+        fieldDefaults: {
+            labelAlign: 'right',
+            labelWidth: 100
+        },
+        items: [
+        ////表单lable文字需要调整 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+            <%for (int i = 0; i < SourceTable.Columns.Count-1; i++) {
+    			  if(SourceTable.Columns[i].Name.ToLower()=="isdeleted")continue;
+                  if(SourceTable.Columns[i].Name.ToLower()=="creator")continue;
+                              
+                %>
+            <%=GetControl(SourceTable.Columns[i]) %>
+            <%} %>
+            <%
+            if(SingleFileUpload&&AddWindow) 
+            {
+            %>
+              {
+                xtype: 'fieldcontainer',
+                msgTarget: 'side',
+                layout: 'hbox', 
+                items: [
+                    {
+                        fieldLabel:'附件',
+                        xtype: 'textfield',
+                        id: 'UploadFile',
+                        emptyText: '请选择文件',
+                        name: 'UploadFile',
+                        width:320,
+                        margin: '0 5 0 0'
+                    },
+                    {
+                        xtype: 'button',
+                        id: 'selectFile',
+                        text: '浏览...',
+                        width:60,
+                        margin: '0 5 0 0'
+                    },
+                    {
+                        fieldLabel: '上传后的真实文件名',
+                        name: 'refFileName',
+                        id:'refFileName',
+                        hidden: true,
+                        xtype: 'textfield'
+                    }
+                    ]
+                },
+            <%}%>
+            <%=GetControl(SourceTable.Columns[SourceTable.Columns.Count-1]) %>
+        ]
+    });
+    
+    var windowAdd = new Ext.window.Window({
+        layout: 'fit',
+        width: 650,
+        height:  <%if(multiFileUpload&&AddWindow){%>800<%}else{%>550<%} %>,
+        resizable: false,//是否能改变窗口大小
+        draggable: true,//是否能拖动
+        closeAction: 'close',
+        title: '新增',
+        modal: true,
+        collapsible: false,//标题栏是否有收缩按钮
+        maximizable: false,//是否有最大化按钮
+        maximized: false,//默认最大化
+        buttonAlign: 'right',//按钮显示位置
+        constrain: true,//必须写上 防止拖动时被遮盖
+        <%if(multiFileUpload&&AddWindow) 
+            {
+            %>
+        items: [{
+                    layout: 'border',
+                    items: [{
+                        layout: 'fit',
+                        region: 'center',
+                        items: [addPanle]
+                    },
+                        {
+                            layout: 'fit',
+                            region: 'south',
+                            title: '文件上传', 
+                            height: '50%',
+                            id:"UploaderPanle",
+                             items: { html: '<div id="uploader" width="100%" height="100%">正在加载控件。。。</div>' }
+                        }
+                    ]
+                }],
+
+            
+            <%} else{%>
+        items: [addPanle],
+        <%} %>
+        buttons: [{
+            text: '保存',
+            iconCls: config.saveCls,
+            handler: function () {
+                save();
+            }
+        }, {
+            text: '关闭',
+            iconCls: config.closeCls,
+            handler: function () {
+                windowAdd.close();
+            }
+        }]
+    });
+
+    windowAdd.on('beforeclose',function(){
+             <%
+            if(SingleFileUpload&&AddWindow) 
+            {
+            %>
+            SignUploader.destroy();
+            <%} %>
+            
+            <%
+            if(multiFileUpload&&AddWindow) 
+            {
+            %>
+            UploadQueueControl.destroy();         
+            <%} %>
+    });
+
+    //#endregion
+
+//#region 公共方法
+    
+    /**
+     * 新增
+     */
+    function  add<%=tabName%>() {
+		/*
+        if (Ext.isEmpty(xxx)) {
+            Ext.MessageBox.alert('提示', '请选中左侧父级单位才能新增！');
+            return;
+        }*/
+        addPanle.getForm().reset();
+
+         //完善新增的初始化信息 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        windowAdd.show();
+        windowAdd.setTitle('新增');
+        
+        <%
+        if(SingleFileUpload&&AddWindow) 
+        {
+        %>
+        SignUploader.init();
+        <%} %>
+                
+       <%
+        if(multiFileUpload&&AddWindow) 
+        {
+        %>
+        UploadQueueControl.Init("<%=moudName%>", "50mb", UploadCompleteF, Error);
+        <%} %>
+    }
+
+    /**
+   * 修改信息
+   */
+    function edit<%=tabName%>() {
+        var recordSelect = grid<%=tabName%> .getSelectionModel().getSelection();
+        if (Ext.isEmpty(recordSelect)) {
+            Ext.MessageBox.alert('提示', '请先选中要修改的记录');
+            return;
+        }
+        addPanle.getForm().loadRecord(recordSelect[0]);
+        
+        //完善修改的初始化信息 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        windowAdd.show();
+        windowAdd.setTitle('修改信息');
+        
+        
+       <%
+        if(SingleFileUpload&&AddWindow) 
+        {
+        %>
+        SignUploader.init();
+        <%} %>
+                
+       <%
+        if(multiFileUpload&&AddWindow) 
+        {
+        %>
+        UploadQueueControl.Init("<%=moudName%>", "50mb", UploadCompleteF, Error);
+        <%} %>
+    }
+	
+    /**
+     * 删除
+     * */
+    function delete<%=tabName%>() {
+        var checkRows = grid<%=tabName%>.getSelectionModel().getSelection();
+        if (Ext.isEmpty(checkRows)) {
+            Ext.Msg.alert('提示', '请先选中要删除的信息!');
+            return;
+        }
+        var checkArry = CheckGridRows(checkRows, 'ID');
+        Ext.Msg.confirm('请确认', '确认删除选中的信息吗?', function (btn, text) {
+            if (btn == 'yes') {
+                ShowWaitMsg();
+                Ext.Ajax.request({
+                    url: <%=moudName.ToLower()%>Config.remove<%=tabName%>,
+                    method: 'post',
+                    success: function (response) {
+                        var resultArray = Ext.JSON.decode(response.responseText);
+                        Ext.Msg.alert('提示', resultArray.Message, function () {
+                            storeGrid<%=tabName%>.loadPage(1);
+                        });
+                    },
+                    failure: function (response) {
+                        var resultArray = Ext.JSON.decode(response.responseText);
+                        Ext.Msg.alert('提示', resultArray.Message, function () {
+                            storeGrid<%=tabName%>.loadPage(1);
+                        });
+                    },
+                    params: {
+                        <%=tabName%>Ids: checkArry
+                    }
+                });
+            }
+        });
+    }
+	
+    /**
+    *保存
+    **/
+    function save() {
+        if (!addPanle.form.isValid()) {
+            Ext.MessageBox.alert('提示', '红色提示框为必填项目。');
+            return;
+        }
+    <%
+    if(SingleFileUpload&&AddWindow) 
+    {
+    %>
+        SignUploader.start();
+    <%}%>
+        
+    <%
+    if(multiFileUpload&&AddWindow) 
+    {
+    %>
+    UploadQueueControl.upload();
+    <%}%>
+    <%if(!SingleFileUpload&&!multiFileUpload){ %>
+    submitForm();
+    <%} %>
+    }
+	
+	/**
+    *提交表单
+    **/
+    function submitForm() {
+        var id=Ext.getCmp('txtID').getValue();
+        var url=<%=moudName.ToLower()%>Config.create<%=tabName%>;
+        if(id&&id!="")
+            url=<%=moudName.ToLower()%>Config.change<%=tabName%>;
+        addPanle.form.submit({
+            url:  url,
+            waitTitle: '提示',
+            method: 'POST',
+            waitMsg: '<font style=font-size:12px;color:#000000>正在处理数据,请稍候...</font>',
+            cors: true,
+            headers:'multipart/form-data',
+            success: function (form, action) {
+                SaveAfterUser(form, action);
+            },
+            failure: function (form, action) {
+                SaveAfterUser(form, action);
+            }
+        });
+    }
+	
+	/**
+    *保存后事件
+    **/
+    function SaveAfterUser(form, action) {
+        var msg = action.result.Message;
+        Ext.Msg.alert('提示', msg, function () {
+            storeGrid<%=tabName%>.loadPage(1);
+            form.reset();
+            windowAdd.close();
+            
+        });
+    }
+    
+//#endregion
+    
+    <%
+        if(SingleFileUpload&&AddWindow) 
+    {
+    %>
+//#region 文件上传  
+    // SignPicUploader.init();
+    // SignPicUploader.destroy();
+    var SignUploader = new plupload.Uploader({
+        // General settings
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'selectFile', // you can pass in id...
+        url: config.uploadUrl +"/Upload?virtualDic=<%=moudName%>",
+        chunk_size: '51mb',
+        unique_names: true,
+
+        // Resize images on client-side if we can
+        resize: { width: 320, height: 240, quality: 90 },
+
+        filters: {
+            max_file_size: '10mb',
+
+            // Specify what files to browse for
+            mime_types: [
+                { title: "图片", extensions: "jpg,gif,png" },
+                { title: "压缩文件", extensions: "zip,rar" },
+                { title: "文档", extensions: "xls,xlsx,doc,docx,pdf" }
+            ]
+        },
+
+        flash_swf_url: viewServer+'/Upload/Scripts/plupload.flash.swf',
+        silverlight_xap_url: viewServer+'/Scripts/plupload.silverlight.xap',
+
+        init: {
+            FilesRemoved:function(uploader,files){
+                alert('模板提示：请完善文件移除事件，并删除此提示！');
+                 //请完善文件移除事件 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            },
+            FilesAdded: function (up, files) {
+                plupload.each(files, function (file) {
+                    document.getElementById("UploadFile-inputEl").value = file.name;
+                });
+                alert('模板提示：请完善文件新增事件，并删除此提示！');
+                //请完善文件新增事件 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            },
+            FileUploaded: function (up, file, info) {
+                //请完善后续表单提交业务 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                 alert('模板提示：文件上传完成，请完善后续表单提交业务，并删除此提示！');
+                
+                var data = JSON.parse( info.response).datas[0];
+                Ext.getCmp('refFileName').setValue(data.saveName);
+                //提交表单
+                submitForm();
+               // log('[FileUploaded] File:', file, "Info:", info);
+            },
+
+            Error: function (up, args) {
+                // Called when error occurs
+                  Ext.Msg.alert('提示', args);
+            }
+        }
+    });
+//#endregion 文件上传
+    <%} %>
+    
+    <%
+    if(multiFileUpload&&AddWindow) 
+    {
+        %>
+//#region 批量文件上传
+        //<div id="uploader" style="height:25px;width:300px"></div> <!--文件列表容器，id 固定-->
+                //上传完成
+        function UploadCompleteF(files) {
+            /*参数说明 ，
+             * files ，上传的文件列表，里面包含上传结果。
+             * file对象属性
+             * 属性/方法	描述
+                id	文件id
+                name	文件名，例如"myfile.gif"
+                type	文件类型，例如"image/jpeg"
+                size	文件大小，单位为字节，当启用了客户端压缩功能后，该值可能会改变
+                origSize	文件的原始大小，单位为字节
+                loaded	文件已上传部分的大小，单位为字节
+                percent	文件已上传部分所占的百分比，如50就代表已上传了50%
+                status	文件的状态，可能为以下几个值之一：plupload.QUEUED 1, plupload.UPLOADING 2, plupload.FAILED 4, plupload.DONE 5
+                lastModifiedDate	文件最后修改的时间
+                getNative()	获取原生的文件对象
+                getSource()	获取mOxie.File 对象，想了解mOxie是什么东西，可以看下https://github.com/moxiecode/moxie/wiki/API
+                destroy()	销毁文件对象
+             * 
+             */
+            alert("模板提示："+files[0].target_name + "上传完成了！请完善后续的业务逻辑，比如业务数据的保存等。并删除此提示！");
+            //请完善后续的业务逻辑 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //提交表单
+                submitForm();
+            //生成下载链接。
+           // document.getElementById("uploadPath").href = config.uploadUrl+"/Get?fileName=" + files[0].target_name
+        }
+        //错误事件
+        function Error(errObject) {
+            /*errObject 有三个属性
+             * code：错误代码，GENERIC_ERROR	值为-100，发生通用错误时的错误代码
+                                HTTP_ERROR	值为-200，发生http网络错误时的错误代码，例如服务气端返回的状态码不是200
+                                IO_ERROR	值为-300，发生磁盘读写错误时的错误代码，例如本地上某个文件不可读
+                                SECURITY_ERROR	值为-400，发生因为安全问题而产生的错误时的错误代码
+                                INIT_ERROR	值为-500，初始化时发生错误的错误代码
+                                FILE_SIZE_ERROR	值为-600，当选择的文件太大时的错误代码
+                                FILE_EXTENSION_ERROR	值为-601，当选择的文件类型不符合要求时的错误代码
+                                FILE_DUPLICATE_ERROR	值为-602，当选取了重复的文件而配置中又不允许有重复文件时的错误代码
+                                IMAGE_FORMAT_ERROR	值为-700，发生图片格式错误时的错误代码
+                                IMAGE_MEMORY_ERROR	当发生内存错误时的错误代码
+                                IMAGE_DIMENSIONS_ERROR	值为-702，当文件大小超过了plupload所能处理的最大值时的错误代码
+
+            file：与该错误相关的文件对象
+
+            message：错误信息*/
+            Ext.Msg.alert("错误",errObject.message);
+        }
+
+//#endregion 批量文件上传
+        <%
+    }
+    %>
+    
+}
+
+<script runat="template">
+public string GetColWith(string colName,int colCount)
+{
+      //计算平均列宽
+  float colwidth=100/colCount;
+  float nameWidth=colwidth+5;
+  float remarkWidth=colwidth+5;
+  float nowidth=colwidth-5;
+    if(colName.ToLower().EndsWith("name"))
+        return nameWidth+"%";
+    if(colName.ToLower().EndsWith("remark"))
+        return remarkWidth+"%";
+    if(colName.ToLower().EndsWith("no"))
+        return nowidth+"%";
+    return colwidth+"%";
+}
+
+public string GetDescription(string lableStr)
+{
+    lableStr=lableStr.Replace("\n","").Replace("\r","");
+    lableStr=lableStr.Split(',')[0];
+    lableStr=lableStr.Split('，')[0];
+    lableStr=lableStr.Split('(')[0];
+    lableStr=lableStr.Split('（')[0];
+    return lableStr;
+}
+public string GetControl(ColumnSchema column)
+{
+    if(column.Name.ToLower()=="isdeleted") return "";
+    if(column.Name.ToLower()=="creator") return "";
+    if(column.Description=="")return "";
+    string lableStr=GetDescription(column.Description);
+
+    string tp="";
+                tp="{";
+            tp+="  xtype: 'fieldcontainer',";
+            tp+="  msgTarget: 'side',";
+            tp+="  layout: 'hbox',";
+            tp+="  defaults: {";
+            tp+="      flex: 1,";
+            tp+="      hideLabel: false";
+            tp+="  },";
+            tp+="  items: [";
+    if(column.Name.ToLower()=="id")
+    {
+            tp+=" {";
+            tp+=" fieldLabel: '"+lableStr+"',";
+            tp+=" name: '"+column.Name.ToUpper()+"',";
+            tp+=" id: 'txt"+column.Name.ToUpper()+"',";
+            tp+=" xtype: 'textfield',";
+            tp+=" hidden: true,";
+            tp+=" maxLength: "+column.Size;
+            tp+=" }";
+        
+        tp+="  ]";
+        tp+="},"; 
+        return tp;
+    }
+    
+	switch (column.DataType)
+	{
+        case DbType.String: 
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+        case DbType.StringFixedLength:
+            tp+="       {";
+			if(!column.AllowDBNull&&column.Name.ToLower()!="id")
+            {
+                tp+=" allowBlank: false,";
+            }
+            tp+=" fieldLabel: '"+lableStr+"',";
+            tp+=" name: '"+column.Name+"',";
+            tp+=" id: '"+column.Name+"',";
+			if(column.Size<256)
+				tp+=" xtype: 'textfield',";
+			else
+				tp+="xtype: 'textarea',";
+            tp+=" maxLength: "+column.Size;
+            tp+=" }";
+            break;
+		case DbType.Currency: 
+		case DbType.Decimal:
+		case DbType.Double:
+        case DbType.VarNumeric: 
+            tp+="       {";
+			if(!column.AllowDBNull)
+            {
+                tp+=" allowBlank: false,";
+            }
+            tp+=" fieldLabel: '"+lableStr+"',";
+            tp+=" name: '"+column.Name+"',";
+            tp+=" id: '"+column.Name+"',";
+            tp+=" xtype: 'numberfield',";
+            tp+=" decimalPrecision:"+column.Scale+",";
+            tp+=" allowDecimals:true";
+            tp+=" }";
+            break;
+        case DbType.Date:
+        case DbType.Time:
+		case DbType.DateTime:
+            tp+="       {";
+			if(!column.AllowDBNull)
+            {
+                tp+=" allowBlank: false,";
+            }
+            tp+=" fieldLabel: '"+lableStr+"',";
+            tp+=" name: '"+column.Name+"',";
+            tp+=" id: '"+column.Name+"',";
+            tp+=" xtype: 'datefield',";
+            tp+="format:'y-M-d'";
+            tp+=" }";
+            break;
+		case DbType.Int16:
+		case DbType.Int32:
+		case DbType.Int64:
+		case DbType.UInt16:
+		case DbType.UInt32:
+		case DbType.UInt64:
+            tp+="       {";
+			if(!column.AllowDBNull)
+            {
+                tp+=" allowBlank: false,";
+            }
+            tp+=" fieldLabel: '"+lableStr+"',";
+            tp+=" name: '"+column.Name+"',";
+            tp+=" id: '"+column.Name+"',";
+            tp+=" xtype:'numberfield'";
+            tp+=" }";
+            break;
+		default:
+		{
+			return "";
+		}
+	}
+    
+        tp+="  ]";
+        tp+="}"; 
+        return tp+",";
+}
+/// <summary>
+
+/// 定义一个下拉列表的枚举
+
+/// </summary>
+
+public enum TreeTypeEnum
+
+{
+    NULL,
+    treeOrganiz,
+    
+    treeProject,
+    
+    treeOwner,
+    
+    treeSupervisor,
+    
+   treeContract
+}
+public string GetMemberVariableName(ColumnSchema column)
+{
+	//string propertyName = GetPropertyName(column);
+	string propertyName = column.Name;
+	string memberVariableName =  propertyName.ToLower();
+	
+	return memberVariableName;
+}
+
+public string GetIsDelete(ColumnSchemaCollection columns)
+{
+    for(int i=0;i<columns.Count;i++)
+    {
+        if(columns[i].Name.ToLower()=="isdeleted")
+        {
+            return ", ILogicDelete";
+        }
+    }
+    return "";
+}
+
+
+public string GetPropertyName(ColumnSchema column)
+{
+	string propertyName = column.Name;
+	
+	if (propertyName == column.Table.Name + "Name") return "Name";
+	if (propertyName == column.Table.Name + "Description") return "Description";
+	
+	if (propertyName.EndsWith("TypeCode")) propertyName = propertyName.Substring(0, propertyName.Length - 4);
+	
+	return propertyName;
+}
+
+public int GetPropertyNameLength(ColumnSchema column)
+{
+	return (GetPropertyName(column)).Length;
+}
+public int GetPropertyNameMaxLength()
+{
+	int ret = 0;
+	foreach(ColumnSchema column in SourceTable.Columns)
+	{
+		ret = ret < GetPropertyNameLength(column)?GetPropertyNameLength(column):ret;
+	}
+	return ret;
+}
+public string GetMudName(string tableName)
+{
+    if(tableName.Contains("_"))
+        return tableName.Split('_')[0];
+    else
+        throw new Exception("数据库表命名错误！");
+}
+public string GetMemberVariableDefaultValue(ColumnSchema column)
+{
+	if(column.IsPrimaryKeyMember)
+	{
+	    return "";
+	}
+	switch (column.DataType)
+	{
+		case DbType.Guid:
+		{
+			return "Guid.Empty";
+		}
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "String.Empty";
+		}
+		default:
+		{
+			return "";
+		}
+	}
+}
+
+public string GetCSharpVariableType(ColumnSchema column)
+{
+	if (column.Name.EndsWith("TypeCode")) return column.Name;
+    if(column.DataType==DbType.Binary)
+    {
+        return column.AllowDBNull?"byte?[]":"byte[]";
+    }
+    
+	string tp="";
+    string isNullTag="";
+	switch (column.DataType)
+	{
+		case DbType.AnsiString:
+            tp= "string" ;
+            break;
+		case DbType.AnsiStringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Boolean:
+            tp= "bool";
+            break;
+		case DbType.Byte:
+            tp= "byte";
+            break;
+		case DbType.Currency: 
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Date:
+            tp= "DateTime";
+            isNullTag="?";
+            break;
+		case DbType.DateTime: 
+            tp= "DateTime";
+            isNullTag="?";
+            break;
+		case DbType.Decimal:
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Double:
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		case DbType.Guid: 
+            tp= "Guid";
+            break;
+		case DbType.Int16: 
+            tp= "short";
+            break;
+		case DbType.Int32: 
+            tp= "int";
+            break;
+		case DbType.Int64: 
+            tp= "long";
+            break;
+		case DbType.Object: 
+            tp= "object";
+            isNullTag="?";
+            break;
+		case DbType.SByte: 
+            tp= "bool";
+            break;
+		case DbType.Single:
+            tp= "float";
+            break;
+		case DbType.String: 
+            tp= "string";
+            break;
+		case DbType.StringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Time:
+            tp= "TimeSpan";
+            isNullTag="?";
+            break;
+		case DbType.UInt16: 
+            tp= "ushort";
+            break;
+		case DbType.UInt32: 
+            tp= "uint";
+            break;
+		case DbType.UInt64: 
+            tp= "ulong";
+            break;
+		case DbType.VarNumeric: 
+            tp= "decimal";
+            isNullTag="?";
+            break;
+		default:
+		{
+			return "__UNKNOWN__" + column.NativeType;
+		}
+	}
+    if(column.AllowDBNull)
+        return tp+isNullTag;
+    else
+        return tp;
+}
+
+public string GetDataAnnotations(ColumnSchema column)
+{
+    string attr=!column.AllowDBNull?"[Required]\r":"";
+    if(column.IsUnique)
+        attr+="[Unique]\r\n";
+        
+    
+	switch (column.DataType)
+	{
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+        case DbType.String: 
+		case DbType.StringFixedLength:
+            attr+="[StringLength("+column.Size+")]\r\n";
+            break;
+	}
+    return attr;
+}
+public string GetReaderMethod(ColumnSchema column)
+{
+	switch (column.DataType)
+	{
+		case DbType.Byte:
+		{
+			return "GetByte";
+		}
+		case DbType.Int16:
+		{
+			return "GetInt16";
+		}
+		case DbType.Int32:
+		{
+			return "GetInt32";
+		}
+		case DbType.Int64:
+		{
+			return "GetInt64";
+		}
+		case DbType.AnsiStringFixedLength:
+		case DbType.AnsiString:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "GetString";
+		}
+		case DbType.Boolean:
+		{
+			return "GetBoolean";
+		}
+		case DbType.Guid:
+		{
+			return "GetGuid";
+		}
+		case DbType.Currency:
+		case DbType.Decimal:
+		{
+			return "GetDecimal";
+		}
+		case DbType.DateTime:
+		case DbType.Date:
+		{
+			return "GetDateTime";
+		}
+		case DbType.Binary:
+		{
+			return "GetBytes";
+		}
+		default:
+		{
+			return "__SQL__" + column.DataType;
+		}
+	}
+}
+
+	public  string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+public override string GetFileName()
+{
+	return this.GetName(this.SourceTable) + ".js";
+}
+</script>

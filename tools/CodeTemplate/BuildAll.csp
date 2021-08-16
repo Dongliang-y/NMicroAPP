@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
+  <variables>
+    <add key="ConnectionString1" value="data source=&quot;(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.176.105.104)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)))&quot;;persist security info=True;user id=C##clsuser;password=clsuser123" />
+    <add key="ConnectionString2" value="Database=ZJJWFoundationPlatform;Data Source=192.168.1.218;User Id=root;Password=root218;CharSet=utf8;port=3306;Pooling=true;SslMode = none;" />
+  </variables>
+  <propertySets>
+    <propertySet name="BuildAll.txt" output="BuildAll.txt" template="BuildAll.cst">
+      <property name="OutputDirectory">F:\ZJJWEPlatformx</property>
+      <property name="SourceData">
+        <connectionString>$(ConnectionString2)</connectionString>
+        <providerType>SchemaExplorer.MySQLSchemaProvider,SchemaExplorer.MySQLSchemaProvider</providerType>
+      </property>
+    </propertySet>
+  </propertySets>
+</codeSmith>

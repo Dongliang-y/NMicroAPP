@@ -1,0 +1,320 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="Text"  ResponseEncoding="UTF-8"  Debug="True" Description="Template description here." %>
+<%@ Property Name="SourceTables" Type="SchemaExplorer.TableSchemaCollection" Category="Context" Description="选择表" %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="CodeSmith.CustomProperties" %> 
+<%@ Assembly Name="System.Data" %>
+<%@ Assembly Name="System.Design" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Design" %>
+
+<% if(!Directory.Exists(OutputDirectory)) Directory.CreateDirectory(OutputDirectory); %>
+Easy Framework BuildScripts.
+by Dongliang Yi.
+
+<% 
+
+TableSchemaCollection Tables=SourceTables;
+//ViewSchemaCollection Views=GetViewCollection(SourceData);
+//过滤掉不正常的表格
+    Tables = FilterTables(Tables);
+    string DtoDIC = OutputDirectory + "\\ZJJWFoundationPlatform.DTO\\";
+
+    string IServiceDIC = OutputDirectory + "\\ZJJWFoundationPlatform.IService\\Services\\";
+    string ServiceDIC = OutputDirectory + "\\ZJJWFoundationPlatform.Domains\\Services\\";
+
+    string IRepositoriesDIC = OutputDirectory + "\\ZJJWFoundationPlatform.Domains\\IRepositories\\";
+    string RepositoriesDIC = OutputDirectory + "\\ZJJWFoundationPlatform.Repositories\\";
+
+    string EntityDIC = OutputDirectory + "\\ZJJWFoundationPlatform.Domains\\Entity\\";
+        //Load Template
+    CodeTemplate Dto = GetCodeTemplate("Dto.cst");
+
+    CodeTemplate IRepositoriesTemplate = GetCodeTemplate("IRepositories.cst");
+    CodeTemplate RepositoriesTemplate = GetCodeTemplate("Repository.cst");
+
+    CodeTemplate EntityTemplate = GetCodeTemplate("MySqlEntity.cst");
+
+    //Render Files
+    for (int i = 0; i < Tables.Count; i++)
+    {  
+        //Dto
+		try
+		{
+            
+            var dirDto=DtoDIC +GetModuleName(Tables[i])+"\\";
+			RenderFileUsingProperties(dirDto+ GetName(Tables[i]) + "Dto.cs",false,ref Dto,Tables[i]);
+
+			//仓储
+
+			var Idirrep=IRepositoriesDIC + GetModuleName(Tables[i])+"\\";
+			var dirRep=RepositoriesDIC + GetModuleName(Tables[i])+"\\";
+			RenderFileUsingProperties(Idirrep+ "I"+GetName(Tables[i]) + "Repository.cs",false,ref IRepositoriesTemplate,Tables[i]);
+			RenderFileUsingProperties(dirRep+ GetName(Tables[i]) + "Repository.cs",false,ref RepositoriesTemplate,Tables[i]);
+
+			//实 体
+			var dirEntity=EntityDIC + GetModuleName(Tables[i])+"\\";
+
+			RenderFileUsingProperties(dirEntity+ GetName(Tables[i]) + ".cs",false,ref EntityTemplate,Tables[i]);
+		}catch(Exception ex)
+		{
+			%>表<%=Tables[i].Name%>出现错误，已跳过，请查验。<%=ex.ToString()%><%
+			continue;
+		}
+    }
+    
+%>
+
+Total <%=Tables.Count %>  Tables completed!
+<script runat="template">	
+    #region Output
+    private string _outputDirectory = String.Empty;
+	
+    [Editor(typeof(System.Windows.Forms.Design.FolderNameEditor), typeof(System.Drawing.Design.UITypeEditor))] 
+	[CodeTemplateProperty(CodeTemplatePropertyOption.Optional)]
+	[Category("General")]
+	[Description("The directory to output the results to.")]
+	[DefaultValue("")]
+	public string OutputDirectory 
+	{ 
+		get
+		{
+			if (_outputDirectory.Length == 0)
+			{
+				return @"d:\ZJJWFoundationPlatform";
+			}
+			else
+			{
+				return _outputDirectory;
+			}
+		}
+		set
+		{
+			if (value.EndsWith("\\")) value = value.Substring(0, value.Length - 1);
+			_outputDirectory = value;
+		} 
+	}
+	#endregion
+#region GetTabs,Views
+public TableSchemaCollection GetTableCollection(DatabaseSchema dataBase)
+{
+    
+    TableSchemaCollection tables = new TableSchemaCollection(dataBase.Tables);
+    return tables;
+}
+public ViewSchemaCollection GetViewCollection(DatabaseSchema dataBase)
+{
+    ViewSchemaCollection views = new ViewSchemaCollection(dataBase.Views);
+    return views;
+}
+    #endregion
+    
+#region Methods
+	#region Get Template
+	public  CodeTemplate GetCodeTemplate(string TemplateName)
+	{		
+		//CodeTemplate template=null;
+		CodeTemplateCompiler compiler = new CodeTemplateCompiler(this.CodeTemplateInfo.DirectoryName+TemplateName); 
+		compiler.CodeTemplateInfo.ToString();
+		compiler.Compile(); 
+		if (compiler.Errors.Count == 0) 
+		{ 
+			return compiler.CreateInstance();
+		} 
+		else 
+		{ 
+			System.Text.StringBuilder errorMessage = new System.Text.StringBuilder();				
+			for (int i = 0; i < compiler.Errors.Count; i++) 
+			{
+				errorMessage.Append(compiler.Errors[i].ToString()).Append("\n");
+			} 
+			throw new ApplicationException(errorMessage.ToString());
+		} 
+		      
+	}
+	#endregion
+	
+	#region Render File
+	/// Copies all properties to a template
+	/// Renders the file 
+	/// NB. the overrite property
+	public void RenderFileUsingProperties(string fullPath, bool overrite, ref CodeTemplate template)
+	{
+		if( overrite || (!File.Exists(fullPath)) )
+		{
+                Response.Write(fullPath+"\r\n"); 
+			CopyPropertiesTo(template);
+			template.RenderToFile(fullPath, overrite);
+		}
+	}
+	
+		/// Copies all properties to a template
+	/// Renders the file 
+	/// NB. the overrite property
+	/// Set Property SourceTable
+	public void RenderFileUsingProperties(string fullPath, bool overrite, ref CodeTemplate template,object SourceTable)
+	{
+		if( overrite || (!File.Exists(fullPath)) )
+		{
+                            Response.Write(fullPath+"\r\n"); 
+            System.IO.FileInfo fi=new System.IO.FileInfo(fullPath);
+            if(!fi.Directory.Exists)
+                fi.Directory.Create();
+            
+			CopyPropertiesTo(template);
+			template.SetProperty("SourceTable",SourceTable);
+			template.RenderToFile(fullPath, overrite);
+		}
+	}
+		/// Copies all properties to a template
+	/// Renders the file 
+	/// NB. the overrite property
+	/// Set Property SourceTable
+	public void RenderFileUsingProperties(string fullPath, bool overrite, ref CodeTemplate template,TableSchemaCollection Tables,ViewSchemaCollection Views)
+	{
+		if( overrite || (!File.Exists(fullPath)) )
+		{
+            Response.Write(fullPath+"\r\n"); 
+            System.IO.FileInfo fi=new System.IO.FileInfo(fullPath);
+            if(!fi.Directory.Exists)
+                fi.Directory.Create();
+            
+			CopyPropertiesTo(template);
+			template.SetProperty("Tables",Tables);
+            template.SetProperty("Views",Views);
+			template.RenderToFile(fullPath, overrite);
+		}
+	}
+	/// Copies all properties to a template
+	/// Renders the file  using the preserve regions merge stratagy
+	public void MergeFileUsingPreserve(string fullPath, ref CodeTemplate template)
+	{		
+		CodeSmith.Engine.PreserveRegionsMergeStrategy preserveRegionsMergeStrategy = new PreserveRegionsMergeStrategy();
+		preserveRegionsMergeStrategy.Language = "C#";
+		preserveRegionsMergeStrategy.RegionNameRegex = "PRESERVE";
+		CopyPropertiesTo(template);
+		template.RenderToFile(fullPath,preserveRegionsMergeStrategy);
+	}
+	/// Copies all properties to a template
+	/// Renders the file  using the preserve regions merge stratagy
+	/// Set Property SourceTable
+	public void MergeFileUsingPreserve(string fullPath, ref CodeTemplate template,TableSchema SourceTable)
+	{		
+		CodeSmith.Engine.PreserveRegionsMergeStrategy preserveRegionsMergeStrategy = new PreserveRegionsMergeStrategy();
+		preserveRegionsMergeStrategy.Language = "C#";
+		preserveRegionsMergeStrategy.RegionNameRegex = "PRESERVE";
+		CopyPropertiesTo(template);
+		template.SetProperty("SourceTable",SourceTable);
+		template.RenderToFile(fullPath,preserveRegionsMergeStrategy);
+	}
+	/// Copies all properties to a template
+	/// Renders the file  using the Insert Region merge strategy
+	public void MergeFileUsingInsert(string fullPath, ref CodeTemplate template)
+	{		
+		CodeSmith.Engine.InsertRegionMergeStrategy mergeStrategy = new InsertRegionMergeStrategy();
+		mergeStrategy.Language = "C#";
+		mergeStrategy.RegionName = "PRESERVE";
+		CopyPropertiesTo(template);
+		template.RenderToFile(fullPath,mergeStrategy);
+		
+	}
+	/// Copies all properties to a template
+	/// Renders the file  using the Insert Region merge strategy
+	/// Set Property SourceTable
+	public void MergeFileUsingInsert(string fullPath, ref CodeTemplate template,object SourceTable)
+	{		
+		CodeSmith.Engine.InsertRegionMergeStrategy mergeStrategy = new InsertRegionMergeStrategy();
+		mergeStrategy.Language = "C#";
+		mergeStrategy.RegionName = "PRESERVE";
+		CopyPropertiesTo(template);
+		template.SetProperty("SourceTable",SourceTable);
+		template.RenderToFile(fullPath,mergeStrategy);
+		
+	}
+	#endregion
+#endregion	
+
+#region Inner Classes	
+	#region TableUtilities Class
+
+		public  bool SkipTable(TableSchema table)
+		{
+			return (!table.HasPrimaryKey||table.PrimaryKey==null|| table.Columns.Count < 2);
+		}
+		public  TableSchemaCollection FilterTables(TableSchemaCollection tables)
+        {			
+            TableSchemaCollection filtered = new TableSchemaCollection();
+            foreach(TableSchema table in tables) 
+            {
+                if(!SkipTable(table)) filtered.Add(table);
+                else
+                {
+                   Response.Write(table.Name+" 缺少主键\r\n"); 
+                }
+            }
+            return filtered;
+        }
+	
+	public static string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+	public static string GetName(ViewSchema table)
+    {
+		
+		if(table==null)
+		{
+		    return null;
+		}
+
+        string[] nameArray=  table.Name.Split('_');
+        switch(nameArray.Length)
+        {
+            case 2:
+                return nameArray[1];
+            case 3:
+                return nameArray[1]+nameArray[2];
+        }
+        return null;
+    }
+	public static string GetModuleName(ViewSchema table)
+    {
+		
+		if(table==null)
+		{
+		    return null;
+		}
+		return  table.Name.Split('_')[0];
+    }	
+	public static string GetModuleName(TableSchema table)
+    {
+		
+		if(table==null)
+		{
+		    return null;
+		}
+		return  table.Name.Split('_')[0];
+    }
+	#endregion
+#endregion	
+</script>

@@ -1,0 +1,313 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#"  ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.ViewSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Assembly Name="System.Data" %>
+<%@ Import Namespace="SchemaExplorer" %>
+<%@ Import Namespace="System.Data" %>
+/***********************************************************
+**项目名称:EFrame.Entity                                                                				   
+**功能描述:	 <%= GetClassName(SourceTable) %>  <%=SourceTable.Description %>
+**作    者: 	易栋梁                                         			   
+**版 本 号:	1.0                                                  
+**修改历史：
+************************************************************/
+using System;
+using EFrame.Entity.IEntity.<%=GetMudName(SourceTable.Name) %>;
+
+namespace  EFrame.Entity.<%=GetMudName(SourceTable.Name) %>
+{
+	/// <summary>
+	///<%= GetClassName(SourceTable)%>数据实体
+	/// </summary>
+	[Serializable()]
+    [TableName(TabName = "<%=SourceTable.Name%>")]
+    public partial class <%= GetClassName(SourceTable)%>:EntityString,I<%=GetClassName(SourceTable)%>
+	{
+		<% for (int i = 0; i < SourceTable.Columns.Count; i++) { 
+            if(SourceTable.Columns[i].Name.ToUpper()=="ID")continue;
+        %>
+		///<summary>
+		///<%=SourceTable.Columns[i].Description.Replace("\n","") %> ,类型 <%=SourceTable.Columns[i].DataType %> To <%=GetCSharpVariableType(SourceTable.Columns[i]) %>
+		///</summary>
+		public <%= GetCSharpVariableType(SourceTable.Columns[i]) %> <%= SourceTable.Columns[i].Name %>{get;set;}
+		<% if (i < SourceTable.Columns.Count - 1) Response.Write("\r\n"); %>	
+		<%}%>
+	}
+}
+
+<script runat="template">
+
+
+public string GetMemberVariableName(ViewColumnSchema column)
+{
+	//string propertyName = GetPropertyName(column);
+	string propertyName = column.Name;
+	string memberVariableName =  propertyName.ToLower();
+	
+	return memberVariableName;
+}
+
+
+public string GetPropertyName(ViewColumnSchema column)
+{
+	string propertyName = column.Name;
+	
+	if (propertyName == column.View.Name + "Name") return "Name";
+	if (propertyName == column.View.Name + "Description") return "Description";
+	
+	if (propertyName.EndsWith("TypeCode")) propertyName = propertyName.Substring(0, propertyName.Length - 4);
+	
+	return propertyName;
+}
+
+public int GetPropertyNameLength(ViewColumnSchema column)
+{
+	return (GetPropertyName(column)).Length;
+}
+public int GetPropertyNameMaxLength()
+{
+	int ret = 0;
+	foreach(ViewColumnSchema column in SourceTable.Columns)
+	{
+		ret = ret < GetPropertyNameLength(column)?GetPropertyNameLength(column):ret;
+	}
+	return ret;
+}
+public string GetMudName(string tableName)
+{
+    if(tableName.Contains("_"))
+        return tableName.Split('_')[0];
+    else
+        throw new Exception("数据库表命名错误！");
+}
+public string GetMemberVariableDefaultValue(ViewColumnSchema column)
+{
+	switch (column.DataType)
+	{
+		case DbType.Guid:
+		{
+			return "Guid.Empty";
+		}
+		case DbType.AnsiString:
+		case DbType.AnsiStringFixedLength:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "String.Empty";
+		}
+		default:
+		{
+			return "";
+		}
+	}
+}
+
+public string GetCSharpVariableType(ViewColumnSchema column)
+{
+	if (column.Name.EndsWith("TypeCode")) return column.Name;
+    if(column.DataType==DbType.Binary)
+    {
+        return column.AllowDBNull?"byte?[]":"byte[]";
+    }
+    
+	string tp="";
+	switch (column.DataType)
+	{
+		case DbType.AnsiString:
+            tp= "string" ;
+            break;
+		case DbType.AnsiStringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Boolean:
+            tp= "bool";
+            break;
+		case DbType.Byte:
+            tp= "byte";
+            break;
+		case DbType.Currency: 
+            tp= "decimal";
+            break;
+		case DbType.Date:
+            tp= "DateTime";
+            break;
+		case DbType.DateTime: 
+            tp= "DateTime";
+            break;
+		case DbType.Decimal:
+            tp= "decimal";
+            break;
+		case DbType.Double:
+            tp= "decimal";
+            break;
+		case DbType.Guid: 
+            tp= "Guid";
+            break;
+		case DbType.Int16: 
+            tp= "short";
+            break;
+		case DbType.Int32: 
+            tp= "int";
+            break;
+		case DbType.Int64: 
+            tp= "long";
+            break;
+		case DbType.Object: 
+            tp= "object";
+            break;
+		case DbType.SByte: 
+            tp= "sbyte";
+            break;
+		case DbType.Single:
+            tp= "float";
+            break;
+		case DbType.String: 
+            tp= "string";
+            break;
+		case DbType.StringFixedLength:
+            tp= "string";
+            break;
+		case DbType.Time:
+            tp= "TimeSpan";
+            break;
+		case DbType.UInt16: 
+            tp= "ushort";
+            break;
+		case DbType.UInt32: 
+            tp= "uint";
+            break;
+		case DbType.UInt64: 
+            tp= "ulong";
+            break;
+		case DbType.VarNumeric: 
+            tp= "decimal";
+            break;
+		default:
+		{
+			return "__UNKNOWN__" + column.NativeType;
+		}
+	}
+    if(column.AllowDBNull&&column.DataType!=DbType.String)
+        return tp+"?";
+    else
+        return tp;
+}
+
+public string GetReaderMethod(ViewColumnSchema column)
+{
+	switch (column.DataType)
+	{
+		case DbType.Byte:
+		{
+			return "GetByte";
+		}
+		case DbType.Int16:
+		{
+			return "GetInt16";
+		}
+		case DbType.Int32:
+		{
+			return "GetInt32";
+		}
+		case DbType.Int64:
+		{
+			return "GetInt64";
+		}
+		case DbType.AnsiStringFixedLength:
+		case DbType.AnsiString:
+		case DbType.String:
+		case DbType.StringFixedLength:
+		{
+			return "GetString";
+		}
+		case DbType.Boolean:
+		{
+			return "GetBoolean";
+		}
+		case DbType.Guid:
+		{
+			return "GetGuid";
+		}
+		case DbType.Currency:
+		case DbType.Decimal:
+		{
+			return "GetDecimal";
+		}
+		case DbType.DateTime:
+		case DbType.Date:
+		{
+			return "GetDateTime";
+		}
+		case DbType.Binary:
+		{
+			return "GetBytes";
+		}
+		default:
+		{
+			return "__SQL__" + column.DataType;
+		}
+	}
+}
+
+public string GetClassName(ViewSchema table)
+{
+	
+	if(table==null)
+	{
+	    return null;
+	}	
+	return table.Name.Replace("_","");
+}
+public string GetClassName(string str1)
+{
+	
+	if(str1==null)
+	{
+	    return null;
+	}
+	if(str1.Length ==1 )
+	{
+		return str1.ToLower();
+	}
+	return str1.Replace("_",""); ;
+}
+public string GetSqlDbType(ViewColumnSchema column)
+{
+	switch (column.NativeType)
+	{
+		case "bigint": return "BigInt";
+		case "binary": return "Binary";
+		case "bit": return "Bit";
+		case "char": return "Char";
+		case "datetime": return "DateTime";
+		case "decimal": return "Decimal";
+		case "float": return "Float";
+		case "image": return "Image";
+		case "int": return "Int";
+		case "money": return "Money";
+		case "nchar": return "NChar";
+		case "ntext": return "NText";
+		case "numeric": return "Decimal";
+		case "nvarchar": return "NVarChar";
+		case "real": return "Real";
+		case "smalldatetime": return "SmallDateTime";
+		case "smallint": return "SmallInt";
+		case "smallmoney": return "SmallMoney";
+		case "sql_variant": return "Variant";
+		case "sysname": return "NChar";
+		case "text": return "Text";
+		case "timestamp": return "Timestamp";
+		case "tinyint": return "TinyInt";
+		case "uniqueidentifier": return "UniqueIdentifier";
+		case "varbinary": return "VarBinary";
+		case "varchar": return "VarChar";
+		default: return "__UNKNOWN__" + column.NativeType;
+	}
+}
+
+
+public override string GetFileName()
+{
+	return this.GetClassName(this.SourceTable) + ".cs";
+}
+</script>

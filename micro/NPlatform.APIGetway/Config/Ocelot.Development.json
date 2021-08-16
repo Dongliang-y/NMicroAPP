@@ -1,0 +1,20 @@
+{
+  "ReRoutes": [
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/values",
+      "DownstreamScheme": "http",
+      "ServiceName": "T169.OcelotConsul.Service",
+      "LoadBalancerOptions": { "Type": "RoundRobin" },
+      "UpstreamPathTemplate": "/ss",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ReRoutesCaseSensitive": false, // non case sensitive  
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost", // Consul Service IP 
+      "Port": 8500 // Consul Service Port 
+    }
+  }
+}

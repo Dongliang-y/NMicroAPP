@@ -1,0 +1,126 @@
+﻿<%@ CodeTemplate Language="C#" TargetLanguage="C#" ResponseEncoding="UTF-8" Description="Generates a very simple business object." %>
+<%@ Property Name="SourceTable" Type="SchemaExplorer.TableSchema" Category="Context" Description="Table that the object is based on." %>
+<%@ Assembly Name="SchemaExplorer" %>
+<%@ Import Namespace="SchemaExplorer" %>
+/***********************************************************
+**项目名称:	                                                                  				   
+**功能描述:	  <%= GetName(SourceTable) %> <%=SourceTable.Description %>
+**作    者: 	此代码由CodeSmith生成。                              			   
+**版 本 号:	1.0                                             		
+**修改历史：
+************************************************************/
+namespace ZJJWFoundationPlatform.Domains.IRepositories.<%=GetModuleName(SourceTable)%>
+{
+    using ZJJWEPlatform;
+    using System;
+    using ZJJWEPlatform.Domains.IRepositories;
+	/// <summary>
+    /// <%=GetName(SourceTable)%>仓储操作层接口
+    /// </summary>
+    public partial interface I<%= GetName(SourceTable) %>Repository : IAggregationRepository<Entity.<%=GetModuleName(SourceTable)%>.<%= GetName(SourceTable) %>, string>
+    {
+    }
+}
+
+<script runat="template">
+
+    public string GetCamelCaseName(string value)
+    {
+        return value.ToLower();
+    }
+
+    public string ConvertFirstCharToUpper(string value)
+    {
+        return value.Substring(0, 1).ToUpper() + value.Substring(1);
+    }
+	public string GetModuleName(TableSchema table)
+	{
+		
+		if(table==null)
+		{
+			return null;
+		}	
+		return table.Name.Split('_')[0];
+	}
+
+	public string GetName(TableSchema table)
+    {
+		try			
+		{
+		if(table==null)
+		{
+		    return null;
+		}
+            string[] nameArray=  table.Name.Split('_');
+            switch(nameArray.Length)
+            {
+                case 2:
+                    return nameArray[1];
+                case 3:
+                    return nameArray[1]+nameArray[2];
+            }
+            return null;
+		}
+		catch(Exception ex)
+		{
+			throw new Exception(table.Name+ex.Message);
+		}
+    }
+    
+	public string GetLowerCaseName(string value)
+    {
+	    return value.ToLower();
+    }
+	
+	public string GetModuleInstanceName(TableSchema table)
+	{
+		return table.Name.ToLower() ;
+	}
+
+    public string GetCSharpVariableType(ColumnSchema column)
+    {
+		if (column.Name.EndsWith("TypeCode")) return column.Name;
+		
+		switch (column.DataType)
+		{
+			case DbType.AnsiString: return "string";
+			case DbType.AnsiStringFixedLength: return "string";
+			case DbType.Binary: return "byte[]";
+			case DbType.Boolean: return "bool";
+			case DbType.Byte: return "byte";
+			case DbType.Currency: return "decimal";
+			case DbType.Date: return "DateTime";
+			case DbType.DateTime: return "DateTime";
+			case DbType.Decimal: return "decimal";
+			case DbType.Double: return "double";
+			case DbType.Guid: return "Guid";
+			case DbType.Int16: return "short";
+			case DbType.Int32: return "int";
+			case DbType.Int64: return "long";
+			case DbType.Object: return "object";
+			case DbType.SByte: return "sbyte";
+			case DbType.Single: return "float";
+			case DbType.String: return "string";
+			case DbType.StringFixedLength: return "string";
+			case DbType.Time: return "TimeSpan";
+			case DbType.UInt16: return "ushort";
+			case DbType.UInt32: return "uint";
+			case DbType.UInt64: return "ulong";
+			case DbType.VarNumeric: return "decimal";
+			default:
+			{
+				return "__UNKNOWN__" + column.NativeType;
+			}
+		}
+	}
+	
+	public string GetPrimaryKeyCSharpType()
+	{
+		return GetCSharpVariableType(SourceTable.PrimaryKey.MemberColumns[0]);
+	}
+	
+	public override string GetFileName()
+	{
+		return "I"+this.GetName(this.SourceTable) + "Repository.cs";
+	}
+</script>
