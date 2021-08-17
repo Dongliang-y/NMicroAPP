@@ -68,7 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ZJJWEPlatform.Infrastructure\NPlatform.Infrastructure.csproj" />
+    <ProjectReference Include="..\NPlatform.Infrastructure\NPlatform.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
