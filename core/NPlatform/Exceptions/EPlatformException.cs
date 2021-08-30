@@ -7,19 +7,19 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System;
 
     /// <summary>
     /// 异常基类
     /// </summary>
-    public class ZJJWEPlatformException : Exception, IZJJWEPlatformException
+    public class NPlatformException : Exception, INPlatformException
     {
         /// <summary>
         /// 异常基类
         /// </summary>
-        public ZJJWEPlatformException(string msg, Exception ex, string errorCode)
+        public NPlatformException(string msg, Exception ex, string errorCode)
             : base(msg, ex)
         {
             ErrorCode = errorCode;
@@ -29,7 +29,7 @@ namespace ZJJWEPlatform
         /// <summary>
         /// 异常基类
         /// </summary>
-        public ZJJWEPlatformException(string msg, string errorCode)
+        public NPlatformException(string msg, string errorCode)
             : base(msg)
         {
             ErrorCode = errorCode;

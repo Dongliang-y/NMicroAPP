@@ -1,10 +1,10 @@
-﻿namespace ZJJWEPlatform.Repositories
+﻿namespace NPlatform.Repositories
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Filters;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Filters;
 
     /// <summary>
     /// 默认仓储上下文配置

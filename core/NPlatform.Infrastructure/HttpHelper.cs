@@ -14,7 +14,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     using System.Collections.Generic;
     using System.IO;

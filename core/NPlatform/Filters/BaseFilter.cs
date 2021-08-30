@@ -3,7 +3,7 @@
 * 类 名 称 ：FilterBase
 * 类 描 述 ：
 * 所在的域 ：DESKTOP-UU3LV10
-* 命名空间 ：ZJJWEPlatform.Filters
+* 命名空间 ：NPlatform.Filters
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：Dongliang Yi
 * 创建时间 ：2019/1/27 16:58:07
@@ -14,13 +14,13 @@
 *******************************************************************
 //----------------------------------------------------------------*/
 #endregion
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     using System;
     using System.Collections.Generic;
 
     using System.Linq.Expressions;
-    using ZJJWEPlatform.Domains.Entity;
+    using NPlatform.Domains.Entity;
 
     /// <summary>
     /// 过滤器基类

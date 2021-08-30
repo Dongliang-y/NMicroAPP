@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ZJJWEPlatform.IdGenerators;
+using NPlatform.IdGenerators;
 
-namespace ZJJWEPlatform.Infrastructure.IdGenerators
+namespace NPlatform.Infrastructure.IdGenerators
 {
     /// <summary>
     /// ID 生成器

@@ -10,7 +10,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Domains
+namespace NPlatform.Domains
 {
     using System;
 

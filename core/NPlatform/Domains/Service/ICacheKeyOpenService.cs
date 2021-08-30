@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Domains.Entity;
+using NPlatform.Domains.Entity;
 
-namespace ZJJWEPlatform.Domains.Service
+namespace NPlatform.Domains.Service
 {
     /// <summary>
     /// 缓存开放引用接口

@@ -1,9 +1,9 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     /// <summary>
     /// 逻辑异常
     /// </summary>
-    public class LogicException : ZJJWEPlatformException
+    public class LogicException : NPlatformException
     {
         /// <summary>
         /// 逻辑异常

@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.IUnitOfWork
+* 项目名称 ：NPlatform.Domains.IUnitOfWork
 * 类 名 称 ：IAggregationUnitOfWork
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.Domains.IUnitOfWork
+* 命名空间 ：NPlatform.Domains.IUnitOfWork
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-19 17:39:43
@@ -14,7 +14,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Domains.IRepositories
+namespace NPlatform.Domains.IRepositories
 {
     using System;
     using System.Collections.Generic;
@@ -23,8 +23,8 @@ namespace ZJJWEPlatform.Domains.IRepositories
 
     using DapperExtensions;
 
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Result;
 
     /// <summary>
     /// 聚合内的工作单元接口

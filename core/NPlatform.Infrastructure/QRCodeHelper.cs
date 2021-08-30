@@ -10,7 +10,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     using System.Drawing;
 

@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Repositories
+namespace NPlatform.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -15,13 +15,13 @@ namespace ZJJWEPlatform.Repositories
     using System.Linq.Expressions;
     using System.Threading.Tasks;
     using DapperExtensions;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Domains.Service;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.Infrastructure.Loger;
-    using ZJJWEPlatform.Infrastructure.Redis;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Domains.Service;
+    using NPlatform.Filters;
+    using NPlatform.Infrastructure.Loger;
+    using NPlatform.Infrastructure.Redis;
+    using NPlatform.Result;
 
     /// <summary>
     /// 聚合仓储基类
@@ -289,7 +289,7 @@ namespace ZJJWEPlatform.Repositories
         {
             if (sorts != null)
             {
-                throw new ZJJWEPlatformException("缓存不支持排序，请在服务里使用linq实现", "GetListByExp");
+                throw new NPlatformException("缓存不支持排序，请在服务里使用linq实现", "GetListByExp");
             }
             var t1 = DateTime.Now;
             // 应用过滤器
@@ -330,7 +330,7 @@ namespace ZJJWEPlatform.Repositories
         {
             if (sorts != null)
             {
-                throw new ZJJWEPlatformException("缓存不支持排序，请在服务里使用linq实现", "GetListByExp");
+                throw new NPlatformException("缓存不支持排序，请在服务里使用linq实现", "GetListByExp");
             }
 
             //应用过滤器
@@ -357,7 +357,7 @@ namespace ZJJWEPlatform.Repositories
             }
             catch (NullReferenceException ex)
             {
-                throw new ZJJWEPlatformException($"{nameof(filter)}条件表达式中所需的字段，在集合实体相应字段的值为空值，拉姆达表达式无法执行，请更改条件！" + ex.Message, "CacheRepository");
+                throw new NPlatformException($"{nameof(filter)}条件表达式中所需的字段，在集合实体相应字段的值为空值，拉姆达表达式无法执行，请更改条件！" + ex.Message, "CacheRepository");
             }
         }
 

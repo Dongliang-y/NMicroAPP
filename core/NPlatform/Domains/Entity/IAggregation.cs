@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domain
+* 项目名称 ：NPlatform.Domain
 * 类 名 称 ：IAggregation
 * 类 描 述 ： 聚合根接口
-* 命名空间 ：ZJJWEPlatform.Domain
+* 命名空间 ：NPlatform.Domain
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-19 17:10:23
@@ -14,7 +14,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     /// <summary>
     /// 聚合根接口

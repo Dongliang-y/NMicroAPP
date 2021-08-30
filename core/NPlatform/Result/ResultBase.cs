@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Infrastructure.Loger;
+using NPlatform.Infrastructure.Loger;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 返回结果的封装
@@ -90,27 +90,27 @@ namespace ZJJWEPlatform.Result
         /// </summary>
         protected virtual IEPResult<bool> Error(string msg,Exception ex)
         {
-            return Error<bool>(msg,new ZJJWEPlatformException(msg,ex, "500"));
+            return Error<bool>(msg,new NPlatformException(msg,ex, "500"));
         }
         /// <summary>
         /// 返回错误信息
         /// </summary>
         protected virtual IEPResult<bool> Error(Exception ex)
         {
-            return Error<bool>(ex.Message, new ZJJWEPlatformException("", ex, "500"));
+            return Error<bool>(ex.Message, new NPlatformException("", ex, "500"));
         }
 
         /// <summary>
         /// 返回错误信息
         /// </summary>
-        protected virtual ErrorResult<T> Error<T>(ZJJWEPlatformException ex) 
+        protected virtual ErrorResult<T> Error<T>(NPlatformException ex) 
         {
             return Error<T>(ex.Message, ex);
         }
         /// <summary>
         /// 返回错误信息
         /// </summary>
-        protected virtual ErrorResult<T> Error<T>(string msg, ZJJWEPlatform.ZJJWEPlatformException ex)
+        protected virtual ErrorResult<T> Error<T>(string msg, NPlatform.NPlatformException ex)
         {
             if (ex.GetType().IsSubclassOf(typeof(LogicException)))
             {

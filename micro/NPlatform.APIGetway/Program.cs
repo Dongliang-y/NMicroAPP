@@ -23,6 +23,7 @@ namespace NPlatform.APIGetway
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
+                        // 根据不同得环境加载不同得配置。
                         config
                         .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
                         .AddJsonFile("Config/appsettings.json", true, true)

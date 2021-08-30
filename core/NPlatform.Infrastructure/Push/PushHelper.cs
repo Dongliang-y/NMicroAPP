@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Jiguang.JPush;
 using Jiguang.JPush.Model;
-using ZJJWEPlatform.Config;
+using NPlatform.Config;
 using Message = ServiceStack.Messaging.Message;
 using System.Net;
 using System.IO;
 
-namespace ZJJWEPlatform.Infrastructure.Push
+namespace NPlatform.Infrastructure.Push
 {
 
     /// <summary>
@@ -19,12 +19,12 @@ namespace ZJJWEPlatform.Infrastructure.Push
         /// <summary>
         /// 全局配置信息
         /// </summary>
-        private static ZJJWEPlatformConfig _config = new ConfigFactory<ZJJWEPlatform.Config.ZJJWEPlatformConfig>().Build();
+        private static NPlatformConfig _config = new ConfigFactory<NPlatform.Config.NPlatformConfig>().Build();
         ///  private static JPushClient client = new JPushClient("8a01a3705d9dbdc5ba963488", "f6e046ded25bcd736a07b40b");
         /// <summary>
         /// 全局配置信息
         /// </summary>
-        public static ZJJWEPlatformConfig Config
+        public static NPlatformConfig Config
         {
             get { return _config; }
 

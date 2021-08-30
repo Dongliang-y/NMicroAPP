@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 数据列表内容对象

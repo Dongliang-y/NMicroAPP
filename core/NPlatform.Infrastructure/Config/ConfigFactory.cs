@@ -10,13 +10,13 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
 
-    using ZJJWEPlatform.Infrastructure;
+    using NPlatform.Infrastructure;
 
     /// <summary>
     /// 配置文件工厂
@@ -84,9 +84,9 @@ namespace ZJJWEPlatform.Config
             {
                 config = new T();
             }
-            if(typeof(T) is ZJJWEPlatformConfig)
+            if(typeof(T) is NPlatformConfig)
             {
-                var cfg = config as ZJJWEPlatformConfig;
+                var cfg = config as NPlatformConfig;
                 if(cfg!=null)
                 {
                     ApolloConfiguration.Init(cfg.ServiceID + cfg.MachineID+cfg.SystemName);

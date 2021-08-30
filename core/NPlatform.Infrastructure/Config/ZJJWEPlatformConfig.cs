@@ -10,18 +10,18 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     using Com.Ctrip.Framework.Apollo;
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using ZJJWEPlatform.Config;
+    using NPlatform.Config;
 
     /// <summary>
     /// 通用配置管理
     /// </summary>
-    public class ZJJWEPlatformConfig : IConfig
+    public class NPlatformConfig : IConfig
     {
         /// <summary>
         /// 机器ID ，集群部署时的设备编号。
@@ -58,7 +58,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(Company), this.company);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(Company), this.company);
             }
             set
             {
@@ -73,7 +73,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(CompanyUrl), this.companyUrl);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(CompanyUrl), this.companyUrl);
             }
             set
             {
@@ -95,7 +95,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(DBProvider), this.dbProvider);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(DBProvider), this.dbProvider);
             }
             set
             {
@@ -110,7 +110,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(PlatformVersion), this.platformVersion);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(PlatformVersion), this.platformVersion);
             }
             set
             {
@@ -125,7 +125,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(ICP), this.iCP);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(ICP), this.iCP);
             }
             set
             {
@@ -140,7 +140,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                var conns = ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(IOCAssemblys), "");
+                var conns = ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(IOCAssemblys), "");
                 if (string.IsNullOrEmpty(conns))
                 {
                     return iocAssemblys;
@@ -173,7 +173,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                var result = ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(DynamicConfigs), "");
+                var result = ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(DynamicConfigs), "");
                 if (!string.IsNullOrEmpty(result))
                 {
                     return JsonConvert.DeserializeObject<dynamic>(result);
@@ -195,7 +195,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(Support), this.support);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(Support), this.support);
             }
             set
             {
@@ -215,7 +215,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(SystemUrl), this.systemUrl);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(SystemUrl), this.systemUrl);
             }
             set
             {
@@ -230,7 +230,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(Team), this.team);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(Team), this.team);
             }
             set
             {
@@ -250,7 +250,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                var result = ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(APIEndPoints), "");
+                var result = ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(APIEndPoints), "");
                 if (!string.IsNullOrEmpty(result))
                 {
                     return JsonConvert.DeserializeObject<dynamic>(result);

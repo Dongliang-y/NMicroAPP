@@ -10,7 +10,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System;
     using System.Text.RegularExpressions;

@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Config;
+using NPlatform.Config;
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
-    public class CustomDic:Dictionary<string,string>, ZJJWEPlatform.Config.IConfig
+    public class CustomDic:Dictionary<string,string>, NPlatform.Config.IConfig
     {
         /// <summary>
         /// 实现[]操作
@@ -20,7 +20,7 @@ namespace ZJJWEPlatform.Config
 
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), key, base[key]);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), key, base[key]);
             }
             set
             {

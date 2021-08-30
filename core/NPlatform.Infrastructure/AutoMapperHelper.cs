@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.AutoMapConfig
+* 项目名称 ：NPlatform.Domains.AutoMapConfig
 * 类 名 称 ：AutoMapHelper
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.Domains.AutoMapConfig
+* 命名空间 ：NPlatform.Domains.AutoMapConfig
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-12-13 16:36:58
@@ -14,7 +14,7 @@
 
 #endregion << 版 本 注 释 >>
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System.Linq;
 

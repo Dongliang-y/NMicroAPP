@@ -4,7 +4,7 @@
 * 类 名 称 ：ArgumentEmptyException
 * 类 描 述 ：
 * 所在的域 ：DESKTOP-UU3LV10
-* 命名空间 ：ZJJWEPlatform.Exceptions
+* 命名空间 ：NPlatform.Exceptions
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：Dongliang Yi
 * 创建时间 ：2019/1/14 17:12:27
@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// 参数为空异常

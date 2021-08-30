@@ -8,12 +8,12 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using ZJJWEPlatform.Infrastructure;
+    using NPlatform.Infrastructure;
 
     /// <summary>
     ///     处理枚举

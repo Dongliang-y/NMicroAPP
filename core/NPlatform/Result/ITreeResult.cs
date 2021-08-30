@@ -1,4 +1,4 @@
-﻿namespace ZJJWEPlatform.Result
+﻿namespace NPlatform.Result
 { 
     /// <summary>
     /// 树Result

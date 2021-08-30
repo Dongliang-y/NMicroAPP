@@ -11,9 +11,9 @@
 *********************************************************************************/
 
 using System;
-using ZJJWEPlatform.Infrastructure;
+using NPlatform.Infrastructure;
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     /// <summary>
     /// config 接口

@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using ZJJWEPlatform.Config;
-using ZJJWEPlatform.Filters;
-using ZJJWEPlatform.Infrastructure;
+using NPlatform.Config;
+using NPlatform.Filters;
+using NPlatform.Infrastructure;
 
-namespace ZJJWEPlatform.DI
+namespace NPlatform.DI
 {
     /// <summary>
     /// 缓存依赖注入

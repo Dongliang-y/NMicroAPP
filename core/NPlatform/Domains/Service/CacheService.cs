@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Domains.Entity;
-using ZJJWEPlatform.Domains.IRepositories;
-using ZJJWEPlatform.IOC;
+using NPlatform.Domains.Entity;
+using NPlatform.Domains.IRepositories;
+using NPlatform.IOC;
 
-namespace ZJJWEPlatform.Domains.Service
+namespace NPlatform.Domains.Service
 {
     /// <summary>
     /// 

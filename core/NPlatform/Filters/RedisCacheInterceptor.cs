@@ -8,10 +8,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Domains.Service;
-using ZJJWEPlatform.Infrastructure;
+using NPlatform.Domains.Service;
+using NPlatform.Infrastructure;
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
 
     /// <summary>
@@ -71,13 +71,13 @@ namespace ZJJWEPlatform.Filters
         /// <returns></returns>
         public CacheSetting[] GetCacheSetting()
         {
-            if (!ZJJWEPlatformStartup.AutoMapperInitialized)
+            if (!NPlatformStartup.AutoMapperInitialized)
             {
                 return null;
             }
             List<CacheSetting> list = new List<CacheSetting>();
             #region 全量取得KEY和关系
-            var cacheKeyService = new CacheService(); //ZJJWEPlatform.IOC.IOCManager.BuildService<ICacheKeyOpenService>();
+            var cacheKeyService = new CacheService(); //NPlatform.IOC.IOCManager.BuildService<ICacheKeyOpenService>();
 
 
             var cacheKeyDTOs = cacheKeyService.FullGetCacheKey();
@@ -460,7 +460,7 @@ namespace ZJJWEPlatform.Filters
         /// <summary>
         /// 方法全量名称 
         /// 格式：命名空间.类名.方法名
-        /// 示例：ZJJWEPlatform.Repositories.Sys.ClientRepository
+        /// 示例：NPlatform.Repositories.Sys.ClientRepository
         /// </summary>
         public string MethodFullName { set; get; }
 

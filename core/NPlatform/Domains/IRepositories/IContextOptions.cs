@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.IRepositories
+* 项目名称 ：NPlatform.Domains.IRepositories
 * 类 名 称 ：IRepositoryOptions
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.Domains.IRepositories
+* 命名空间 ：NPlatform.Domains.IRepositories
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-20 17:22:26
@@ -16,10 +16,10 @@
 
 using System.Collections.Generic;
 using System.Data;
-using ZJJWEPlatform.Filters;
-using ZJJWEPlatform.Repositories;
+using NPlatform.Filters;
+using NPlatform.Repositories;
 
-namespace ZJJWEPlatform.Domains.IRepositories
+namespace NPlatform.Domains.IRepositories
 {
     /// <summary>
     /// 仓储上下文配置接口

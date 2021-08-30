@@ -12,16 +12,16 @@
 // </modify>
 
 
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using ZJJWEPlatform;
-    using ZJJWEPlatform.Domains;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.IdGenerators;
+    using NPlatform;
+    using NPlatform.Domains;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Filters;
+    using NPlatform.IdGenerators;
 
     // Base_CacheKey
     // 缓存键值管理

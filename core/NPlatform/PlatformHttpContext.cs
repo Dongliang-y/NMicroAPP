@@ -2,7 +2,7 @@
   * CLR版本：       4.0.30319.42000
   * 类 名 称：       PlatformContext
   * 机器名称：       DESKTOP123
-  * 命名空间：       ZJJWEPlatform.Infrastructure
+  * 命名空间：       NPlatform.Infrastructure
   * 文 件 名：       PlatformContext
   * 创建时间：       2020-5-21 9:19:34
   * 作    者：          xxx
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     ///  平台  http 上下文

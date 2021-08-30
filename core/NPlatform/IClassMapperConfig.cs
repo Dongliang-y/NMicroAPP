@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// class映射接口

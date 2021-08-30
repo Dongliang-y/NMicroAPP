@@ -10,9 +10,9 @@
 
 *********************************************************************************/
 
-using ZJJWEPlatform.Domains.Entity;
+using NPlatform.Domains.Entity;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// Dto 接口

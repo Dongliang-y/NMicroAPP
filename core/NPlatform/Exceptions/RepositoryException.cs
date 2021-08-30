@@ -8,14 +8,14 @@
 **修改历史：
 ****************************** Class1 ******************************/
 
-namespace ZJJWEPlatform.Repositories.Exceptions
+namespace NPlatform.Repositories.Exceptions
 {
     using System;
 
     /// <summary>
     /// 仓储数据操作异常
     /// </summary>
-    public class RepositoryException : ZJJWEPlatformException, IRepositoryException
+    public class RepositoryException : NPlatformException, IRepositoryException
     {
 
         /// <summary>

@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     /// <summary>
     ///     Defines interface for base entity type. All entities in the system must implement this interface.

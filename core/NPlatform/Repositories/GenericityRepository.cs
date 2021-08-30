@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Repositories
+namespace NPlatform.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -21,14 +21,14 @@ namespace ZJJWEPlatform.Repositories
 
     using DapperExtensions;
     using ServiceStack;
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Domains.Service;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.IOC;
-    using ZJJWEPlatform.Repositories.DapperExt;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Config;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Domains.Service;
+    using NPlatform.Filters;
+    using NPlatform.IOC;
+    using NPlatform.Repositories.DapperExt;
+    using NPlatform.Result;
 
     /// <summary>
     /// 聚合仓储基类
@@ -472,7 +472,7 @@ namespace ZJJWEPlatform.Repositories
         /// <returns></returns>
         public bool Remove(TEntity entity)
         {
-            logerSvc.BLLDeleteLog<TEntity>(entity.Id.ToString(), ZJJWEPlatform.Infrastructure.SerializerHelper.ToJson(entity));
+            logerSvc.BLLDeleteLog<TEntity>(entity.Id.ToString(), NPlatform.Infrastructure.SerializerHelper.ToJson(entity));
             var enabled = this.Options.QueryFilters.ContainsKey(nameof(LogicDeleteFilter));
 
             if (typeof(ILogicDelete).IsAssignableFrom(typeof(TEntity)) && enabled)
@@ -524,7 +524,7 @@ namespace ZJJWEPlatform.Repositories
                         }
 
                         var ids = string.Join(",", keys);
-                        logerSvc.BLLDeleteLog<TEntity>(ids, ZJJWEPlatform.Infrastructure.SerializerHelper.ToJson(entitys));
+                        logerSvc.BLLDeleteLog<TEntity>(ids, NPlatform.Infrastructure.SerializerHelper.ToJson(entitys));
                         unitwork.Commit();
                         return true;
                     }
@@ -570,7 +570,7 @@ namespace ZJJWEPlatform.Repositories
                         }
                             var idArray = entitys.Select(t => t.Id);
                             var ids = string.Join(",", idArray);
-                            logerSvc.BLLDeleteLog<TEntity>(ids, ZJJWEPlatform.Infrastructure.SerializerHelper.ToJson(entitys));
+                            logerSvc.BLLDeleteLog<TEntity>(ids, NPlatform.Infrastructure.SerializerHelper.ToJson(entitys));
                         unitwork.Commit();
                         return true;
                     }

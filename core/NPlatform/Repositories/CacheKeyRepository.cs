@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Domains.Entity;
-using ZJJWEPlatform.Domains.IRepositories;
+using NPlatform.Domains.Entity;
+using NPlatform.Domains.IRepositories;
 
-namespace ZJJWEPlatform.Repositories
+namespace NPlatform.Repositories
 {
     public partial class CacheKeyRepository : AggregationRepository<CacheKey, string>, ICacheKeyRepository
 

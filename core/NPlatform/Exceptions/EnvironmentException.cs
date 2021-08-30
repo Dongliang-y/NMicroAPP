@@ -1,9 +1,9 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     /// <summary>
     /// 运行环境异常
     /// </summary>
-    public class EnvironmentException : ZJJWEPlatformException
+    public class EnvironmentException : NPlatformException
     {
         /// <summary>
         /// 运行环境异常

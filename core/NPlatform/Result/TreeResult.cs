@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 树类型的结构

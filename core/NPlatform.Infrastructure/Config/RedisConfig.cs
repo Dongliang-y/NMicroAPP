@@ -12,9 +12,9 @@
 
 using Com.Ctrip.Framework.Apollo;
 using Newtonsoft.Json;
-using ZJJWEPlatform.Config;
+using NPlatform.Config;
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     public sealed class RedisConfig : IConfig
     {

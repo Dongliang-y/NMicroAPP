@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     using System;
     using System.Collections.Generic;

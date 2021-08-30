@@ -16,7 +16,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Repositories
+namespace NPlatform.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -27,11 +27,11 @@ namespace ZJJWEPlatform.Repositories
     using Dapper;
     using DapperExtensions;
 
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.Infrastructure.Loger;
+    using NPlatform.Config;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Filters;
+    using NPlatform.Infrastructure.Loger;
 
     /// <summary>
     /// IUnitOfWork 的实现，此UnitOfWork 可以跨业务领域。
@@ -41,7 +41,7 @@ namespace ZJJWEPlatform.Repositories
         /// <summary>
         /// The config.
         /// </summary>
-        private static readonly ZJJWEPlatformConfig Config = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+        private static readonly NPlatformConfig Config = new ConfigFactory<NPlatformConfig>().Build();
 
         /// <summary>
         /// The df.
@@ -412,7 +412,7 @@ namespace ZJJWEPlatform.Repositories
             var result = false;
             if (filter == null)
             {
-                throw new ZJJWEPlatformException($"filter参数不能为空！", "UnitOfWorkRemove");
+                throw new NPlatformException($"filter参数不能为空！", "UnitOfWorkRemove");
             }
 
             // 应用过滤器

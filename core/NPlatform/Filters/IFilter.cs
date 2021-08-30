@@ -1,13 +1,13 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.Entity
+* 项目名称 ：NPlatform.Domains.Entity
 * 类 名 称 ：IFilter
 * 类 描 述 ：过滤器，过滤器模式也称作标准模式，可以根据不同标准来分别或统一过滤对象。该模式属于结构型模式。
 * http://www.runoob.com/design-pattern/intercepting-filter-pattern.html
 * 
 * 比如常见场景为 ， 软删除数据过滤、租户数据过滤、不同数据权限过滤。
-* 命名空间 ：ZJJWEPlatform.Domains.Entity
+* 命名空间 ：NPlatform.Domains.Entity
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-20 15:37:15
@@ -17,12 +17,12 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    using ZJJWEPlatform.Domains.Entity;
+    using NPlatform.Domains.Entity;
 
     /// <summary>
     /// 过滤器接口

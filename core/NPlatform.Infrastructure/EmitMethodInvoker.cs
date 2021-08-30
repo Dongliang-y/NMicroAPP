@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection.Emit;
 using System.Reflection;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     ///  IL  invoke method class  --用于ZF02报表

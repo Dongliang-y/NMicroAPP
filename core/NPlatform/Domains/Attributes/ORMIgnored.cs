@@ -1,4 +1,4 @@
-namespace ZJJWEPlatform.Domains
+namespace NPlatform.Domains
 {
     /// <summary>
     /// Dapper ORM ∫ˆ¬‘”≥…‰¥À¡–
@@ -12,7 +12,7 @@ namespace ZJJWEPlatform.Domains
         {
             get
             {
-                return "ZJJWEPlatformEntityORMIgnored";
+                return "NPlatformEntityORMIgnored";
             }
         }
     }

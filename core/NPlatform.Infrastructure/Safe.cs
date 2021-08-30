@@ -1,4 +1,4 @@
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     using System.Text;
     using System.Text.RegularExpressions;

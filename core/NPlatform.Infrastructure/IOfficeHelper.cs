@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// Office 助手

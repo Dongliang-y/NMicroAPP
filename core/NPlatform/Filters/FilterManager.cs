@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.Service
+* 项目名称 ：NPlatform.Domains.Service
 * 类 名 称 ：FilterManager
 * 类 描 述 ：过滤器管服务，解决软删除数据过滤，租户数据过滤，项目权限数据过滤。
-* 命名空间 ：ZJJWEPlatform.Domains.Service
+* 命名空间 ：NPlatform.Domains.Service
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-20 15:53:07
@@ -14,15 +14,15 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Result;
 
     /// <summary>
     /// 过滤器管理服务
@@ -68,7 +68,7 @@ namespace ZJJWEPlatform.Filters
             }
             else
             {
-                throw new ZJJWEPlatformException("过滤器不存在！", "FilterManager.EnabledFilter");
+                throw new NPlatformException("过滤器不存在！", "FilterManager.EnabledFilter");
             }
         }
 
@@ -95,7 +95,7 @@ namespace ZJJWEPlatform.Filters
             }
             else
             {
-                throw new ZJJWEPlatformException("过滤器不存在！", "FilterManager.EnabledFilter");
+                throw new NPlatformException("过滤器不存在！", "FilterManager.EnabledFilter");
             }
         }
 

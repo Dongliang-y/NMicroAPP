@@ -18,9 +18,9 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using ZJJWEPlatform;
+using NPlatform;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 数据列表内容对象

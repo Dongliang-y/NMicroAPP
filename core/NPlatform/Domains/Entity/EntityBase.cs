@@ -7,7 +7,7 @@
 **修改历史： 2016/08/24 修改为可支持多种主键类型
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     using System;
     using System.Collections.Generic;

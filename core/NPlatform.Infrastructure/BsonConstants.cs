@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System;
 

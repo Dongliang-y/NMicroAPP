@@ -2,7 +2,7 @@
   * CLR版本：       4.0.30319.42000
   * 类 名 称：       BusinessLog
   * 机器名称：       DESKTOP123
-  * 命名空间：       ZJJWEPlatform.Infrastructure.Loger
+  * 命名空间：       NPlatform.Infrastructure.Loger
   * 文 件 名：       BusinessLog
   * 创建时间：       2020-5-13 9:16:30
   * 作    者：          xxx
@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// 业务日志

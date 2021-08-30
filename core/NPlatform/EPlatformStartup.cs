@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains
-* 类 名 称 ：ZJJWEPlatformStartup
+* 项目名称 ：NPlatform.Domains
+* 类 名 称 ：NPlatformStartup
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.Domains
+* 命名空间 ：NPlatform.Domains
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-20 16:37:16
@@ -14,19 +14,19 @@
 
 #endregion
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using AutoMapper;
    // using Lincence.Verify;
     using System.IO;
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.IOC;
+    using NPlatform.Config;
+    using NPlatform.Filters;
+    using NPlatform.IOC;
 
     /// <summary>
     /// 平台初始化对象. IOC容器加载、缓存初始化。
     /// </summary>
-    public class ZJJWEPlatformStartup
+    public class NPlatformStartup
     {
         /// <summary>
         /// 定义一个标识确保线程同步
@@ -36,12 +36,12 @@ namespace ZJJWEPlatform
         /// <summary>
         /// 平台配置项
         /// </summary>
-        public ZJJWEPlatformConfig Config { get; set; }
+        public NPlatformConfig Config { get; set; }
 
         /// <summary>
         /// 定义一个静态变量来保存类的实例
         /// </summary>
-        private static ZJJWEPlatformStartup uniqueInstance;
+        private static NPlatformStartup uniqueInstance;
 
         /// <summary>
         /// 是否加载完成.
@@ -49,21 +49,21 @@ namespace ZJJWEPlatform
         public static bool AutoMapperInitialized { set; get; } = false;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="ZJJWEPlatformStartup"/> class from being created. 
+        /// Prevents a default instance of the <see cref="NPlatformStartup"/> class from being created. 
         /// 定义私有构造函数，使外界不能创建该类实例
         /// </summary>
-        private ZJJWEPlatformStartup()
+        private NPlatformStartup()
         {
             // 加载配置
-            Config = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+            Config = new ConfigFactory<NPlatformConfig>().Build();
             AutoMapperInit();
         }
 
         /// <summary>
-        /// 全局唯一的,ZJJWEPlatformStartup 对象.
+        /// 全局唯一的,NPlatformStartup 对象.
         /// </summary>
-        /// <returns>ZJJWEPlatformStartup</returns>
-        public static ZJJWEPlatformStartup Start()
+        /// <returns>NPlatformStartup</returns>
+        public static NPlatformStartup Start()
         {
 //#if DEBUG
 //#else
@@ -82,7 +82,7 @@ namespace ZJJWEPlatform
                         // 如果类的实例不存在则创建，否则直接返回
                         if (uniqueInstance == null)
                         {
-                            uniqueInstance = new ZJJWEPlatformStartup();
+                            uniqueInstance = new NPlatformStartup();
                         }
                     }
                 }

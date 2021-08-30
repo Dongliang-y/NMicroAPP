@@ -10,12 +10,12 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Repositories.Exceptions
+namespace NPlatform.Repositories.Exceptions
 {
     /// <summary>
     /// 仓储一场接口
     /// </summary>
-    public interface IRepositoryException : IZJJWEPlatformException
+    public interface IRepositoryException : INPlatformException
     {
     }
 }

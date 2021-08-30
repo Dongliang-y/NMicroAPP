@@ -1,11 +1,11 @@
 ﻿#region << 版 本 注 释 >>
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Infrastructure
+* 项目名称 ：NPlatform.Infrastructure
 * 项目描述 ：
 * 类 名 称 ：HttpClientHelper
 * 类 描 述 ：
 * 所在的域 ：DONGJIANHU
-* 命名空间 ：ZJJWEPlatform.Infrastructure
+* 命名空间 ：NPlatform.Infrastructure
 * 机器名称 ：DONGJIANHU 
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：MACHENIKE
@@ -23,7 +23,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// http client 工具类型

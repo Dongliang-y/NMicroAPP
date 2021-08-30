@@ -1,16 +1,16 @@
-﻿namespace ZJJWEPlatform.Domains.Service
+﻿namespace NPlatform.Domains.Service
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.IOC;
-    using ZJJWEPlatform.Repositories;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Config;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.IOC;
+    using NPlatform.Repositories;
+    using NPlatform.Result;
     using Flurl.Http;
     /// <summary>
     /// 领域服务基类
@@ -35,7 +35,7 @@
         /// <summary>
         /// 框架配置
         /// </summary>
-        protected static ZJJWEPlatformConfig Config { get; } = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+        protected static NPlatformConfig Config { get; } = new ConfigFactory<NPlatformConfig>().Build();
 
 
         /// <summary>

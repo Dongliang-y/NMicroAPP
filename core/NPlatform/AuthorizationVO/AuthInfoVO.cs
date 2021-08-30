@@ -4,7 +4,7 @@
 * 类 名 称 ：AuthInfoDto
 * 类 描 述 ：
 * 所在的域 ：DESKTOP-QUTJPVF
-* 命名空间 ：ZJJWEPlatform.AuthorizationDto
+* 命名空间 ：NPlatform.AuthorizationDto
 * 机器名称 ：DESKTOP-QUTJPVF
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：王盈攀
@@ -21,9 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using ZJJWEPlatform;
+using NPlatform;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// 授权数据

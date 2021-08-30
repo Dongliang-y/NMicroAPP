@@ -1,9 +1,9 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.IOC
+* 项目名称 ：NPlatform.IOC
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.IOC
+* 命名空间 ：NPlatform.IOC
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-12-11 9:27:28
@@ -13,7 +13,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.IOC
+namespace NPlatform.IOC
 {
     using Autofac;
     using Autofac.Core;
@@ -23,8 +23,8 @@ namespace ZJJWEPlatform.IOC
     using Autofac.Extras.DynamicProxy;
     using Microsoft.Extensions.DependencyInjection;
     using NPOI.SS.Formula.Functions;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.Infrastructure;
+    using NPlatform.Filters;
+    using NPlatform.Infrastructure;
     using ServiceStack;
     using System;
     using System.Collections;
@@ -33,14 +33,14 @@ namespace ZJJWEPlatform.IOC
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using ZJJWEPlatform.Applications;
-    // using ZJJWEPlatform.API.Controllers;
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.Infrastructure;
-    using ZJJWEPlatform.Infrastructure.Loger;
-    using ZJJWEPlatform.Repositories;
+    using NPlatform.Applications;
+    // using NPlatform.API.Controllers;
+    using NPlatform.Config;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Filters;
+    using NPlatform.Infrastructure;
+    using NPlatform.Infrastructure.Loger;
+    using NPlatform.Repositories;
     using Microsoft.Extensions.Configuration;
 
     /// <summary>
@@ -88,7 +88,7 @@ namespace ZJJWEPlatform.IOC
                 {
                     if (container == null)
                     {
-                        throw new ZJJWEPlatformException("IOC 容器未初始化", "IOCManager.Container");
+                        throw new NPlatformException("IOC 容器未初始化", "IOCManager.Container");
                     }
 
                     return container;
@@ -194,10 +194,10 @@ namespace ZJJWEPlatform.IOC
         public static void Install(IRepositoryOptions rspOptions, ContainerBuilder builder)
         {
             DefaultOption = rspOptions ?? new Repositories.RepositoryOptions();
-            var cfg = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+            var cfg = new ConfigFactory<NPlatformConfig>().Build();
             if (cfg.IOCAssemblys.Length == 0)
             {
-                throw new ZJJWEPlatformException("ZJJWEPlatformConfig IOCAssemblys is null", "IOC Install");
+                throw new NPlatformException("NPlatformConfig IOCAssemblys is null", "IOC Install");
             }
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope().InstancePerDependency();
@@ -220,7 +220,7 @@ namespace ZJJWEPlatform.IOC
                 }
                 catch (FileNotFoundException ex)
                 {
-                    throw new ZJJWEPlatformException(
+                    throw new NPlatformException(
                         $"没找到配置指定注入的{ex.FileName}，请确认dll是否已正确复制，名称是否与配置的相同。",
                         "IOCManager.Install.FileNotFoundException");
                 }

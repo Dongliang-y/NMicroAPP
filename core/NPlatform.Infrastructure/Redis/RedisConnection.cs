@@ -4,9 +4,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
-using ZJJWEPlatform.Config;
+using NPlatform.Config;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// ConnectionMultiplexer对象管理帮助类

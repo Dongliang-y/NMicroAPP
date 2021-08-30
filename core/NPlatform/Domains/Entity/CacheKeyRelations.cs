@@ -10,16 +10,16 @@
 //      修改描述：
 //      版本：1.0
 // </modify>
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using ZJJWEPlatform;
-    using ZJJWEPlatform.Domains;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Filters;
-    using ZJJWEPlatform.IdGenerators;
+    using NPlatform;
+    using NPlatform.Domains;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Filters;
+    using NPlatform.IdGenerators;
 
     // Base_CacheKeyRelations
     // 缓存键值关系管理

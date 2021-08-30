@@ -10,7 +10,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Applications
+namespace NPlatform.Applications
 {
     using System;
 

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     public class ZipHelper
     {

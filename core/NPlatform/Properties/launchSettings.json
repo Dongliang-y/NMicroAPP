@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ZJJWEPlatform": {
+    "NPlatform": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

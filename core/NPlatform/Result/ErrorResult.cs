@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 错误信息

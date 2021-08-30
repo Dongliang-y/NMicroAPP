@@ -3,7 +3,7 @@ using System.CodeDom.Compiler;
 using Microsoft.CSharp;
 using System.Reflection;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// 处理表达试运算---动态生成数学表达式并计算其值

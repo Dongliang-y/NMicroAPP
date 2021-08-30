@@ -1,4 +1,4 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     using System;
     using System.Collections.Generic;

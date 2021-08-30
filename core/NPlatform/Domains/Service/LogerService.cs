@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.Service
+namespace NPlatform.Domains.Service
 {
     using System;
     using System.Collections.Generic;
@@ -19,13 +19,13 @@ namespace ZJJWEPlatform.Domains.Service
     using log4net.Config;
     using log4net.Repository;
     using ServiceStack;
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Domains.IRepositories;
-    using ZJJWEPlatform.Domains.Service;
-    using ZJJWEPlatform.Infrastructure;
-    using ZJJWEPlatform.Infrastructure.Loger;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Config;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Domains.IRepositories;
+    using NPlatform.Domains.Service;
+    using NPlatform.Infrastructure;
+    using NPlatform.Infrastructure.Loger;
+    using NPlatform.Result;
 
     /// <summary>
     /// 日志记录类
@@ -59,7 +59,7 @@ namespace ZJJWEPlatform.Domains.Service
         /// <summary>
         /// 平台配置
         /// </summary>
-        private static ZJJWEPlatformConfig platConfig = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+        private static NPlatformConfig platConfig = new ConfigFactory<NPlatformConfig>().Build();
         /// <summary>
         /// Initializes static members of the <see cref="LogerHelper"/> class.
         /// 构造

@@ -11,7 +11,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Repositories.DapperExt
+namespace NPlatform.Repositories.DapperExt
 {
     using System;
     using System.Linq;

@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Domains.Service
+* 项目名称 ：NPlatform.Domains.Service
 * 类 名 称 ：IsDeleteFilter
 * 类 描 述 ：
-* 命名空间 ：ZJJWEPlatform.Domains.Service
+* 命名空间 ：NPlatform.Domains.Service
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
 * 创建时间 ：2018-11-21 8:56:05
@@ -14,7 +14,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     using System;
     using System.Collections.Generic;

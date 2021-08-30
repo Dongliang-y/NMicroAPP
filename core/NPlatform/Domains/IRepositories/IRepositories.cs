@@ -7,7 +7,7 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.IRepositories
+namespace NPlatform.Domains.IRepositories
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace ZJJWEPlatform.Domains.IRepositories
 
     using DapperExtensions;
 
-    using ZJJWEPlatform.Domains.Entity;
-    using ZJJWEPlatform.Result;
+    using NPlatform.Domains.Entity;
+    using NPlatform.Result;
 
     /// <summary>
     /// 仓储接口

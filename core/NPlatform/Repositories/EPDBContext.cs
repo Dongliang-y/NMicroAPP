@@ -21,32 +21,32 @@ using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 using DapperExtensions;
-using ZJJWEPlatform.Infrastructure;
-using ZJJWEPlatform.Domains;
+using NPlatform.Infrastructure;
+using NPlatform.Domains;
 using System.Collections;
 using System.Collections.Generic;
-using ZJJWEPlatform.Config;
-using ZJJWEPlatform.Domains.IRepositories;
+using NPlatform.Config;
+using NPlatform.Domains.IRepositories;
 using System.Linq;
 using System.Diagnostics;
-using ZJJWEPlatform.Infrastructure.Loger;
+using NPlatform.Infrastructure.Loger;
 using System.ComponentModel;
 using MySql.Data.MySqlClient;
 using System.Text;
 using System.IO;
 using System.Reflection;
 
-namespace ZJJWEPlatform.Repositories
+namespace NPlatform.Repositories
 {
     /// <summary>
-    /// ZJJWEPlatform上下文
+    /// NPlatform上下文
     /// </summary>
     public class EPDBContext: IDbConnection
     {
-        private volatile static ZJJWEPlatformConfig _config;
+        private volatile static NPlatformConfig _config;
         private static readonly object LockHelper = new object();
 
-        private static ZJJWEPlatformConfig config
+        private static NPlatformConfig config
         {
             get
             {
@@ -57,7 +57,7 @@ namespace ZJJWEPlatform.Repositories
                         if (_config == null)
                         {
                             
-                            _config = new ConfigFactory<ZJJWEPlatform.Config.ZJJWEPlatformConfig>().Build();
+                            _config = new ConfigFactory<NPlatform.Config.NPlatformConfig>().Build();
                         }
                     }
                 }
@@ -334,7 +334,7 @@ namespace ZJJWEPlatform.Repositories
             }
             else
             {
-                throw new ZJJWEPlatformException("实体未指定 TableName 属性",null,"500");
+                throw new NPlatformException("实体未指定 TableName 属性",null,"500");
             }
 
             var cacheFileInfo = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), strName + ".csv");
@@ -348,11 +348,11 @@ namespace ZJJWEPlatform.Repositories
                 }
                 catch (System.IO.IOException ex)
                 {
-                    throw new ZJJWEPlatformException("导入失败，无法创建缓存目录！", ex, "500");
+                    throw new NPlatformException("导入失败，无法创建缓存目录！", ex, "500");
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    throw new ZJJWEPlatformException("导入失败，无法创建缓存目录！", ex, "500");
+                    throw new NPlatformException("导入失败，无法创建缓存目录！", ex, "500");
                 }
             }
             string csv = ListToCsv(datas);
@@ -445,11 +445,11 @@ namespace ZJJWEPlatform.Repositories
                 }
                 catch(System.IO.IOException ex)
                 {
-                    throw new ZJJWEPlatformException("导入失败，无法创建缓存目录！",ex,"500");
+                    throw new NPlatformException("导入失败，无法创建缓存目录！",ex,"500");
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    throw new ZJJWEPlatformException("导入失败，无法创建缓存目录！", ex, "500");
+                    throw new NPlatformException("导入失败，无法创建缓存目录！", ex, "500");
                 }
             }
             string csv = DataTableToCsv(table);

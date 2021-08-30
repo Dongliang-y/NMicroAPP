@@ -10,12 +10,12 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Repositories.Exceptions
+namespace NPlatform.Repositories.Exceptions
 {
     /// <summary>
     /// 查询谓词类型错误
     /// </summary>
-    public class PredicateTypeException : ZJJWEPlatformException
+    public class PredicateTypeException : NPlatformException
     {
         /// <summary>
         /// 查询谓词类型错误

@@ -1,9 +1,9 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     /// <summary>
     /// 操作异常
     /// </summary>
-    public class OperateException : ZJJWEPlatformException
+    public class OperateException : NPlatformException
     {
         /// <summary>
         /// 操作异常

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     /// <summary>
     /// sql 查询过滤器。

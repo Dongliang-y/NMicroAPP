@@ -2,7 +2,7 @@
   * CLR版本：       4.0.30319.42000
   * 类 名 称：       BusinessLayout
   * 机器名称：       DESKTOP123
-  * 命名空间：       ZJJWEPlatform.Infrastructure.Loger
+  * 命名空间：       NPlatform.Infrastructure.Loger
   * 文 件 名：       BusinessLayout
   * 创建时间：       2020-5-13 10:52:36
   * 作    者：          xxx
@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// 业务日志格式化

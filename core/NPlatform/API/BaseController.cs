@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ZJJWEPlatform.Result;
-using ZJJWEPlatform.Config;
+using NPlatform.Result;
+using NPlatform.Config;
 using Microsoft.AspNetCore.Authorization;
-using ZJJWEPlatform.Infrastructure.Redis;
+using NPlatform.Infrastructure.Redis;
 using System.Web;
-using ZJJWEPlatform.Infrastructure.Loger;
+using NPlatform.Infrastructure.Loger;
 
-namespace ZJJWEPlatform.API.Controllers
+namespace NPlatform.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Primitives;
@@ -16,9 +16,9 @@ namespace ZJJWEPlatform.API.Controllers
     using System.IO;
     using System.Net.Http;
     using System.Text;
-    using ZJJWEPlatform.Infrastructure;
-    using ZJJWEPlatform.IOC;
-    using ZJJWEPlatform.Repositories;
+    using NPlatform.Infrastructure;
+    using NPlatform.IOC;
+    using NPlatform.Repositories;
 
     /// <summary>
     /// controler 基类
@@ -31,12 +31,12 @@ namespace ZJJWEPlatform.API.Controllers
         /// <summary>
         /// 全局配置信息
         /// </summary>
-        private static ZJJWEPlatformConfig _Config = new ConfigFactory<ZJJWEPlatform.Config.ZJJWEPlatformConfig>().Build();
+        private static NPlatformConfig _Config = new ConfigFactory<NPlatform.Config.NPlatformConfig>().Build();
 
         /// <summary>
         /// 全局配置信息
         /// </summary>
-        public static ZJJWEPlatformConfig Config
+        public static NPlatformConfig Config
         {
             get { return _Config; }
             
@@ -54,7 +54,7 @@ namespace ZJJWEPlatform.API.Controllers
                 Request.Body.CopyTo(ms);
                 var b = ms.ToArray();
                 var postParamsString = Encoding.UTF8.GetString(b);
-                return ZJJWEPlatform.Infrastructure.SerializerHelper.FromJson<T>(postParamsString);
+                return NPlatform.Infrastructure.SerializerHelper.FromJson<T>(postParamsString);
             }
         }
 
@@ -183,7 +183,7 @@ namespace ZJJWEPlatform.API.Controllers
         /// <summary>
         /// 返回错误信息
         /// </summary>
-        protected virtual IEPResult Error(ZJJWEPlatformException ex)
+        protected virtual IEPResult Error(NPlatformException ex)
         {
             return  Error<IDTO>(ex.Message,ex,"");
         }
@@ -197,14 +197,14 @@ namespace ZJJWEPlatform.API.Controllers
         /// <summary>
         /// 返回错误信息
         /// </summary>
-        protected virtual ErrorResult<T> Error<T>(ZJJWEPlatformException ex) 
+        protected virtual ErrorResult<T> Error<T>(NPlatformException ex) 
         {
             return Error<T>(ex.Message, ex, "");
         }
         /// <summary>
         /// 返回错误信息
         /// </summary>
-        protected virtual ErrorResult<T> Error<T>(string msg, ZJJWEPlatform.ZJJWEPlatformException ex, string modelName)
+        protected virtual ErrorResult<T> Error<T>(string msg, NPlatform.NPlatformException ex, string modelName)
         {
             if (ex.GetType().IsSubclassOf(typeof(LogicException)))
             {
@@ -274,7 +274,7 @@ namespace ZJJWEPlatform.API.Controllers
         /// <returns>ID</returns>
         protected string IDGenerate()
         {
-            return new ZJJWEPlatform.Infrastructure.IdGenerators.IdGenerator().GenerateId().ToString();
+            return new NPlatform.Infrastructure.IdGenerators.IdGenerator().GenerateId().ToString();
         }
     }
 }

@@ -2,7 +2,7 @@
   * CLR版本：       4.0.30319.42000
   * 类 名 称：       LogLevel
   * 机器名称：       DESKTOP123
-  * 命名空间：       ZJJWEPlatform.Infrastructure.Loger
+  * 命名空间：       NPlatform.Infrastructure.Loger
   * 文 件 名：       LogLevel
   * 创建时间：       2020-5-20 17:13:37
   * 作    者：          xxx
@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace ZJJWEPlatform.Infrastructure.Loger
+namespace NPlatform.Infrastructure.Loger
 {
     /// <summary>
     /// 日志级别的keyvalue 字典描述

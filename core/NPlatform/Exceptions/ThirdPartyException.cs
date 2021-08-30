@@ -1,9 +1,9 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     /// <summary>
     /// 第三方系统异常
     /// </summary>
-    public class ThirdPartyException : ZJJWEPlatformException
+    public class ThirdPartyException : NPlatformException
     {
         /// <summary>
         /// 第三方系统异常

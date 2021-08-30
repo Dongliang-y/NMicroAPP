@@ -7,7 +7,7 @@
 **ÐÞ¸ÄÀúÊ·£º
 ************************************************************/
 
-namespace ZJJWEPlatform.Infrastructure.Loger
+namespace NPlatform.Infrastructure.Loger
 {
     using System;
     using System.IO;

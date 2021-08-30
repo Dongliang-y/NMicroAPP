@@ -6,7 +6,7 @@ using System.Data;
 using System.Web;
 using System.Text.RegularExpressions;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// 表达式解析 ，用于ZF02生成报表

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZJJWEPlatform.Extends
+namespace NPlatform.Extends
 {
     /// <summary>
     /// HTTP扩展类型

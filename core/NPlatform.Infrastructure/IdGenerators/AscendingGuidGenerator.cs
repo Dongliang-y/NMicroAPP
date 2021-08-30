@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-namespace ZJJWEPlatform.IdGenerators
+namespace NPlatform.IdGenerators
 {
     using System;
     using System.Diagnostics;

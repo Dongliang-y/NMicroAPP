@@ -1,12 +1,12 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Applications
+* 项目名称 ：NPlatform.Applications
 * 项目描述 ：
 * 类 名 称 ：Application
 * 类 描 述 ：
 * 所在的域 ：LDY
-* 命名空间 ：ZJJWEPlatform.Applications
+* 命名空间 ：NPlatform.Applications
 * 机器名称 ：LDY 
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
@@ -20,17 +20,17 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Applications
+namespace NPlatform.Applications
 {
     using System;
     using System.Linq.Expressions;
     using System.Collections.Generic;
     using System.Linq;
 
-    using ZJJWEPlatform.Config;
-    using ZJJWEPlatform.Result;
-    using ZJJWEPlatform.Repositories;
-    using ZJJWEPlatform.Domains.Service;
+    using NPlatform.Config;
+    using NPlatform.Result;
+    using NPlatform.Repositories;
+    using NPlatform.Domains.Service;
 
     /// <summary>
     /// Application 基类
@@ -40,7 +40,7 @@ namespace ZJJWEPlatform.Applications
         /// <summary>
         /// The _ config.
         /// </summary>
-        protected static ZJJWEPlatformConfig Config { get; } = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+        protected static NPlatformConfig Config { get; } = new ConfigFactory<NPlatformConfig>().Build();
 
         /// <summary>
         /// 集合分页

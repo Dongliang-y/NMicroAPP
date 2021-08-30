@@ -4,8 +4,8 @@
 	  <IsPackable>true</IsPackable>
     <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>ZJJWEPlatform</RootNamespace>
-    <AssemblyName>ZJJWEPlatform</AssemblyName>
+    <RootNamespace>NPlatform</RootNamespace>
+    <AssemblyName>NPlatform</AssemblyName>
     <AssemblyVersion>5.0.1.6</AssemblyVersion>
     <Description>*V 5.0.1增加对 .NET5 ,.NET 2.2的支持,实现 2.2,3.1 5.0多目标框架支持. 增加FluentHttp的支持,实现基于 resetfull api的服务简单调用</Description>
     <Version>5.0.1.6</Version>
@@ -15,17 +15,17 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <FileVersion>5.0.1.6</FileVersion>
-    <PackageId>ZJJWEPlatform</PackageId>
+    <PackageId>NPlatform</PackageId>
     <PackageReleaseNotes>单元测试通过，试运行。</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>ZJJWEPlatform.xml</DocumentationFile>
+    <DocumentationFile>NPlatform.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>ZJJWEPlatform.xml</DocumentationFile>
+    <DocumentationFile>NPlatform.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,11 +35,11 @@
 
   <ItemGroup>
     <None Remove="Readme.md" />
-    <None Remove="ZJJWEPlatform.xml" />
+    <None Remove="NPlatform.xml" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ZJJWEPlatform.xml">
+    <EmbeddedResource Include="NPlatform.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -72,7 +72,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="ZJJWEPlatform.xml">
+    <Resource Include="NPlatform.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

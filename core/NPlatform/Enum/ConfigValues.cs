@@ -1,4 +1,4 @@
-﻿namespace ZJJWEPlatform
+﻿namespace NPlatform
 {
     /// <summary>
     /// 字典配置数据的值字段

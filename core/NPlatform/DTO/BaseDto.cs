@@ -13,9 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Result;
+using NPlatform.Result;
 
-namespace ZJJWEPlatform.DTO
+namespace NPlatform.DTO
 {
     /// <summary>
     /// DTO 基类

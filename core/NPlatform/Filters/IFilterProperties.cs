@@ -1,12 +1,12 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Filters
+* 项目名称 ：NPlatform.Filters
 * 项目描述 ：
 * 类 名 称 ：IEntityFilter
 * 类 描 述 ：
 * 所在的域 ：LDY
-* 命名空间 ：ZJJWEPlatform.Filters
+* 命名空间 ：NPlatform.Filters
 * 机器名称 ：LDY 
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：DongliangYi
@@ -20,7 +20,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     /// <summary>
     /// 过滤规范属性

@@ -1,4 +1,4 @@
-﻿namespace ZJJWEPlatform.Filters
+﻿namespace NPlatform.Filters
 {
     using System;
     using System.Collections.Generic;

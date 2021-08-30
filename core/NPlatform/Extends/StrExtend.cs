@@ -8,7 +8,7 @@
 **ÐÞ¸ÄÀúÊ·£º
 ************************************************************/
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     using System;
     using System.Diagnostics;

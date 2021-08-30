@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Collections;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// 组织机构类型（0 业主单位、1 监理单位、2 施工单位、3 设计单位、4 咨询单位 、10其他/归类）

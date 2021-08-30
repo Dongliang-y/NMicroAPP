@@ -11,9 +11,9 @@
 *********************************************************************************/
 
 using System;
-using ZJJWEPlatform.Result;
+using NPlatform.Result;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// Dto 接口

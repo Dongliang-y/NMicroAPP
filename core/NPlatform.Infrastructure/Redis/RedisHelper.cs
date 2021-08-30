@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Config;
+using NPlatform.Config;
 
-namespace ZJJWEPlatform.Infrastructure
+namespace NPlatform.Infrastructure
 {
     /// <summary>
     /// Redis操作
@@ -16,7 +16,7 @@ namespace ZJJWEPlatform.Infrastructure
     {
         private int DbNum { get; }
         private readonly ConnectionMultiplexer _conn;
-        private ZJJWEPlatformConfig config = new ConfigFactory<ZJJWEPlatformConfig>().Build();
+        private NPlatformConfig config = new ConfigFactory<NPlatformConfig>().Build();
         private string prefix;
 
         #region 构造函数

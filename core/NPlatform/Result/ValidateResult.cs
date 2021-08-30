@@ -4,7 +4,7 @@
 * 类 名 称 ：ValidateResult
 * 类 描 述 ：
 * 所在的域 ：DESKTOP-UU3LV10
-* 命名空间 ：ZJJWEPlatform.Result
+* 命名空间 ：NPlatform.Result
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：Dongliang Yi
 * 创建时间 ：2019/1/14 14:33:55
@@ -17,7 +17,7 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// Dto 校验结果

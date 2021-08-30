@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-namespace ZJJWEPlatform.IdGenerators
+namespace NPlatform.IdGenerators
 {
     /// <summary>
     /// Represents an Id generator for ObjectIds.

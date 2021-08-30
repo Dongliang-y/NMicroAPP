@@ -10,7 +10,7 @@
 
 *********************************************************************************/
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     using Newtonsoft.Json;
     using System.Collections.Generic;

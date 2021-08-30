@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Domains.Entity;
+using NPlatform.Domains.Entity;
 
-namespace ZJJWEPlatform.Filters
+namespace NPlatform.Filters
 {
     /// <summary>
     /// 结果过滤器

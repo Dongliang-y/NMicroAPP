@@ -6,14 +6,14 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.Entity
+namespace NPlatform.Domains.Entity
 {
     using System;
 
-    using ZJJWEPlatform;
-    using ZJJWEPlatform.Domains;
-    using ZJJWEPlatform.Domains.Entity;
-        using ZJJWEPlatform.Domains;
+    using NPlatform;
+    using NPlatform.Domains;
+    using NPlatform.Domains.Entity;
+        using NPlatform.Domains;
     /// <summary>
     ///Loger数据实体
     /// </summary>

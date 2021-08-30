@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZJJWEPlatform.Config
+namespace NPlatform.Config
 {
     /// <summary>
     /// Auth 服务器信息配置
@@ -37,7 +37,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(AuthorizationUrl), this.authorizationUrl);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(AuthorizationUrl), this.authorizationUrl);
             }
             set
             {
@@ -52,7 +52,7 @@ namespace ZJJWEPlatform.Config
         {
             get
             {
-                return ApolloConfiguration.GetConfig(nameof(ZJJWEPlatformConfig), nameof(AccessTokenLifetime), this.accessTokenLifetime);
+                return ApolloConfiguration.GetConfig(nameof(NPlatformConfig), nameof(AccessTokenLifetime), this.accessTokenLifetime);
             }
             set
             {

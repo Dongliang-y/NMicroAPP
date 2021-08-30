@@ -16,9 +16,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using ZJJWEPlatform.Result;
+using NPlatform.Result;
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     public static class DTOValidate
     {

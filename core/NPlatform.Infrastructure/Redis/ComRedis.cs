@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 
 /*----------------------------------------------------------------
-* 项目名称 ：ZJJWEPlatform.Infrastructure.Redis
+* 项目名称 ：NPlatform.Infrastructure.Redis
 * 类 名 称 ：ComRedisEngine
 * 类 描 述 ：通用Redis公共辅助类库
-* 命名空间 ：ZJJWEPlatform.Infrastructure.Redis
+* 命名空间 ：NPlatform.Infrastructure.Redis
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：YanZhou
 * 创建时间 ：2018-12-21 16:36:58
@@ -14,8 +14,8 @@
 
 #endregion
 
-namespace ZJJWEPlatform.Infrastructure.Redis { 
-    using ZJJWEPlatform.Config;
+namespace NPlatform.Infrastructure.Redis { 
+    using NPlatform.Config;
 
     /// <summary>
     /// 通用Redis缓存

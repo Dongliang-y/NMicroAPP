@@ -7,12 +7,12 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform
+namespace NPlatform
 {
     /// <summary>
     /// 平台异常基类
     /// </summary>
-    public interface IZJJWEPlatformException
+    public interface INPlatformException
     {
         /// <summary>
         /// 错误码

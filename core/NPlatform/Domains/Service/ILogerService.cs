@@ -10,11 +10,11 @@
 using log4net.Repository;
 using System;
 using System.Collections.Generic;
-using ZJJWEPlatform.Domains.Entity;
-using ZJJWEPlatform.Infrastructure.Loger;
-using ZJJWEPlatform.Result;
+using NPlatform.Domains.Entity;
+using NPlatform.Infrastructure.Loger;
+using NPlatform.Result;
 
-namespace ZJJWEPlatform.Domains.Service
+namespace NPlatform.Domains.Service
 {
     /// <summary>
     /// 日志服务

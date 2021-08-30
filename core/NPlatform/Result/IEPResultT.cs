@@ -12,7 +12,7 @@
 
 using Newtonsoft.Json;
 
-namespace ZJJWEPlatform.Result
+namespace NPlatform.Result
 {
     /// <summary>
     /// 成功的结果内容

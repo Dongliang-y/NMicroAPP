@@ -7,14 +7,14 @@
 **修改历史：
 ************************************************************/
 
-namespace ZJJWEPlatform.Domains.IRepositories
+namespace NPlatform.Domains.IRepositories
 {
     using Dapper;
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using ZJJWEPlatform.Domains.Entity;
+    using NPlatform.Domains.Entity;
 
     /// <summary>
     /// 工作单元模式仓储接口
