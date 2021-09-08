@@ -30,3 +30,4 @@ wwwroot
 /tools/consul.exe
 /tools/*.exe
 /tools/consul/data
+tools/consul/consul.exe
