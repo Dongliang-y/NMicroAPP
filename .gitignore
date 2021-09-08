@@ -29,3 +29,4 @@ bin
 wwwroot
 /tools/consul.exe
 /tools/*.exe
+/tools/consul/data

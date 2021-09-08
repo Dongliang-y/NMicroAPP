@@ -1,0 +1,3251 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NPlatform.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:NPlatform.AutoMapperHelper">
+            <summary>
+            对象映射工具类
+            </summary>
+        </member>
+        <member name="M:NPlatform.AutoMapperHelper.Map``1(System.Object[])">
+            <summary>
+            映射1-N个对象。
+            </summary>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="sources">源对象</param>
+            <returns>map的结果对象</returns>
+        </member>
+        <member name="M:NPlatform.AutoMapperHelper.Map(System.Object,System.Object[])">
+            <summary>
+            map 源对象到目标对象。
+            </summary>
+            <param name="destination">目标.</param>
+            <param name="sources">源.</param>
+        </member>
+        <member name="M:NPlatform.AutoMapperHelper.Map``1(System.Object)">
+            <summary>
+            Maps 单个对象到目标对象。
+            </summary>
+            <typeparam name="T">type of teh destination</typeparam>
+            <param name="source">The source.</param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.BsonConstants">
+            <summary>
+            BSON数据类型 mysql 专用
+            A static class containing BSON constants.
+            </summary>
+        </member>
+        <member name="P:NPlatform.BsonConstants.DateTimeMaxValueMillisecondsSinceEpoch">
+            <summary>
+            Gets the number of milliseconds since the Unix epoch for DateTime.MaxValue.
+            </summary>
+        </member>
+        <member name="P:NPlatform.BsonConstants.DateTimeMinValueMillisecondsSinceEpoch">
+            <summary>
+            Gets the number of milliseconds since the Unix epoch for DateTime.MinValue.
+            </summary>
+        </member>
+        <member name="P:NPlatform.BsonConstants.UnixEpoch">
+            <summary>
+            Gets the Unix Epoch for BSON DateTimes (1970-01-01).
+            </summary>
+        </member>
+        <member name="T:NPlatform.BsonUtils">
+            <summary>
+            BSON操作类
+            A static class containing BSON utility methods.
+            </summary>
+        </member>
+        <member name="M:NPlatform.BsonUtils.GetFriendlyTypeName(System.Type)">
+            <summary>
+            Gets a friendly class name suitable for use in error messages.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>A friendly class name.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ParseHexString(System.String)">
+            <summary>
+            Parses a hex string into its equivalent byte array.
+            </summary>
+            <param name="s">The hex string to parse.</param>
+            <returns>The byte equivalent of the hex string.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToDateTimeFromMillisecondsSinceEpoch(System.Int64)">
+            <summary>
+            Converts from number of milliseconds since Unix epoch to DateTime.
+            </summary>
+            <param name="millisecondsSinceEpoch">The number of milliseconds since Unix epoch.</param>
+            <returns>A DateTime.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToHexChar(System.Int32)">
+            <summary>
+            Converts a value to a hex character.
+            </summary>
+            <param name="value">The value (assumed to be between 0 and 15).</param>
+            <returns>The hex character.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToHexString(System.Byte[])">
+            <summary>
+            Converts a byte array to a hex string.
+            </summary>
+            <param name="bytes">The byte array.</param>
+            <returns>A hex string.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToLocalTime(System.DateTime)">
+            <summary>
+            Converts a DateTime to local time (with special handling for MinValue and MaxValue).
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>The DateTime in local time.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToMillisecondsSinceEpoch(System.DateTime)">
+            <summary>
+            Converts a DateTime to number of milliseconds since Unix epoch.
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>Number of seconds since Unix epoch.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.ToUniversalTime(System.DateTime)">
+            <summary>
+            Converts a DateTime to UTC (with special handling for MinValue and MaxValue).
+            </summary>
+            <param name="dateTime">A DateTime.</param>
+            <returns>The DateTime in UTC.</returns>
+        </member>
+        <member name="M:NPlatform.BsonUtils.TryParseHexString(System.String,System.Byte[]@)">
+            <summary>
+            Tries to parse a hex string to a byte array.
+            </summary>
+            <param name="s">The hex string.</param>
+            <param name="bytes">A byte array.</param>
+            <returns>True if the hex string was successfully parsed.</returns>
+        </member>
+        <member name="T:NPlatform.Config.ApolloConfiguration">
+            <summary>
+            apollo配置获取
+            </summary>
+        </member>
+        <member name="M:NPlatform.Config.ApolloConfiguration.GetConfig(System.String,System.String,System.String)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="key">key值</param>
+            <param name="defaultValue">如果没找到key,则返回默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Config.ApolloConfiguration.GetConfig(System.String,System.String,System.Boolean)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="key">key值</param>
+            <param name="defaultValue">如果没找到key,则返回默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Config.ApolloConfiguration.GetConfig(System.String,System.String,System.Int32)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="key">key值</param>
+            <param name="defaultValue">如果没找到key,则返回默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Config.ApolloConfiguration.OnChanged(System.Object,Com.Ctrip.Framework.Apollo.Model.ConfigChangeEventArgs)">
+            <summary>
+            动态监听配置改变
+            </summary>
+            <param name="sender"></param>
+            <param name="changeEvent"></param>
+        </member>
+        <member name="T:NPlatform.Config.AuthServerConfig">
+            <summary>
+            Auth 服务器信息配置
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.AuthServerConfig.ApiScope">
+            <summary>
+            ApiScope 服务端有效
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.AuthServerConfig.AuthorizationUrl">
+            <summary>
+            授权中心的地址
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.AuthServerConfig.AccessTokenLifetime">
+            <summary>
+            Token 过期时间
+            </summary>
+        </member>
+        <member name="T:NPlatform.Config.ConfigFactory`1">
+            <summary>
+            配置文件工厂
+            </summary>
+            <typeparam name="T">配置实体类</typeparam>
+        </member>
+        <member name="M:NPlatform.Config.ConfigFactory`1.GetFilePath">
+            <summary>
+            获取配置文件路径
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Config.ConfigFactory`1.Save(`0)">
+            <summary>
+            保存配置文件
+            </summary>
+        </member>
+        <member name="M:NPlatform.Config.ConfigFactory`1.Build">
+            <summary>
+            创建配置对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NPlatform.Config.CustomDic.Item(System.String)">
+            <summary>
+            实现[]操作
+            </summary>
+            <param name="key">对象的Id</param>
+            <returns>对象</returns>
+        </member>
+        <member name="T:NPlatform.Config.IConfig">
+            <summary>
+            config 接口
+            </summary>
+        </member>
+        <member name="T:NPlatform.Config.MemcachedConfig">
+            <summary>
+            Memcached 管理
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.DefaultCacheHours">
+            <summary>
+            默认缓存时间，单位为小时~
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.MaxPoolSize">
+            <summary>
+            最大连接数
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.MemcachedProtocol">
+            <summary>
+            协议  Binary/Text
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.MinPoolSize">
+            <summary>
+            最小连接数
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.PassWord">
+            <summary>
+            登陆密码
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.Servers">
+            <summary>
+            服务列表
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.MemcachedConfig.UserName">
+            <summary>
+            登陆用户
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.RedisType">
+            <summary>
+            Gets or sets redis 安装模式，Normal 普通，Twemproxy 代理，Sentinel 哨兵
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.Connections">
+            <summary>
+            Gets or sets 连接字符串  ,  [IP:port]
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.Password">
+            <summary>
+            redis 密码
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.AllowAdmin">
+            <summary>
+            AllowAdmin
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.Pipe">
+            <summary>
+            redis 管道
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.RedisConfig.EnableCacheInterceptor">
+            <summary>
+            是否开启缓存方法拦截
+            </summary>
+        </member>
+        <member name="T:NPlatform.Config.NPlatformConfig">
+            <summary>
+            通用配置管理
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.MachineID">
+            <summary>
+            机器ID ，集群部署时的设备编号。
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.ServiceID">
+            <summary>
+            分布式部署时服务ID
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.IsDebug">
+            <summary>
+            是否为调试模式
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.Company">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.CompanyUrl">
+            <summary>
+            CompanyUrl
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.ConnectionString">
+            <summary>
+            链接字符串
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.DBProvider">
+            <summary>
+            数据 提供程序
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.PlatformVersion">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.ICP">
+            <summary>
+            ICP备案号
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.IOCAssemblys">
+            <summary>
+            需要注入的dll
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.Authinfo">
+            <summary>
+            授权配置
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.PlatformConfigs">
+            <summary>
+            配置信息
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.DynamicConfigs">
+            <summary>
+            可变类型的配置项
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.Support">
+            <summary>
+            技术支持
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.SystemName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.SystemUrl">
+            <summary>
+            系统地址
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.Team">
+            <summary>
+            开发团队
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.UserConfigs">
+            <summary>
+            配置信息JGAppSecret
+            </summary>
+        </member>
+        <member name="P:NPlatform.Config.NPlatformConfig.APIEndPoints">
+            <summary>
+            API调用端口,配置的格式   {QCM:{xxget:'',xxxDelete:''},MPM:{zzzAdd:'',zzzDelete:''}}
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.EnumFormula">
+            <summary>
+            表达式解析 ，用于ZF02生成报表
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.FormulaDeal">
+            <summary>
+            FormulaDeal
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.FormulaDeal.CalculateExpress(System.String)">
+            <summary>
+            计算表达式
+            </summary>
+            <param name="strExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.FormulaDeal.CalculateExExpress(System.String,NPlatform.Infrastructure.EnumFormula)">
+            <summary>
+            计算含数学函数的表达式
+            </summary>
+            <param name="strExpression"></param>
+            <param name="expressType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.FormulaDeal.GetNextPos(System.String)">
+            <summary>
+            获取操作符位置
+            </summary>
+            <param name="strExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.FormulaDeal.SpiltExpression(System.String)">
+            <summary>
+            分割表达式并计算
+            </summary>
+            <param name="strExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ConvertHelper">
+            <summary>
+            用于把对象型数据转成特定数据类型的方法
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetString(System.Object)">
+            <summary>
+            将对象变量转成字符串变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>字符串变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetInteger(System.Object)">
+            <summary>
+            将对象变量转成32位整数型变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>32位整数型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetLong(System.Object)">
+            <summary>
+            将对象变量转成64位整数型变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>64位整数型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetDouble(System.Object)">
+            <summary>
+            将对象变量转成双精度浮点型变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>双精度浮点型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetDecimal(System.Object)">
+            <summary>
+            将对象变量转成十进制数字变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>十进制数字变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetBoolean(System.Object)">
+            <summary>
+            将对象变量转成布尔型变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>布尔型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetDateTimeString(System.Object,System.String)">
+            <summary>
+            将对象变量转成日期时间型字符串变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <param name="sFormat">格式字符</param>
+            <returns>时间型字符串变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetShortDateString(System.Object)">
+            <summary>
+            将对象变量转成日期字符串变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>日期字符串变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.GetDateTime(System.Object)">
+            <summary>
+            将对象变量转成日期型变量的方法
+            </summary>
+            <param name="obj">对象变量</param>
+            <returns>日期型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.ConvertStringToInteger(System.String)">
+            <summary>
+            将字符串转成32位整数型变量的方法
+            </summary>
+            <param name="s">字符串</param>
+            <returns>32位整数型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.ConvertStringToLong(System.String)">
+            <summary>
+            将字符串转成64位整数型变量的方法
+            </summary>
+            <param name="s">字符串</param>
+            <returns>64位整数型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.ConvertStringToDouble(System.String)">
+            <summary>
+            将字符串转成双精度浮点型变量的方法
+            </summary>
+            <param name="s">字符串</param>
+            <returns>双精度浮点型变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.ConvertStringToDecimal(System.String)">
+            <summary>
+            将字符串转成十进制数字变量的方法
+            </summary>
+            <param name="s">字符串</param>
+            <returns>十进制数字变量</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertHelper.ExpressEval(System.String)">
+            <summary>
+            将字符串转换成表达式并返回结果
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.EmitMethodInvoker">
+            <summary>
+             IL  invoke method class  --用于ZF02报表
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.EmitMethodInvoker.FastInvokeHandler">
+            <summary>
+            the fast method delegate 
+            </summary>
+            <param name="target"></param>
+            <param name="paramters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.EmitMethodInvoker.GetMethodInvoker(System.Reflection.MethodInfo)">
+            <summary>
+             return fastinvokehandler type for invoke
+            </summary>
+            <param name="methodInfo"></param>
+            <returns>FastInvokeHandler</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.EncoderHelper">
+            <summary>
+            编码助手
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.EncoderHelper.Base64Decode(System.String)">
+            <summary>
+            将Base64字符串解码为普通字符串
+            </summary>
+            <param name="str">要解码的字符串</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.EncoderHelper.Base64Encode(System.String)">
+            <summary>
+            将字符串编码为Base64字符串
+            </summary>
+            <param name="str">要编码的字符串</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.EncoderHelper.Escape(System.String)">
+            <summary>
+            模拟Javascript中escape的串编码实现
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.EncoderHelper.UnEscape(System.String)">
+            <summary>
+            模拟Javascript中unescape的解码实现
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.DES">
+            <summary>
+            DES加密，高速可逆
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.DES.Ms_IV">
+            <summary>
+            私密
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.DES.Ms_Key">
+            <summary>
+            公密
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.DES.DESDecrypt(System.String)">
+            <summary>
+            内置固定Key解密
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.DES.DESDecryptByKey(System.String,System.String)">
+            <summary>
+            使用8位长度的字符Key解密
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.DES.DESEncrypt(System.String)">
+            <summary>
+            内置固定Key加密
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.DES.DESEncryptByKey(System.String,System.String)">
+            <summary>
+            使用8位长度的字符Key加密
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.MD5S">
+            <summary>
+            不可逆
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.MD5S.EncodeMd5(System.String)">
+            <summary>
+            MD5 32位
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.MD5S.GetMd5Str(System.String)">
+            <summary>
+            MD5 16位
+            </summary>
+            <param name="convertString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.MD5S.GetSHA256(System.String)">
+            <summary>
+            SHA256函数
+            </summary>
+            /// <param name="str">原始字符串</param>
+            <returns>SHA256结果</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.AES">
+            <summary> 
+            AES加密
+            </summary> 
+        </member>
+        <member name="F:NPlatform.Infrastructure.AES.keys">
+            <summary>
+            默认密钥向量
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.AES.Decode(System.String,System.String)">
+            <summary>
+            AES解密字符串
+            </summary>
+            <param name="decryptString">待解密的字符串</param>
+            <param name="decryptKey">解密密钥,要求为8位,和加密密钥相同</param>
+            <returns>解密成功返回解密后的字符串,失败返源串</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.AES.Encode(System.String,System.String)">
+            <summary>
+            AES加密字符串
+            </summary>
+            <param name="encryptString">待加密的字符串</param>
+            <param name="encryptKey">加密密钥,要求为8位</param>
+            <returns>加密成功返回加密后的字符串,失败返回源串</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.AES.GetSubString(System.String,System.Int32,System.String)">
+            <summary>
+            字符串如果操过指定长度则将超出的部分用指定字符串代替
+            </summary>
+            <param name="p_SrcString">要检查的字符串</param>
+            <param name="pLength">指定长度</param>
+            <param name="pTailString">用于替换的字符串</param>
+            <returns>截取后的字符串</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.RSA">
+            <summary>
+            RSA 非对称加密算法
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.Decrypt(System.Byte[],System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="s"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.Decrypt(System.String,System.String,System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="s"></param>
+            <param name="privateKey"></param>
+            <param name="encode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.Encrypt(System.Byte[],System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="s"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.Encrypt(System.String,System.String,System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="s"></param>
+            <param name="publicKey"></param>
+            <param name="encode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.GetPrivateKey">
+            <summary>
+            同一个对象产生的私密用来解密
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RSA.GetPublicKey">
+            <summary>
+            同一个对象产生的公密用来加密
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ExcelNpoiHelper">
+            <summary>
+            Excel 操作类，基于NPOI
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.#ctor(System.String,System.String)">
+            <summary>
+            构造
+            </summary>
+            <param name="filePath">源文件路径</param>
+            <param name="saveAsFile">保存路径</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.Export(System.Data.DataTable,System.String,System.String,System.String)">
+            <summary>
+                DataTable导出到Excel文件
+            </summary>
+            <param name="dtSource">源DataTable</param>
+            <param name="strHeaderText">表头文本</param>
+            <param name="strFileName">保存位置</param>
+            <param name="strSheetName">工作表名称</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.Export(System.Data.DataTable,System.String,System.String)">
+            <summary>
+                DataTable导出到Excel的MemoryStream
+            </summary>
+            <param name="dtSource">源DataTable</param>
+            <param name="strHeaderText">表头文本</param>
+            <param name="strSheetName">工作表名称</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.GetSheetName(System.String)">
+            <summary>
+            获取所有的sheet名称
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.GetSheetNumber(System.String)">
+            <summary>
+                获取Sheet个数
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.Import(System.String,System.Boolean)">
+            <summary>
+                读取excel
+                默认第一行为表头，导入第一个工作表
+            </summary>
+            <param name="strFileName">excel文档路径</param>
+            <param name="removeEmpty">移除空白行</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.InsertSheet(System.String,System.String,System.Data.DataTable)">
+            <summary>
+            把某个DataTable 导入到某个Excel
+            </summary>
+            <param name="outputFile">目标文件</param>
+            <param name="sheetName">Sheet名</param>
+            <param name="dt">需要到处的table</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.ReadDataToDs(System.String)">
+            <summary>
+            加载数据到dataset
+            </summary>
+            <param name="fileName">文件名</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.ReadDataToDs(System.IO.Stream)">
+            <summary>
+            加载数据到dataset
+            </summary>
+            <param name="fileStream">文件流</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.RenderDataTableFromExcel(System.String,System.String,System.Int32)">
+            <summary>
+                从Excel中获取数据到DataTable
+            </summary>
+            <param name="strFileName">Excel文件全路径(服务器路径)</param>
+            <param name="sheetName">要获取数据的工作表名称</param>
+            <param name="headerRowIndex">工作表标题行所在行号(从0开始)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.RenderDataTableFromExcel(System.String,System.Int32,System.Int32)">
+            <summary>
+                从Excel中获取数据到DataTable
+            </summary>
+            <param name="strFileName">Excel文件全路径(服务器路径)</param>
+            <param name="sheetIndex">要获取数据的工作表序号(从0开始)</param>
+            <param name="headerRowIndex">工作表标题行所在行号(从0开始)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String,System.String[],System.Int32,System.Int32)">
+            <summary>
+                更新Excel表格限定于Excel2003
+            </summary>
+            <param name="outputFile">需更新的excel表格路径</param>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colId">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String,System.String[][],System.Int32[],System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="outputFile">需更新的excel表格路径</param>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colIds">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String,System.Double[],System.Int32,System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="outputFile">需更新的excel表格路径</param>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colId">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String,System.Double[][],System.Int32[],System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="outputFile">需更新的excel表格路径</param>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colIds">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.Commit">
+            <summary>
+            提交修改
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.GetSheetName">
+            <summary>
+            获取sheet名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.InsertPng(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            插入图片
+            </summary>
+            <param name="sheetName">sheet名</param>
+            <param name="imgPath">图片路径</param>
+            <param name="colId">列</param>
+            <param name="rowId">行</param>
+            <param name="endCol">结束列</param>
+            <param name="endRow">结束行</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String[],System.Int32,System.Int32)">
+            <summary>
+                更新Excel表格限定于Excel2003
+            </summary>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colId">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.String[][],System.Int32[],System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colIds">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.Double[],System.Int32,System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colId">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.UpdateExcel(System.String,System.Double[][],System.Int32[],System.Int32)">
+            <summary>
+                更新Excel表格Excel2003
+            </summary>
+            <param name="sheetName">sheet名</param>
+            <param name="updateData">需更新的数据</param>
+            <param name="colIds">需更新的列号</param>
+            <param name="rowId">需更新的开始行号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.ExportDataSetToExcel(System.Data.DataSet,System.String)">
+            <summary>  
+            由DataSet导出Excel  
+            </summary>  
+            <param name="sourceDs">要导出数据的DataSet</param>  
+            <param name="sheetName">工作表名称</param>  
+            <returns>Excel工作表</returns>  
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.RenderDataTableFromExcel(NPOI.SS.UserModel.IWorkbook,System.String,System.Int32)">
+            <summary>
+                从Excel中获取数据到DataTable
+            </summary>
+            <param name="workbook">要处理的工作薄</param>
+            <param name="sheetName">要获取数据的工作表名称</param>
+            <param name="headerRowIndex">工作表标题行所在行号(从0开始)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.RenderDataTableFromsheet(NPOI.SS.UserModel.ISheet,System.Int32,System.Boolean)">
+            <summary>
+                从Excel中获取数据到DataTable
+            </summary>
+            <param name="sheet">要获取数据的工作表</param>
+            <param name="headerRowIndex">工作表标题行所在行号(从0开始)</param>
+            <param name="removeEmpty">是否移除空行</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.InsertRow(System.Int32,System.Int32)">
+            <summary>
+            插入空白行
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.ToDataTable``1(System.Collections.Generic.List{``0})">
+            <summary>
+            List转datatable
+            </summary>
+            <typeparam name="T">对象</typeparam>
+            <param name="items">值</param>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.GetCoreType(System.Type)">
+            <summary>
+            获取类型
+            </summary>
+            <param name="t">类型</param>
+            <returns>Type</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ExcelNpoiHelper.IsNullable(System.Type)">
+            <summary>
+            类型是否为空
+            </summary>
+            <param name="t">t</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.GuidNext">
+            <summary>
+            获取一个GUID，通过使用new guid +当前时刻
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.GuidNext.Next">
+            <summary>
+            获取下一个GUID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.GZipStr">
+            <summary>
+            GZIP 字符串压缩，对大量文字压缩效果好。
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.GZipStr.Compress(System.Byte[])">
+            <summary>
+            压缩二级制文件
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.GZipStr.CompressString2String(System.String)">
+            <summary>
+            压缩字符串
+            </summary>
+            <param name="str">字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.GZipStr.Decompress(System.Byte[])">
+            <summary>
+            解压缩二进制文件
+            </summary>
+            <param name="data">数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.GZipStr.DecompressString2String(System.String)">
+            <summary>
+            解压缩
+            </summary>
+            <param name="str">字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.HttpClientHelper">
+            <summary>
+            http client 工具类型
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpClientHelper.PostFile(System.String,System.String,System.Byte[],System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+            <summary>
+            post 文件
+            </summary>
+            <param name="url">文件地址</param>
+            <param name="fileName">文件名</param>
+            <param name="fileByteArray">文件的字节数组</param>
+            <param name="formParams">表单参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpClientHelper.PostFile(System.String,System.String,System.Byte[],System.Collections.Generic.KeyValuePair{System.String,System.String}[],System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+            <summary>
+            post 文件
+            </summary>
+            <param name="url">文件地址</param>
+            <param name="fileName">文件名</param>
+            <param name="fileByteArray">文件的字节数组</param>
+            <param name="formParams">表单参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpClientHelper.HttpGet(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            发起GET同步请求
+            </summary>
+            <param name="url"></param>
+            <param name="headers"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpClientHelper.HttpGetAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            发起GET异步请求
+            </summary>
+            <param name="url"></param>
+            <param name="headers"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.HttpContentType">
+            <summary>
+            HTTP 内容类型(Content-Type)
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.TEXT_PLAIN">
+            <summary>
+            资源类型：普通文本
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.APPLICATION_JSON">
+            <summary>
+            资源类型：JSON字符串
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.APPLICATION_OCTET_STREAM">
+            <summary>
+            资源类型：未知类型(数据流)
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.WWW_FORM_URLENCODED">
+            <summary>
+            资源类型：表单数据(键值对)
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.WWW_FORM_URLENCODED_GB2312">
+            <summary>
+            资源类型：表单数据(键值对)。编码方式为 gb2312
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.WWW_FORM_URLENCODED_UTF8">
+            <summary>
+            资源类型：表单数据(键值对)。编码方式为 utf-8
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.HttpContentType.MULTIPART_FORM_DATA">
+            <summary>
+            资源类型：多分部数据
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.HttpHelper">
+            <summary>
+            http 处理
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpHelper.HttpGet(System.String,System.String,System.String)">
+            <summary>
+            http get 请求
+            </summary>
+            <param name="strUrl"></param>
+            <param name="strParams"></param>
+            <param name="encoding"></param>
+            <param name="contentType"></param>
+            <param name="heards"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpHelper.HttpPost(System.String,System.String,System.String)">
+            <summary>
+            http post 请求
+            </summary>
+            <param name="strUrl"></param>
+            <param name="strParams"></param>
+            <param name="encoding"></param>
+            <param name="contentType"></param>
+            <param name="heards"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpHelper.HttpRequest(System.String,System.String,System.String,System.Text.Encoding,System.String,System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+            <summary>
+            http 请求
+            </summary>
+            <param name="strUrl">请求地址 </param>
+            <param name="strParams">Post参数 json格式的请求报文,例如：{"key1":"value1","key2":"value2"}</param>
+            <param name="method">请求方法</param>
+            <param name="encoding">字符编码</param>
+            <param name="contentType"> contentType </param>
+            <param name="heards">请求头 </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.HttpHelper.HttpPostStremFile(System.String,System.IO.Stream)">
+            <summary>
+            Post方法以文件流方式上传文件
+            </summary>
+            <param name="strUrl">一般应用程序请求地址</param>
+            <param name="inputStream">文件流</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.IdGenerators.IdGenerator">
+            <summary>
+            ID 生成器
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IdGenerators.IdGenerator.GenerateId">
+            <summary>
+            生成ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.IOfficeHelper">
+            <summary>
+            Office 助手
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.BusinessLayout">
+            <summary>
+            业务日志格式化
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.BusinessLayout.#ctor">
+            <summary>
+            业务日志格式化
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.BusinessLog">
+            <summary>
+            业务日志
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.BusinessID">
+            <summary>
+            业务数据ID
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.Module">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.LogType">
+            <summary>
+            类型，默认为操作日志记录
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.LogLocation">
+            <summary>
+            类型，默认为操作日志记录
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.LogBrowser">
+            <summary>
+            类型，默认为操作日志记录
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.LogMachineName">
+            <summary>
+            机器
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.BusinessLog.Creator">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.BusinessLog.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            业务数据
+            </summary>
+            <param name="businessID">数据ID</param>
+            <param name="module">模块</param>
+            <param name="message">消息</param>
+            <param name="logType">类型</param>
+            <param name="creator">创建者</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.BusinessIDPatternConvert">
+            <summary>
+            业务数据ID
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.BusinessIDPatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+            业务数据ID
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.CreatorPatternConvert">
+            <summary>
+             Creator
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.CreatorPatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+             Creator
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.MessagePatternConvert">
+            <summary>
+             Creator
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.MessagePatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+             Message
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ModulePatternConvert">
+            <summary>
+              Module
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ModulePatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+              Module
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.TypePatternConvert">
+            <summary>
+             Type
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:NPlatform.Infrastructure.TypePatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)" -->
+        <member name="T:NPlatform.Infrastructure.LogLocationPatternConvert">
+            <summary>
+            业务数据ID
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.LogLocationPatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+            业务数据ID
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.LogBrowserPatternConvert">
+            <summary>
+            业务数据ID
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.LogBrowserPatternConvert.Convert(System.IO.TextWriter,log4net.Core.LoggingEvent)">
+            <summary>
+            业务数据ID
+            </summary>
+             <param name="writer">writer</param>
+            <param name="loggingEvent">loggingEvent</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Loger.LogLeveDic">
+            <summary>
+            日志级别的keyvalue 字典描述
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Loger.LogLeveDic.LogLeveDics">
+            <summary>
+            日志级别的keyvalue 字典描述
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Loger.LogLevel">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogLevel.Debug">
+            <summary>
+            调试
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogLevel.Info">
+            <summary>
+            信息记录
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogLevel.Warn">
+            <summary>
+            警告
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogLevel.Error">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogLevel.Fatal">
+            <summary>
+            致命错误
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Loger.LogType">
+            <summary>
+            日志类型
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogType.Business">
+            <summary>
+            业务日志
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Loger.LogType.Trace">
+            <summary>
+            系统跟踪日志。
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Loger.LogerHelper">
+            <summary>
+            日志记录类
+            使用前先加载配置 。
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Loger.LogerHelper.LogRepository">
+            <summary>
+            loger reposityory
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Loger.LogerHelper.Log">
+            <summary>
+            The loger.
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:NPlatform.Infrastructure.Loger.LogerHelper"/> class.
+            构造
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Info(System.String,System.String)">
+            <summary>
+            记录
+            </summary>
+            <param name="msg">
+            The msg.
+            </param>
+            <param name="logType">
+            The log Type.
+            </param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.BusinessLog(NPlatform.Infrastructure.BusinessLog)">
+            <summary>
+            记录业务日志
+            </summary>
+            <param name="log">业务数据对象</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Debug(System.String,System.String)">
+            <summary>
+            调试日志
+            </summary>
+            <param name="msg">消息</param>
+            <param name="logType">消息类型</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Error(System.String,System.String)">
+            <summary>
+            异常日志
+            </summary>
+            <param name="msg">消息</param>
+            <param name="logType">消息类型</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Error(System.Exception,System.String)">
+            <summary>
+            异常日志
+            </summary>
+            <param name="ex">异常</param>
+            <param name="logType">消息类型</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Error(System.String,System.String,System.Exception)">
+            <summary>
+            异常日志
+            </summary>
+            <param name="msg">消息</param>
+            <param name="ex">异常</param>
+            <param name="logType">消息类型</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Error(NPlatform.Infrastructure.BusinessLog,System.Exception)">
+            <summary>
+            异常日志
+            </summary>
+            <param name="ex">异常</param>
+            <param name="log">业务消息</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Fatal(System.String,System.String,System.Exception)">
+            <summary>
+            异常日志
+            </summary>
+            <param name="ex">异常</param>
+            <param name="msg">消息</param>
+            <param name="module">模块</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Warn(System.String,System.String)">
+            <summary>
+            警告
+            </summary>
+            <param name="msg">消息</param>
+            <param name="logType">消息类型</param> 
+        </member>
+        <member name="M:NPlatform.Infrastructure.Loger.LogerHelper.Warn(NPlatform.Infrastructure.BusinessLog)">
+            <summary>
+            警告
+            </summary>
+            <param name="log">业务消息</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ConvertMoney">
+            <summary>
+            货币金额中文大写转换
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertMoney.GetCnString(System.Decimal)">
+            <summary>
+            以下是货币金额中文大写转换方法
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ConvertMoney.GetEnString(System.Decimal)">
+            <summary>
+            以下是货币金额英文大写转换方法
+            </summary>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Push.PushHelper">
+            <summary>
+            发布消息
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Push.PushHelper._config">
+            <summary>
+            全局配置信息
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Push.PushHelper.Config">
+             private static JPushClient client = new JPushClient("8a01a3705d9dbdc5ba963488", "f6e046ded25bcd736a07b40b");
+            <summary>
+            全局配置信息
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Push.PushHelper.SendMessage(System.String,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            极光推送
+            </summary>
+            <param name="title">消息标题</param>
+            <param name="alert">消息内容</param>
+            <param name="registrationIds">推送用户的注册id</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Push.PushHelper.SendSmsMessage(System.String,System.String)">
+            <summary>
+            短信推送
+            </summary>
+            <param name="mobile"></param>
+            <param name="content"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Push.PushHelper.GetHttpData(System.String)">
+            <summary>
+            获取发送结果
+            </summary>
+            <param name="url">地址</param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.QRCodeHelper">
+            <summary>
+            二维码工具类
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.QRCodeHelper.CreateQRCode(System.String)">
+            <summary>  
+            生成二维码图片  
+            </summary>  
+            <param name="codeStr">要生成二维码的字符串</param>      
+            <returns>二维码图片</returns>  
+        </member>
+        <member name="T:NPlatform.Infrastructure.Redis.ComRedis">
+            <summary>
+            通用Redis缓存
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Redis.ComRedis.engine">
+            <summary>
+            通用Redis单例
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Redis.ComRedis.Instance">
+            <summary>
+            获取单例
+            </summary>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.ComRedis.Add``1(System.String,``0,System.String)">
+            <summary>
+            将缓存对象以json形式存储
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="key">缓存键</param>
+            <param name="t">值对象</param>
+            <param name="group">add添加到指定组，获取就从指定组获取</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.ComRedis.Add``1(System.String,``0,System.Int32,System.String)">
+            <summary>
+            将缓存对象以json形式存储
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="key">缓存键</param>
+            <param name="t">值对象</param>
+            <param name="group">add添加到指定组，获取就从指定组获取</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.ComRedis.Get``1(System.String,System.String)">
+            <summary>
+            获取泛型对象信息
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="key">缓存键</param>
+            <param name="group">获取指定组的缓存，add添加到指定组，获取就从指定组获取</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.ComRedis.Remove(System.String,System.String)">
+            <summary>
+            移除缓存
+            </summary>
+            <param name="key">缓存键</param>
+            <param name="group">从指定组里删除指定键的缓存</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.ComRedis.RemoveGroup(System.String)">
+            <summary>
+            根据组名清空缓存
+            </summary>
+            <param name="group">组名</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Redis.TableRedis">
+            <summary>
+            表Redis缓存
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.Redis.TableRedis.inst">
+            <summary>
+            表Redis单例
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Redis.TableRedis.Instance">
+            <summary>
+            获取单例
+            </summary>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.TableRedis.Add``1(System.String,``0)">
+            <summary>
+            将缓存对象以json形式存储
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="module">模块类型</param>
+            <param name="t">值对象</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.TableRedis.Exists(System.String)">
+            <summary>
+            表是否有缓存
+            </summary>
+            <param name="key">缓存键</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.TableRedis.Get``1(System.String)">
+            <summary>
+            获取泛型对象信息
+            </summary>
+            <typeparam name="T">泛型对象</typeparam>
+            <param name="module">模块类型</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Redis.TableRedis.Remove(System.String)">
+            <summary>
+            移除缓存
+            </summary>
+            <param name="module">模块类型</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.RedisConnection">
+            <summary>
+            ConnectionMultiplexer对象管理帮助类
+            </summary>
+        </member>
+        <member name="F:NPlatform.Infrastructure.RedisConnection.Switch_master">
+            <summary>
+            集群或者哨兵模式时，必须实现的委托。
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.RedisConnection.Instance">
+            <summary>
+            单例获取
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerConfigurationChanged(System.Object,StackExchange.Redis.EndPointEventArgs)">
+            <summary>
+            配置更改时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerErrorMessage(System.Object,StackExchange.Redis.RedisErrorEventArgs)">
+            <summary>
+            发生错误时
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerConnectionRestored(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            重新建立连接之前的错误
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerConnectionFailed(System.Object,StackExchange.Redis.ConnectionFailedEventArgs)">
+            <summary>
+            连接失败 ， 如果重新连接成功你将不会收到这个通知
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerHashSlotMoved(System.Object,StackExchange.Redis.HashSlotMovedEventArgs)">
+            <summary>
+            更改集群
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisConnection.MuxerInternalError(System.Object,StackExchange.Redis.InternalErrorEventArgs)">
+            <summary>
+            redis类库错误
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.RedisHelper">
+            <summary>
+            Redis操作
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.#ctor(System.Int32)">
+            <summary>
+            RedisHelper
+            </summary>
+            <param name="dbNum">库序号</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSetAsync(System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存单个key value
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">保存的值</param>
+            <param name="expiry">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSet(System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存单个key value
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">保存的值</param>
+            <param name="expiry">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSetAsync(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{StackExchange.Redis.RedisKey,StackExchange.Redis.RedisValue}})">
+            <summary>
+            保存多个key value
+            </summary>
+            <param name="keyValues">键值对</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSetAsync``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存一个对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSet``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            保存一个对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringSetWithType``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            带类型的存储
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringGetAsync(System.String)">
+            <summary>
+            获取单个key的值
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringGetAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取多个Key
+            </summary>
+            <param name="listKey">Redis Key集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringGetAsync``1(System.String)">
+            <summary>
+            获取一个key的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringGet``1(System.String)">
+            <summary>
+            获取一个key的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringIncrementAsync(System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.StringDecrementAsync(System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SetAdd(System.String,System.String)">
+            <summary>
+            给集合添加一个值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SetMembers(System.String)">
+            <summary>
+            取得集合下面所有的值
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SetRemove``1(System.String,``0)">
+            <summary>
+            从集合中移除一个元素
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SetRemove(System.String,System.String[])">
+            <summary>
+            从集合中清除一系列的元素
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashExistsAsync(System.String,System.String)">
+            <summary>
+            判断某个数据是否已经被缓存
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashSetAsync``1(System.String,System.String,``0)">
+            <summary>
+            存储数据到hash表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashDeleteAsync(System.String,System.String)">
+            <summary>
+            移除hash中的某值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashDeleteAsync(System.String,System.Collections.Generic.List{StackExchange.Redis.RedisValue})">
+            <summary>
+            移除hash中的多个值
+            </summary>
+            <param name="key"></param>
+            <param name="dataKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashGeAsync``1(System.String,System.String)">
+            <summary>
+            从hash表获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashIncrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            为数字增长val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>增长后的值</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashDecrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            为数字减少val
+            </summary>
+            <param name="key"></param>
+            <param name="dataKey"></param>
+            <param name="val">可以为负</param>
+            <returns>减少后的值</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.HashKeysAsync``1(System.String)">
+            <summary>
+            获取hashkey所有Redis key
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListRemoveAsync``1(System.String,``0)">
+            <summary>
+            移除指定ListId的内部List的值
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListRangeAsync``1(System.String)">
+            <summary>
+            获取指定key的List
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListRightPushAsync``1(System.String,``0)">
+            <summary>
+            入队
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListRightPopAsync``1(System.String)">
+            <summary>
+            出队
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListLeftPushs``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            入栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListLeftPushAsync``1(System.String,``0)">
+            <summary>
+            入栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListLeftPopAsync``1(System.String)">
+            <summary>
+            出栈
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ListLengthAsync(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SortedSetAddAsync``1(System.String,``0,System.Double)">
+            <summary>
+            添加
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+            <returns><placeholder>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</placeholder></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SortedSetRemoveAsync``1(System.String,``0)">
+            <summary>
+            删除
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SortedSetRangeByRankAsync``1(System.String)">
+            <summary>
+            获取全部
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SortedSetLengthAsync(System.String)">
+            <summary>
+            获取集合中的数量
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyDelete(System.String)">
+            <summary>
+            删除单个key
+            </summary>
+            <param name="key">redis key</param>
+            <returns>是否删除成功</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyDelete(System.Collections.Generic.List{System.String})">
+            <summary>
+            删除多个key
+            </summary>
+            <param name="keys">rediskey</param>
+            <returns>成功删除的个数</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyDeletePattern(System.String)">
+            <summary>
+            根据前缀删除
+            </summary>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyExists(System.String)">
+            <summary>
+            判断key是否存储
+            </summary>
+            <param name="key">redis key</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyRename(System.String,System.String)">
+            <summary>
+            重新命名key
+            </summary>
+            <param name="key">就的redis key</param>
+            <param name="newKey">新的redis key</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.KeyExpire(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            设置Key的时间
+            </summary>
+            <param name="key">redis key</param>
+            <param name="expiry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.Subscribe(System.String,System.Action{StackExchange.Redis.RedisChannel,StackExchange.Redis.RedisValue})">
+            <summary>
+            Redis发布订阅  订阅
+            </summary>
+            <param name="subChannel"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.Publish``1(System.String,``0)">
+            <summary>
+            Redis发布订阅  发布
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="channel"></param>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.Unsubscribe(System.String)">
+            <summary>
+            Redis发布订阅  取消订阅
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.UnsubscribeAll">
+            <summary>
+            Redis发布订阅  取消全部订阅
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.CreateTransaction">
+            <summary>
+            创建事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.GetDatabase">
+            <summary>
+            获取DB
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.GetServer(System.String)">
+            <summary>
+            获取服务器
+            </summary>
+            <param name="hostAndPort"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.SetSysCustomKey(System.String)">
+            <summary>
+            设置前缀
+            </summary>
+            <param name="prefix"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.ClearAll">
+            <summary>
+            清除所有缓存
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.Lock(System.String,System.Int32)">
+            <summary>
+            获取锁。
+            </summary>
+            <param name="key">锁名称。</param>
+            <param name="seconds">过期时间（秒）。</param>
+            <returns>是否已锁。</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.UnLock(System.String)">
+            <summary>
+            释放锁。
+            </summary>
+            <param name="key">锁名称。</param>
+            <returns>是否成功。</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.LockAsync(System.String,System.Int32)">
+            <summary>
+            异步获取锁。
+            </summary>
+            <param name="key">锁名称。</param>
+            <param name="seconds">过期时间（秒）。</param>
+            <returns>是否成功。</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.RedisHelper.UnLockAsync(System.String)">
+            <summary>
+            异步释放锁。
+            </summary>
+            <param name="key">锁名称。</param>
+            <returns>是否成功。</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ReportHelper">
+            <summary>
+            报表 BaseController
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ReportHelper.ObjectToTabString``1(``0,System.Boolean)">
+            <summary>
+            把对象序列化为帆软报表要求的数据源格式。
+            </summary>
+            <param name="t">需要转换的对象</param>
+            <param name="descriptionAsHeard">是否使用字段Description特性作为表头</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ReportHelper.EnumerableToTabString``1(System.Collections.Generic.IEnumerable{``0},System.Boolean)">
+            <summary>
+            把数据集合序列化为帆软报表要求的数据源格式。
+            </summary>
+            <param name="datas">需要转换的集合</param>
+            <param name="descriptionAsHeard">是否使用字段Description特性作为表头</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:NPlatform.Infrastructure.ReportHelper.ReplaceSepcialStr(System.String)" -->
+        <member name="T:NPlatform.Infrastructure.Safe">
+            <summary>
+            安全操作类
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.DoKill(System.String)">
+            <summary>
+            杀死进程
+            </summary>
+            <param name="processName">进程名</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.FilterBadChar(System.String)">
+            <summary>
+            特殊字符过滤
+            </summary>
+            <param name="strchar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.ShowHtml(System.String)">
+            <summary>
+            反格式化字符串
+            </summary>
+            <param name="str">要反格式化的字符串</param>
+            <returns>反格式化完成的字符串</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.SqlFilterKeyword(System.String)">
+            <summary>
+            SQL注入过滤
+            </summary>
+            <param name="strchar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.RepStr(System.String)">
+            <summary>
+            去掉特殊字符--用于台账，规则等导入
+            </summary>
+            <param name="str">字符串</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Safe.RepReportStr(System.String)">
+            <summary>
+            去掉特殊字符--用于帆软报表输出
+            </summary>
+            <param name="str">字符串</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.IPAddressConverter">
+            <summary>
+            IPEndPoint转换器,json序列化专用
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPAddressConverter.CanConvert(System.Type)">
+            <summary>
+            能否转换
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPAddressConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            从json 读取
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPAddressConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            转换成json
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.IPEndPointConverter">
+            <summary>
+            IPEndPoint转换器,json序列化专用
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPEndPointConverter.CanConvert(System.Type)">
+            <summary>
+            能否转换
+            </summary>
+            <param name="objectType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPEndPointConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            读取json 
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.IPEndPointConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            转换成json
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.SerializerHelper">
+            <summary>
+                序列化
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.FromByte``1(System.Byte[])">
+            <summary>
+                把字节反序列化成相应的对象
+            </summary>
+            <param name="pBytes">字节流</param>
+            <returns>object</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.FromByteFile``1(System.String)">
+            <summary>
+                byte反序列化成obj
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.FromJson``1(System.String)">
+            反序列化Json对象
+            
+            需要转换成的对象
+            Json串
+            。net对象
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.FromXml``1(System.String)">
+            <summary>
+                xml反序列化成obj
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="xmlString">xmlstring</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.ToByte``1(``0)">
+            <summary>
+             对象序列化成Byte
+            </summary>
+            <param name="obj">对象</param>
+            <typeparam name="T">对象类型T</typeparam>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.ToByteFile``1(``0,System.String)">
+            <summary>
+            对象序列化成二进制文件
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.ToJson``1(``0)">
+            .net对象序列化为Json对象
+            
+            。net对象类型
+            需要序列化的。net对象
+            Json对象
+        </member>
+        <member name="M:NPlatform.Infrastructure.SerializerHelper.ToXml``1(``0)">
+            <summary>
+                对象序列化成xml
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="obj">对象</param>
+            <returns>序列化结果</returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Thumbnail">
+            <summary>
+            Thumbnail 的摘要说明。
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.GetFormat(System.String)">
+            <summary>
+            得到图片格式
+            </summary>
+            <param name="name">文件名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.GetMapPath(System.String)">
+            <summary>
+            获得当前绝对路径
+            </summary>
+            <param name="strPath">指定的路径</param>
+            <returns>绝对路径</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.MakeSquareImage(System.String,System.String,System.Int32)">
+            <summary>
+            制作小正方形
+            </summary>
+            <param name="fileName">原图的文件路径</param>
+            <param name="newFileName">新地址</param>
+            <param name="newSize">长度或宽度</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.MakeThumbnailImage(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            制作缩略图
+            </summary>
+            <param name="fileName">原图路径</param>
+            <param name="newFileName">新图路径</param>
+            <param name="maxWidth">最大宽度</param>
+            <param name="maxHeight">最大高度</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.GetImage(System.Int32,System.Int32)">
+            <summary>
+            生成缩略图,返回缩略图的Image对象
+            </summary>
+            <param name="width">缩略图宽度</param>
+            <param name="Height">缩略图高度</param>
+            <returns>缩略图的Image对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.SaveImage(System.Int32,System.Int32,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            生成缩略图并保存
+            </summary>
+            <param name="width">缩略图的宽度</param>
+            <param name="height">缩略图的高度</param>
+            <param name="imgformat">保存的图像格式</param>
+            <returns>缩略图的Image对象</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.SaveThumbnailImage(System.Int32,System.Int32)">
+            <summary>
+            保存缩略图
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.SetImage(System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="fileName">原始图片路径</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.ThumbnailCallback">
+            <summary>
+            回调
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.GetCodecInfo(System.String)">
+            <summary>
+            获取图像编码解码器的所有相关信息
+            </summary>
+            <param name="mimeType">包含编码解码器的多用途网际邮件扩充协议 (MIME) 类型的字符串</param>
+            <returns>返回图像编码解码器的所有相关信息</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.ResizeImage(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算新尺寸
+            </summary>
+            <param name="width">原始宽度</param>
+            <param name="height">原始高度</param>
+            <param name="maxWidth">最大新宽度</param>
+            <param name="maxHeight">最大新高度</param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Thumbnail.SaveImage(System.Drawing.Image,System.String,System.Drawing.Imaging.ImageCodecInfo)">
+            <summary>
+            保存图片
+            </summary>
+            <param name="image">Image 对象</param>
+            <param name="savePath">保存路径</param>
+            <param name="ici">指定格式的编解码参数</param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ValidCodeCn">
+            <summary>
+                产生中文验证码
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeCn.CreateGifValidCode(System.String@,System.Int32)">
+            <summary>
+            生成gif格式的验证码图片
+            </summary>
+            <returns>返回验证码图片的 byte[]数据</returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeCn.GetRandomColor">
+            <summary>
+            生成随机颜色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeCn.GenerateCheckCode">
+            <summary>
+            产生中文验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.ValidCodeEn">
+            <summary>
+            验证码
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeEn.CreateGifValidCodeBytes(System.String@,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            验证码绘图
+            </summary>
+            <example>
+            <code>
+                string strIdentifyCode = Pub.Class.Identify.IdentifyCode(4);
+                Pub.Class.Identify.DrawIdentifyCode(strIdentifyCode, 50, 100);
+                Response.End();
+                在登录页面引用此文件:&lt;img src="Identify.aspx" border="0" style="cursor: pointer;cursor:hand;" onclick="javascript:this.src='Identify.aspx?iTime=' + Math.random();" title="单击可更换新的验证码" />
+                Session["IdentifyCode"]
+            </code>
+            </example>
+            <param name="strIdentifyCode">验证码</param>
+            <param name="intFgNoise">文字噪音程度</param>
+            <param name="intBgNoise">背景噪音程度</param>
+            <param name="height">图片高</param>
+            <param name="width">图片宽</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeEn.CreateGifValidCode(System.String@,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            验证码绘图
+            </summary>
+            <example>
+            </example>
+            <param name="strIdentifyCode">验证码</param>
+            <param name="intFgNoise">文字噪音程度</param>
+            <param name="intBgNoise">背景噪音程度</param>
+            <param name="height">图片高</param>
+            <param name="width">图片宽</param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeEn.GetRandomColor">
+            <summary>
+            生成随机颜色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ValidCodeEn.IdentifyCode(System.Int32)">
+            <summary>
+            取得随机字符串，并设置Session值
+            </summary>
+            <example>
+            <code>
+                string strIdentifyCode = Pub.Class.Identify.IdentifyCode(4);
+                Pub.Class.Identify.DrawIdentifyCode(strIdentifyCode, 50, 100);
+                Response.End();
+                在登录页面引用此文件:&lt;img src="Valid.aspx"  border="0" />
+                Session["IdentifyCode"]
+            </code>
+            </example>
+            <param name="intLength"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.Watermark">
+            <summary>
+            添加水印类 只支持添加图片水印
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Watermark.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.BottoamSpace">
+            <summary>
+            获取或设置水印在修改图片中距底部的高度
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.DrawedImagePath">
+            <summary>
+            获取或设置在画的图片路径(水印图片)
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.LucencyPercent">
+            <summary>
+            获取或设置要绘制水印的透明度,注意是原来图片透明度的百分比
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.ModifyImagePath">
+            <summary>
+            获取或设置要修改的图像路径
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.OutPath">
+            <summary>
+            获取或设置要输出图像的路径
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.Watermark.RightSpace">
+            <summary>
+            获取或设置水印在修改图片中的右边距
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.Watermark.DrawImage">
+            <summary>
+            开始绘制水印
+            </summary>
+            <example>
+            <code>
+                Watermark wm = new Watermark();
+                wm.DrawedImagePath= Server.MapPath("") + "/upfile/" + "backlogo.gif";
+                wm.ModifyImagePath=path; 
+                wm.RightSpace=184;
+                wm.BottoamSpace=81;
+                wm.LucencyPercent=50;
+                wm.OutPath=Server.MapPath("") + "/upfile/" + fileName + "_new" + extension;
+                wm.DrawImage();
+                
+                //保存加水印过后的图片,删除原始图片 
+                mFileName=fileName + "_new" + extension;
+                if(File.Exists(path)) {  File.Delete(path); } 
+            </code>
+            </example>
+        </member>
+        <member name="T:NPlatform.Infrastructure.WinRAR">
+            <summary>
+            WinRAR 操作类
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.#ctor">
+            <summary>
+            构造器
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.#ctor(System.String)">
+            <summary>
+            构造器
+            </summary>
+            <param name="rarSetupPath">WinRAR路径</param>
+        </member>
+        <member name="P:NPlatform.Infrastructure.WinRAR.RarSetupPath">
+            <summary>
+            WinRAR路径
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.RARAFile(System.String,System.String)">
+            <summary>
+            压缩一个或多个文件
+            </summary>
+            <param name="fileList">一个或多个文件</param>
+            <param name="rarFile">压缩到指定的RAR文件中</param>
+            <returns>是否操作成功</returns>
+            <example>
+            <code>
+            WinRAR _rar = new WinRAR();
+            WinRAR.File _rarFile = new WinRAR.File();
+            _rarFile.Add(Server.MapPath("~/default.aspx"));
+            _rarFile.Add(Server.MapPath("~/Register.aspx"));
+            if (_rar.RARAFile(_rarFile.FileList, Server.MapPath("~/") + "aa.rar")) Response.Write("OK"); else Response.Write("NO") ;
+            </code>
+            </example>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.RARAFolder(System.String,System.String)">
+            <summary>
+            压缩目录
+            </summary>
+            <param name="folderList">目录列表</param>
+            <param name="rarFile">压缩到指定的RAR文件中</param>
+            <returns>是否操作成功</returns>
+            <example>
+            <code>
+            WinRAR _rar = new WinRAR();
+            WinRAR.Folder _rarFolder = new WinRAR.Folder();
+            _rarFolder.Add(Server.MapPath("~/App_Code/"));
+            _rarFolder.Add(Server.MapPath("~/log/"));
+            if (_rar.RARAFolder(_rarFolder.FolderList, Server.MapPath("~/") + "aaa.rar")) Response.Write("OK"); else Response.Write("NO") ;
+            </code>
+            </example>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.RARXFile(System.String,System.String,System.String)">
+            <summary>
+            解压文件
+            </summary>
+            <param name="rarFile">压缩RAR文件</param>
+            <param name="fileList">压缩文件可以是*.*/*.txt或空</param>
+            <param name="outFolder">输出到指定目录</param>
+            <returns>是否操作成功</returns>
+            <example>
+            <code>
+            WinRAR _rar = new WinRAR();
+            WinRAR.Folder _rarFolder = new WinRAR.Folder();
+            if (_rar.RARXFile(Server.MapPath("~/aa.rar"),"",Server.MapPath("~/") + "aa\\")) Response.Write("OK"); else Response.Write("NO") ;
+            </code>
+            </example>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.RARXFolder(System.String,System.String,System.String)">
+            <example>
+            <code>
+            WinRAR _rar = new WinRAR();
+            WinRAR.Folder _rarFolder = new WinRAR.Folder();
+            if (_rar.RARXFolder(Server.MapPath("~/aaa.rar"),"",Server.MapPath("~/") + "aaa\\")) Response.Write("OK"); else Response.Write("NO") ;
+            </code>
+            </example>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.InitRarSetupPath(System.String)">
+            <summary>
+            初始化WinRAR路径
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.Run(System.String,System.String,System.Diagnostics.ProcessWindowStyle)">
+            <summary>
+            运行指定的可执行文件
+            </summary>
+            <param name="cmd"></param>
+            <param name="arguments"></param>
+            <param name="winStyle"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NPlatform.Infrastructure.WinRAR.File">
+            <summary>
+            文件列表类
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.WinRAR.File.FileList">
+            <summary>
+            返回文件列表字符串
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.File.Add(System.String)">
+            <summary>
+            添加指定的文件名要绝对路径
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="T:NPlatform.Infrastructure.WinRAR.Folder">
+            <summary>
+            目录列表类
+            </summary>
+        </member>
+        <member name="P:NPlatform.Infrastructure.WinRAR.Folder.FolderList">
+            <summary>
+            返回目录列表字符串
+            </summary>
+        </member>
+        <member name="M:NPlatform.Infrastructure.WinRAR.Folder.Add(System.String)">
+            <summary>
+            添加指定的目录名要绝对路径
+            </summary>
+            <param name="folder"></param>
+        </member>
+        <member name="M:NPlatform.Infrastructure.ZipHelper.GetCompressPath(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            获取压缩后的文件路径
+            </summary>
+            <param name="dirPath">压缩的文件路径</param>
+            <param name="filesPath">多个文件路径</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:NPlatform.InfrastructureConsts">
+            <summary>
+            基础设施的Consts
+            </summary>
+        </member>
+        <member name="T:NPlatform.ModuleNames">
+            <summary>
+            模块定义
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.ALL">
+            <summary>
+            系统管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.SYS">
+            <summary>
+            系统管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.DM">
+            <summary>
+            图纸管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.DSM">
+            <summary>
+            进度计划
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.ATM">
+            <summary>
+            变更管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.BASE">
+            <summary>
+            配置管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.MPM">
+            <summary>
+            计量支付
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.PJE">
+            <summary>
+            概预算
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.FAM">
+            <summary>
+            工程决算
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.WORKFLOW">
+            <summary>
+            流程管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.RCM">
+            <summary>
+            报表设置
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.WFM">
+            <summary>
+            流程设置
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.Admin">
+            <summary>
+            后台管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.CM">
+            <summary>
+            合同管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.QCM">
+            <summary>
+            质量管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.SPM">
+            <summary>
+            监理计量
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.SAF">
+            <summary>
+            会议管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.LOG">
+            <summary>
+            人员管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.EM">
+            <summary>
+            设备管理
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.CEM">
+            <summary>
+            信誉评价
+            </summary>
+        </member>
+        <member name="F:NPlatform.ModuleNames.BIM">
+            <summary>
+            BIM管理
+            </summary>
+        </member>
+        <member name="T:NPlatform.EPServer">
+            <summary>
+            平台的Server 助手类
+            </summary>
+        </member>
+        <member name="M:NPlatform.EPServer.MapPath(System.String)">
+            <summary>
+            获得当前绝对路径
+            </summary>
+            <param name="strPath">指定的路径</param>
+            <returns>绝对路径</returns>
+        </member>
+        <member name="T:NPlatform.IdGenerators.AscendingGuid">
+            <summary>
+            A GUID generator that generates GUIDs in ascending order. To enable 
+            an index to make use of the ascending nature make sure to use
+            as the storage representation.
+            Internally the GUID is of the form
+            8 bytes: Ticks from DateTime.UtcNow.Ticks
+            3 bytes: hash of machine name
+            2 bytes: low order bytes of process Id
+            3 bytes: increment
+            </summary>
+        </member>
+        <member name="P:NPlatform.IdGenerators.AscendingGuid.Instance">
+            <summary>
+            Gets an instance of AscendingGuidGenerator.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuid.GenerateId">
+            <summary>
+            Generates an ascending Guid .
+            </summary>
+            <returns>A Guid.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuid.GenerateId(System.Int64,System.Byte[],System.Int32)">
+            <summary>
+            Generates a Guid for a document. Note - this is purely used for
+            unit testing
+            </summary>
+            <param name="tickCount">The time portion of the Guid</param>
+            <param name="machineProcessId">A 5 byte array with the first 3 bytes
+            representing a machine id and the next 2 representing a process
+            id</param>
+            <param name="increment">The increment portion of the Guid. Used
+            to distinguish between 2 Guids that have the timestamp. Note
+            only the least significant 3 bytes are used.</param>
+            <returns>A Guid.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuid.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an id is empty.
+            </summary>
+            <param name="id">The id to test.</param>
+            <returns>True if the Id is empty. False otherwise</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuid.GetCurrentProcessId">
+            <summary>
+            Gets the current process id.  This method exists because of how
+            CAS operates on the call stack, checking for permissions before
+            executing the method.  Hence, if we inlined this call, the calling
+            method would not execute before throwing an exception requiring the
+            try/catch at an even higher level that we don't necessarily control.
+            </summary>
+        </member>
+        <member name="T:NPlatform.IdGenerators.AscendingGuidGenerator">
+            <summary>
+            A GUID generator that generates GUIDs in ascending order. To enable 
+            an index to make use of the ascending nature make sure to use
+            as the storage representation.
+            Internally the GUID is of the form
+            8 bytes: Ticks from DateTime.UtcNow.Ticks
+            3 bytes: hash of machine name
+            2 bytes: low order bytes of process Id
+            3 bytes: increment
+            </summary>
+        </member>
+        <member name="P:NPlatform.IdGenerators.AscendingGuidGenerator.Instance">
+            <summary>
+            Gets an instance of AscendingGuidGenerator.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuidGenerator.GenerateId">
+            <summary>
+            Generates an ascending Guid .
+            </summary>
+            <returns>A Guid.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.AscendingGuidGenerator.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an id is empty.
+            </summary>
+            <param name="id">The id to test.</param>
+            <returns>True if the Id is empty. False otherwise</returns>
+        </member>
+        <member name="T:NPlatform.IdGenerators.GuidGenerator">
+            <summary>
+            Represents an Id generator for Guids.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.GuidGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the GuidGenerator class.
+            </summary>
+        </member>
+        <member name="P:NPlatform.IdGenerators.GuidGenerator.Instance">
+            <summary>
+            Gets an instance of GuidGenerator.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.GuidGenerator.GenerateId">
+            <summary>
+            Generates an Id for a document.
+            </summary>
+            <returns>An Id.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.GuidGenerator.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an Id is empty.
+            </summary>
+            <param name="id">The Id.</param>
+            <returns>True if the Id is empty.</returns>
+        </member>
+        <member name="T:NPlatform.IdGenerators.ObjectIdGenerator">
+            <summary>
+            Represents an Id generator for ObjectIds.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.ObjectIdGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the ObjectIdGenerator class.
+            </summary>
+        </member>
+        <member name="P:NPlatform.IdGenerators.ObjectIdGenerator.Instance">
+            <summary>
+            Gets an instance of ObjectIdGenerator.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.ObjectIdGenerator.GenerateId">
+            <summary>
+            Generates an Id for a document.
+            </summary>
+            <returns>An Id.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.ObjectIdGenerator.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an Id is empty.
+            </summary>
+            <param name="id">The Id.</param>
+            <returns>True if the Id is empty.</returns>
+        </member>
+        <member name="T:NPlatform.IdGenerators.SnowflakeHelper">
+            <summary>
+            雪花算法
+            </summary>
+        </member>
+        <member name="T:NPlatform.IdGenerators.StringObjectIdGenerator">
+            <summary>
+            Represents an Id generator for ObjectIds represented internally as strings.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.StringObjectIdGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the StringObjectIdGenerator class.
+            </summary>
+        </member>
+        <member name="P:NPlatform.IdGenerators.StringObjectIdGenerator.Instance">
+            <summary>
+            Gets an instance of StringObjectIdGenerator.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IdGenerators.StringObjectIdGenerator.GenerateId">
+            <summary>
+            Generates an Id for a document.
+            </summary>
+            <returns>An Id.</returns>
+        </member>
+        <member name="M:NPlatform.IdGenerators.StringObjectIdGenerator.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an Id is empty.
+            </summary>
+            <param name="id">The Id.</param>
+            <returns>True if the Id is empty.</returns>
+        </member>
+        <member name="T:NPlatform.IIdGenerator">
+            <summary>
+            An interface implemented by Id generators.
+            </summary>
+        </member>
+        <member name="M:NPlatform.IIdGenerator.GenerateId">
+            <summary>
+            Generates an Id 
+            </summary>
+            <returns>An Id.</returns>
+        </member>
+        <member name="M:NPlatform.IIdGenerator.IsEmpty(System.Object)">
+            <summary>
+            Tests whether an Id is empty.
+            </summary>
+            <param name="id">The Id.</param>
+            <returns>True if the Id is empty.</returns>
+        </member>
+        <member name="T:NPlatform.ObjectId">
+            <summary>
+            Represents an ObjectId (see also BsonObjectId).
+            </summary>
+        </member>
+        <member name="M:NPlatform.ObjectId.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="bytes">The bytes.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="bytes">The bytes.</param>
+            <param name="index">The index into the byte array where the ObjectId starts.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.#ctor(System.DateTime,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp (expressed as a DateTime).</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.#ctor(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ObjectId class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:NPlatform.ObjectId.Empty">
+            <summary>
+            Gets an instance of ObjectId where the value is empty.
+            </summary>
+        </member>
+        <member name="P:NPlatform.ObjectId.Timestamp">
+            <summary>
+            Gets the timestamp.
+            </summary>
+        </member>
+        <member name="P:NPlatform.ObjectId.Machine">
+            <summary>
+            Gets the machine.
+            </summary>
+        </member>
+        <member name="P:NPlatform.ObjectId.Pid">
+            <summary>
+            Gets the PID.
+            </summary>
+        </member>
+        <member name="P:NPlatform.ObjectId.Increment">
+            <summary>
+            Gets the increment.
+            </summary>
+        </member>
+        <member name="P:NPlatform.ObjectId.CreationTime">
+            <summary>
+            Gets the creation time (derived from the timestamp).
+            </summary>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_LessThan(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than the second ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_LessThanOrEqual(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is less than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_Equality(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_Inequality(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are not equal.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_GreaterThanOrEqual(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than or equal to the second ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.op_GreaterThan(NPlatform.ObjectId,NPlatform.ObjectId)">
+            <summary>
+            Compares two ObjectIds.
+            </summary>
+            <param name="lhs">The first ObjectId.</param>
+            <param name="rhs">The other ObjectId</param>
+            <returns>True if the first ObjectId is greather than the second ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.GenerateNewId">
+            <summary>
+            Generates a new ObjectId with a unique value.
+            </summary>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.GenerateNewId(System.DateTime)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the timestamp component based on a given DateTime).
+            </summary>
+            <param name="timestamp">The timestamp component (expressed as a DateTime).</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.GenerateNewId(System.Int32)">
+            <summary>
+            Generates a new ObjectId with a unique value (with the given timestamp).
+            </summary>
+            <param name="timestamp">The timestamp component.</param>
+            <returns>An ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.Pack(System.Int32,System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Packs the components of an ObjectId into a byte array.
+            </summary>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.Parse(System.String)">
+            <summary>
+            Parses a string and creates a new ObjectId.
+            </summary>
+            <param name="s">The string value.</param>
+            <returns>A ObjectId.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.TryParse(System.String,NPlatform.ObjectId@)">
+            <summary>
+            Tries to parse a string and create a new ObjectId.
+            </summary>
+            <param name="s">The string value.</param>
+            <param name="objectId">The new ObjectId.</param>
+            <returns>True if the string was parsed successfully.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.Unpack(System.Byte[],System.Int32@,System.Int32@,System.Int16@,System.Int32@)">
+            <summary>
+            Unpacks a byte array into the components of an ObjectId.
+            </summary>
+            <param name="bytes">A byte array.</param>
+            <param name="timestamp">The timestamp.</param>
+            <param name="machine">The machine hash.</param>
+            <param name="pid">The PID.</param>
+            <param name="increment">The increment.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.GetCurrentProcessId">
+            <summary>
+            Gets the current process id.  This method exists because of how CAS operates on the call stack, checking
+            for permissions before executing the method.  Hence, if we inlined this call, the calling method would not execute
+            before throwing an exception requiring the try/catch at an even higher level that we don't necessarily control.
+            </summary>
+        </member>
+        <member name="M:NPlatform.ObjectId.CompareTo(NPlatform.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="other">The other ObjectId.</param>
+            <returns>A 32-bit signed integer that indicates whether this ObjectId is less than, equal to, or greather than the other.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.Equals(NPlatform.ObjectId)">
+            <summary>
+            Compares this ObjectId to another ObjectId.
+            </summary>
+            <param name="rhs">The other ObjectId.</param>
+            <returns>True if the two ObjectIds are equal.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.Equals(System.Object)">
+            <summary>
+            Compares this ObjectId to another object.
+            </summary>
+            <param name="obj">The other object.</param>
+            <returns>True if the other object is an ObjectId and equal to this one.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns>The hash code.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.ToByteArray">
+            <summary>
+            Converts the ObjectId to a byte array.
+            </summary>
+            <returns>A byte array.</returns>
+        </member>
+        <member name="M:NPlatform.ObjectId.ToByteArray(System.Byte[],System.Int32)">
+            <summary>
+            Converts the ObjectId to a byte array.
+            </summary>
+            <param name="destination">The destination.</param>
+            <param name="offset">The offset.</param>
+        </member>
+        <member name="M:NPlatform.ObjectId.ToString">
+            <summary>
+            Returns a string representation of the value.
+            </summary>
+            <returns>A string representation of the value.</returns>
+        </member>
+        <member name="T:NPlatform.MathExpression">
+            <summary>
+            处理表达试运算---动态生成数学表达式并计算其值
+            表达式使用 C# 语法，可带一个的自变量(x)。
+            表达式的自变量和值均为(double)类型。
+            </summary>
+            <example>
+            <code>
+            Expression expression = new Expression("Math.Sin(x)"); 
+            Console.WriteLine(expression.Compute(Math.PI / 2)); 
+            expression = new Expression("double u = Math.PI - x;" + 
+            "double pi2 = Math.PI * Math.PI;" + 
+            "return 3 * x * x + Math.Log(u * u) / pi2 / pi2 + 1;"); 
+            Console.WriteLine(expression.Compute(0)); 
+            
+            Expression expression = new Expression("return 10*(5+5)/10;");
+            Response.Write(expression.Compute(0));
+            Response.End();
+            </code>
+            </example>
+        </member>
+        <member name="M:NPlatform.MathExpression.#ctor(System.String)">
+            <summary>
+            表达试运算
+            </summary>
+            <param name="expression">表达试</param>
+        </member>
+        <member name="M:NPlatform.MathExpression.Compute(System.Double)">
+            <summary>
+            处理数据
+            </summary>
+            <param name="x"></param>
+            <returns>返回计算值</returns>
+        </member>
+    </members>
+</doc>

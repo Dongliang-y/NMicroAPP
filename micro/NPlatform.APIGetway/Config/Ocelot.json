@@ -1,21 +1,18 @@
 {
   "ReRoutes": [
     {
-      "UseServiceDiscovery": true,
-      "DownstreamPathTemplate": "/api",
-      "DownstreamScheme": "http",
-      "ServiceName": "N.Service",
-      "LoadBalancerOptions": { "Type": "RoundRobin" },
-      "UpstreamPathTemplate": "/api",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "ReRoutesCaseSensitive": false, // non case sensitive  
-    },
-    {
       "DownstreamPathTemplate": "/{url}",
       "UpstreamPathTemplate": "/{url}",
       "UpstreamHttpMethod": [
-        "Get"
+        "Get",
+        "Post",
+        "Delete",
+        "Put"
       ],
+      //RoundRobin轮流发送;
+      //LeastConnection – 将请求发往最空闲的那个服务器
+      //NoLoadBalance – 总是发往第一个请求或者是服务发现
+      "LoadBalancerOptions": { "Type": "RoundRobin" },
       "AddHeadersToRequest": {},
       "AddClaimsToRequest": {},
       "RouteClaimsRequirement": {},
@@ -25,43 +22,55 @@
         "TtlSeconds": 0,
         "Region": ""
       },
-      "ReRouteIsCaseSensitive": false,
+      "key": "router2",
+      "ReRouteIsCaseSensitive": false, // 是否区分大小写
       "ServiceName": "",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 51876
-        }
-      ],
-      "QoSOptions": {
-        "ExceptionsAllowedBeforeBreaking": 0,
-        "DurationOfBreak": 0,
-        "TimeoutValue": 0
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 51876
+      //  }
+      //],
+      "QoSOptions": { //服务质量与熔断,熔断的意思是停止将请求转发到下游服务。当下游服务已经出现故障的时候再请求也是无功而返，并且增加下游服务器和API网关的负担，这个功能是用的Polly来实现的，我们只需要为路由做一些简单配置即可
+        "ExceptionsAllowedBeforeBreaking": 0, // 允许多少个异常请求
+        "DurationOfBreak": 0, // 熔断时间
+        "TimeoutValue": 0 // 如果下游请求的处理时间超过多少则自动讲请求设置为超时
       },
       "LoadBalancer": "",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": false,
-        "Period": "",
-        "PeriodTimespan": 0,
-        "Limit": 0
+      "RateLimitOptions": { //限流设置
+        "ClientWhitelist": [], //客户端白名单
+        "EnableRateLimiting": true, //是否启用限流设置
+        "Period": "1s", //每次请求时间间隔
+        "PeriodTimespan": 15, //恢复的时间间隔
+        "Limit": 1 //请求数量
       },
-      "AuthenticationOptions": {
+      "AuthenticationOptions": { // 授权服务器？ key is identitykey by dongliang Yi
         "AuthenticationProviderKey": "",
         "AllowedScopes": []
       },
+
+      //"Aggregates": [ //请求聚合
+      //  {
+      //    "ReRouteKeys": [ //设置需要聚合的路由key
+      //      "booking",
+      //      "passenger"
+      //    ],
+      //    "UpstreamPathTemplate": "/api/getbookingpassengerinfo" //暴露给外部的聚合请求路径
+      //  }
+      //],
       "HttpHandlerOptions": {
         "AllowAutoRedirect": true,
         "UseCookieContainer": true,
         "UseTracing": true
       },
-      "UseServiceDiscovery": false,
+      "UseServiceDiscovery": true, //是否启用服务发现
       "DangerousAcceptAnyServerCertificateValidator": false
     }
   ],
   "GlobalConfiguration": {
-    "ServiceDiscoveryProvider": {
+    "BaseUrl": "https://localhost:5000", //网关基地址
+    "ServiceDiscoveryProvider": { // 服务注册管理的地址
       "Host": "localhost", // Consul Service IP 
       "Port": 8500 // Consul Service Port 
     }

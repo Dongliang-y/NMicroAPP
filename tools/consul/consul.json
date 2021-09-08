@@ -1,0 +1,50 @@
+{
+	
+    "encrypt": "7TnJPB4lKtjEcCWWjN6jSA==",
+  "datacenter": "dctest",
+  "data_dir": "./data",
+  "log_level": "INFO",
+  "node_name": "foobar",
+  "server": true,
+  "addresses": { "https": "127.0.0.1" },
+  "ports": { "https": 8080 },
+
+  "services": [
+
+    {
+
+      "id": "A-1:001",
+
+      "name": "svc1",
+
+      "tags": [ "svc1" ],
+
+      "address": "127.0.0.1",
+
+      "port": 5000,
+
+      "checks": [
+
+        {
+
+          "id": "A-1:001_check",
+
+          "name": "001_check",
+
+          "http": "http://127.0.0.1:5000/health",
+
+          "interval": "10s",
+
+          "tls_skip_verify": false,
+
+          "method": "GET",
+
+          "timeout": "1s"
+
+        }
+
+      ]
+
+  	}
+  ]
+}
