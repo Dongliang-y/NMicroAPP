@@ -1,6 +1,0 @@
-  FtpClient ftp = new FtpClient("190.2.4.200", "FECJ0", "090106", 
-20, 21);
-            ftp.Login();
-            ftp.QuoteFileType("jes");
-            ftp.Download("'PROD.BATCH.JCL(FECJ0AP1)'",@"C:
-\s.txt",false)
