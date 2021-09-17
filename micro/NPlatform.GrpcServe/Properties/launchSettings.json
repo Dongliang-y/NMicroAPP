@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "GrpcService": {
+    "NPlatform.GrpcServe": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
