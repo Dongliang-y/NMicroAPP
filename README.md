@@ -8,7 +8,7 @@
 * 尽量使用markdown 编写文档 ，最终使用 doctoc 插件生成目录
 
 
-## 技术栈约定
+## 技术栈
 * Mysql\redis\mongodb\InfluxDB
 * .NET CORE 5.0
 * EFCore
