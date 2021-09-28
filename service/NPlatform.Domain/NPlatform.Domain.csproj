@@ -8,4 +8,9 @@
     <Folder Include="DTO\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NPlatform" Version="1.0.0.1" />
+    <PackageReference Include="NPlatform.Infrastructure" Version="1.0.0.1" />
+  </ItemGroup>
+
 </Project>
