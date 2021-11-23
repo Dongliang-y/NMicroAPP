@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Sys\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NPlatform\NPlatform.Infrastructure\NPlatform.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\NPlatform\NPlatform\NPlatform.csproj" />
+  </ItemGroup>
+
+</Project>
