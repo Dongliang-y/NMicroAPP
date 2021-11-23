@@ -6,6 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
-    <PackageReference Include="DapperExtensions.Lambda" Version="3.0.0.19" />
+    <PackageReference Include="DapperExtensions.Lambda" Version="3.0.0.26-alpha" />
+    <PackageReference Include="NPlatform" Version="1.0.0.11-alpha" />
+    <PackageReference Include="NPlatform.Infrastructure" Version="1.0.0.10-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NPlatform.Domains\NPlatform.Domains.csproj" />
   </ItemGroup>
 </Project>

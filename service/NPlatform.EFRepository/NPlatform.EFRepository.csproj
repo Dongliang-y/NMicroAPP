@@ -11,6 +11,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.5" />
       <PackageReference Include="MySqlConnector" Version="0.61.0" />
+      <PackageReference Include="NPlatform" Version="1.0.0.11-alpha" />
+      <PackageReference Include="NPlatform.Infrastructure" Version="1.0.0.10-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NPlatform.Domains\NPlatform.Domains.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

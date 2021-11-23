@@ -45,10 +45,11 @@
         "PeriodTimespan": 15, //恢复的时间间隔
         "Limit": 1 //请求数量
       },
-      "AuthenticationOptions": { // 授权服务器？ key is identitykey by dongliang Yi
-        "AuthenticationProviderKey": "",
-        "AllowedScopes": []
-      },
+
+      //"AuthenticationOptions": { // 授权服务器？ key is identitykey by dongliang Yi
+      //  "AuthenticationProviderKey": "",
+      //  "AllowedScopes": []
+      //},
 
       //"Aggregates": [ //请求聚合
       //  {
@@ -69,7 +70,7 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000", //网关基地址
+    "BaseUrl": "https://localhost:8001", //网关基地址
     "ServiceDiscoveryProvider": { // 服务注册管理的地址
       "Host": "localhost", // Consul Service IP 
       "Port": 8500 // Consul Service Port 
