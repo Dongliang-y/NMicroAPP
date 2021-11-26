@@ -9,12 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Consul" Version="1.6.10.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="NPlatform" Version="1.0.0.13-alpha" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\NPlatform\NPlatform.Infrastructure\NPlatform.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\NPlatform\NPlatform\NPlatform.csproj" />
+    <PackageReference Include="NPlatform" Version="1.0.0.13-alpha" />
+    <PackageReference Include="NPlatform.Infrastructure" Version="1.0.0.10-alpha" />
     <ProjectReference Include="..\NPlatform.Domains\NPlatform.Domains.csproj" />
   </ItemGroup>
 
