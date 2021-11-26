@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using WXWorkFinanceApproveApp.Models;
 
-namespace WXWorkFinanceApproveApp.Services
+namespace NPlatform.Domains
 {
     public class AutoMapperProfile : Profile
     {
@@ -10,7 +9,7 @@ namespace WXWorkFinanceApproveApp.Services
         /// </summary>
         public AutoMapperProfile()
         {
-            CreateMap<TodoList, BackLog>().ForMember(x => x.title, z => z.MapFrom(y => y.field0001 + "，" + y.field0002 + "，" + y.field0003));
+         //   CreateMap<TodoList, BackLog>().ForMember(x => x.title, z => z.MapFrom(y => y.field0001 + "，" + y.field0002 + "，" + y.field0003));
         }
     }
 }
