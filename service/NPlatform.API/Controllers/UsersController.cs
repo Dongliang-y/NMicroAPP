@@ -8,6 +8,7 @@
  *  @version     2021/11/8 17:30:53  @Reviser  Initial Version
  **************************************************************/
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NPlatform.Domains.Entity.Sys;
 using NPlatform.Domains.IService.Sys;
 using NPlatform.DTO.Sys;
@@ -25,12 +26,16 @@ namespace NPlatform.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUserService userSvc;
+        public UsersController(ILogger<UsersController> loger, IUserService usvc)
+        {
+            UserSvc = usvc;
+        }
+        private IUserService UserSvc { get; set; }
         // GET: api/<UsersController>
         [HttpGet]
         public async Task<INPResult >Get()
         {
-            return await userSvc.GetAllAsync();
+            return await UserSvc.GetAllAsync();
         }
 
         // GET api/<UsersController>/5

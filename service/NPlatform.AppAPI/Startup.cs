@@ -33,7 +33,7 @@ namespace NPlatform.AppAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+          //  services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
             var svcConfig = Configuration.GetServiceConfig();
             services.AddHealthChecks().AddCheck<NHealthChecks>(svcConfig.ServiceName); ;
 
@@ -44,16 +44,15 @@ namespace NPlatform.AppAPI
             });
 
 #region NPlatform代码
-            NPlatformStartup.AddNPlatformConfig(new Repositories.RepositoryOptions()
-            {
-                DBProvider = DBProvider.MySqlClient,
-                 MainConection=Configuration.GetConnectionString("MainConection"), //使用简单的数据库集群
-                 MinorConnection=Configuration.GetConnectionString("MinorConnection")
-            }, Configuration);
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            NPlatformStartup.ConfigureContainer(builder, null, null);
+            NPlatformStartup.Configure(builder, new Repositories.RepositoryOptions()
+            {
+                DBProvider = DBProvider.MySqlClient,
+                MainConection = Configuration.GetConnectionString("MainConection"), //使用简单的数据库集群
+                MinorConnection = Configuration.GetConnectionString("MinorConnection")
+            }, Configuration);
         }
         #endregion
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

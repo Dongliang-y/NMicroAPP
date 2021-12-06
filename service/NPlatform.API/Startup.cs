@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -38,7 +40,7 @@ namespace NPlatform.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NPlatform.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NPlatform.API",  Version = "v1" });
             });
         }
         public void ConfigureContainer(ContainerBuilder builder)
@@ -49,6 +51,8 @@ namespace NPlatform.API
                 MainConection = Configuration.GetConnectionString("MainConection"), //使用简单的数据库集群
                 MinorConnection = Configuration.GetConnectionString("MinorConnection")
             }, Configuration);
+       //     builder.RegisterType<Configuration>().As<IConfiguration>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
+        //    builder.RegisterType<IConfiguration>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
         }
 
 
@@ -57,7 +61,7 @@ namespace NPlatform.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NPlatform.API v1"));
             }
@@ -124,12 +128,24 @@ namespace NPlatform.API
             ConsulClient consulClient = new ConsulClient(p => { p.Address = new Uri(Configuration.GetValue<string>("ConsulClient")); });
 
             var serviceConfig = Configuration.GetServiceConfig();
+            var urls = Configuration.GetValue<string>("Urls");
+            if(string.IsNullOrEmpty(urls))
+            {
+                throw new Exception("未配置服务监听地址");
+            }
 
+            var urlArray = urls.Split(";", StringSplitOptions.RemoveEmptyEntries);
+            if(urlArray.Length<1)
+            {
+                throw new Exception("未配置服务监听地址");
+            }
+
+            var uri = new Uri(urlArray[0].Replace("*","localhost"));
             var httpCheck = new AgentServiceCheck()
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//间隔固定的时间访问一次，https://localhost:44308/api/Health
-                HTTP = $"{serviceConfig.Address}:{serviceConfig.Port}/healthChecks",//健康检查地址 44308是visualstudio启动的端口
+                HTTP = $"{uri.Scheme}://{uri.Authority}/healthChecks",//健康检查地址 44308是visualstudio启动的端口
                 Timeout = TimeSpan.FromSeconds(5)
             };
 
@@ -138,8 +154,8 @@ namespace NPlatform.API
                 Checks = new[] { httpCheck },
                 ID =$"{serviceConfig.ServiceName}{serviceConfig.DataCenterID}_{serviceConfig.ServiceID}",
                 Name = serviceConfig.ServiceName,
-                Address = serviceConfig.Address,
-                Port = serviceConfig.Port,
+                Address = $"{uri}",
+                Port = uri.Port,
             };
             RegistrationID = registration.ID;
             consulClient.Agent.ServiceRegister(registration).Wait();//注册服务 
