@@ -32,6 +32,8 @@ namespace NPlatform.Repositories
     using NPlatform.Domains.Entity;
     using NPlatform.Domains.IRepositories;
     using NPlatform.Filters;
+    using NPlatform.Repositories.IRepositories;
+
     /// <summary>
     /// IUnitOfWork 的实现，此UnitOfWork 可以跨业务领域。
     /// </summary>
@@ -219,7 +221,7 @@ namespace NPlatform.Repositories
         /// <typeparam name="sql">需要执行的SQL</typeparam>
         /// <param name="parameters">参数对象</param>
         /// <returns>执行结果</returns>
-        public async virtual Task<IEnumerable<T>> QueryFromSql<T>(string sql, object parameters)
+        public async virtual Task<IEnumerable<T>> QueryFromSql<T>(string sql, object parameters) where T : class, IEntity
         {
             if (sql.IsNullOrEmpty()) return null;
             var result = await this.DBContext.QueryAsync<T>(sql, parameters, this.trans, this.Timeout);
@@ -227,10 +229,6 @@ namespace NPlatform.Repositories
             return result;
         }
 
-        Task<IEnumerable<T>> IUnitOfWork.QueryFromSql<T>(string sql, object parameters)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// 设置实体的过滤器属性

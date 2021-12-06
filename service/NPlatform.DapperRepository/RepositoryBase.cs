@@ -17,7 +17,7 @@ namespace NPlatform.Repositories
     using NPlatform.Domains.IRepositories;
     using NPlatform.Filters;
     using NPlatform.Infrastructure.Config;
-    using NPlatform.Repositories.Repositories;
+    using NPlatform.Repositories.IRepositories;
     using NPlatform.Result;
     using ServiceStack;
     using System;
@@ -37,9 +37,11 @@ namespace NPlatform.Repositories
     public  class RepositoryBase<TEntity, TPrimaryKey> : ResultBase, IRepository<TEntity, TPrimaryKey>
         where TEntity : EntityBase<TPrimaryKey>
     {
+
+        public ILogger loggerSvc;
+        public IConfiguration Config;
+
         private IRepositoryOptions _Options;
-        private ILogger loggerSvc;
-        private IConfiguration Config;
         private DPContext DBMain { get; set; }
         private DPContext DBMinor { get; set; }
 
