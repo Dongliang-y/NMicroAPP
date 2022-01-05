@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\NPlatform\NPlatform.Infrastructure\NPlatform.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\NPlatform\NPlatform\NPlatform.csproj" />
+    <PackageReference Include="NPlatform" Version="1.0.0.15" />
+    <PackageReference Include="NPlatform.Infrastructure" Version="1.0.0.10" />
   </ItemGroup>
 
 </Project>

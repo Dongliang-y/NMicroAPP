@@ -60,6 +60,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPlatform.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPlatform.Domains", "service\NPlatform.Domains\NPlatform.Domains.csproj", "{12692C75-ED6B-4857-8EB9-9298FA29A53A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "Tests\test\test.csproj", "{BD88249E-0652-456E-9587-55B03B0E28E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{12692C75-ED6B-4857-8EB9-9298FA29A53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12692C75-ED6B-4857-8EB9-9298FA29A53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12692C75-ED6B-4857-8EB9-9298FA29A53A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD88249E-0652-456E-9587-55B03B0E28E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD88249E-0652-456E-9587-55B03B0E28E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD88249E-0652-456E-9587-55B03B0E28E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD88249E-0652-456E-9587-55B03B0E28E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

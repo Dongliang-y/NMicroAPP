@@ -27,6 +27,7 @@ namespace NPlatform.Repositories
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -34,13 +35,9 @@ namespace NPlatform.Repositories
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TPrimaryKey">主键类型</typeparam>
-    public  class RepositoryBase<TEntity, TPrimaryKey> : ResultBase, IRepository<TEntity, TPrimaryKey>
+    public  class RepositoryBase<TEntity, TPrimaryKey> : ResultHelper, IRepository<TEntity, TPrimaryKey>
         where TEntity : EntityBase<TPrimaryKey>
     {
-
-        public ILogger loggerSvc;
-        public IConfiguration Config;
-
         private IRepositoryOptions _Options;
         private DPContext DBMain { get; set; }
         private DPContext DBMinor { get; set; }
@@ -63,15 +60,11 @@ namespace NPlatform.Repositories
         public RepositoryBase(IRepositoryOptions option)
         {
             _Options = option;
-            var serverConfig = Config.GetServiceConfig();
-            DBProvider provider;
-            if (Enum.TryParse(serverConfig.DBProvider, out provider))
+            //   loggerSvc = loger;
+            DBMain = new DPContext(option.MainConection, option.DBProvider, (int)option.TimeOut);
+            if (!option.MinorConnection.IsNullOrEmpty())
             {
-                DBMain = new DPContext(option.MainConection, option.DBProvider, (int)option.TimeOut);
-                if(!serverConfig.MinorConnection.IsNullOrEmpty())
-                {
-                    DBMinor = new DPContext(serverConfig.MinorConnection, provider, (int)option.TimeOut);
-                }
+                DBMinor = new DPContext(option.MinorConnection, option.DBProvider, (int)option.TimeOut);
             }
         }
 
@@ -167,6 +160,21 @@ namespace NPlatform.Repositories
         }
 
         /// <summary>
+        /// 异步修改
+        /// </summary>
+        /// <param name="item">修改的对象</param>
+        /// <returns><placeholder>A <see cref="Task"/> representing the asynchronous operation.</placeholder></returns>
+        public async Task<int> UpdateAsync(TEntity item)
+        {
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            return await this.CUDContext.UpdateAsync(item) ? 1 : 0;
+        }
+
+        /// <summary>
         /// create update delete
         /// </summary>
         private DPContext CUDContext
@@ -174,89 +182,6 @@ namespace NPlatform.Repositories
             get
             {
                 return this.DBMinor != null ? this.DBMinor : DBMain;
-            }
-        }
-        /// <summary>
-        /// 移除对象
-        /// </summary>
-        /// <param name="entity">对象</param>
-        /// <returns></returns>
-        public async Task<int> RemoveAsync(TEntity entity)
-        {
-            this.loggerSvc.LogTrace("删除了{0}数据ID：{1}", entity.GetType().Name, entity.Id.ToString());
-            var enabled = this.Options.QueryFilters.ContainsKey(nameof(LogicDeleteFilter));
-
-            if (typeof(ILogicDelete).IsAssignableFrom(typeof(TEntity)) && enabled)
-            {
-                ((ILogicDelete)entity).IsDeleted = true;
-
-                return await CUDContext.UpdateAsync(entity) ? 1 : 0;
-            }
-            else
-            {
-                return await CUDContext.DeleteAsync<TEntity>(entity);
-            }
-        }
-
-        /// <summary>
-        /// 键值删除
-        /// </summary>
-        public virtual async Task<int> RemoveAsync(params TPrimaryKey[] keys)
-        {
-            if (keys == null)
-            {
-                throw new ArgumentEmptyException(nameof(keys));
-            }
-
-            if (keys.Length == 0)
-            {
-                throw new ArgumentException("Argument is empty collection", nameof(keys));
-            }
-
-            Expression<Func<TEntity, bool>> exp = t => keys.Contains(t.Id);
-
-            return await this.RemoveAsync(exp);
-        }
-
-        /// <summary>
-        /// 条件删除
-        /// </summary>
-        /// <param name="filter">删除条件</param>
-        /// <returns>移除结果</returns>
-        public async Task<int> RemoveAsync(Expression<Func<TEntity, bool>> filter)
-        {
-            var enabled = this.Options.QueryFilters.ContainsKey(nameof(LogicDeleteFilter));
-            if (typeof(ILogicDelete).IsAssignableFrom(typeof(TEntity)) && enabled)
-            {
-                using (var unitwork = new UnitOfWork(Options))
-                {
-                    try
-                    {
-                        var entitys = await this.GetListByExpAsync(filter);
-                        foreach (var entity in entitys)
-                        {
-                            ((ILogicDelete)entity).IsDeleted = true;
-                            await unitwork.ChangeAsync(entity);
-                        }
-                        var keys = entitys.Select(t => t.Id);
-                        var ids = string.Join(",", keys);
-                        loggerSvc.LogTrace("删除{0}的数据：{1}，", typeof(TEntity).Name, keys);
-                        unitwork.Commit();
-                        return ids.Length;
-                    }
-                    catch
-                    {
-                        unitwork.Rollback();
-                        throw;
-                    }
-                }
-            }
-            else
-            {
-                var predicate = QueryBuilder<TEntity>.FromExpression(filter);
-
-                loggerSvc.LogTrace("删除{0}的数据：{1}，", typeof(TEntity).Name, filter.ToString());
-                return await CUDContext.DeleteAsync<TEntity>(predicate);
             }
         }
         #endregion
@@ -308,7 +233,7 @@ namespace NPlatform.Repositories
             IList<ISort> dapperSorts = null;
             if (sorts != null)
             {
-                dapperSorts = sorts.Select(t => new Sort { Ascending = t.Ascending, PropertyName = t.PropertyName })
+                dapperSorts = sorts.Select(t => new Sort { Ascending = t.IsAsc, PropertyName = t.Field })
                     .ToArray();
             }
 
@@ -412,7 +337,7 @@ namespace NPlatform.Repositories
             IList<ISort> dapperSorts = null;
             if (sorts != null)
             {
-                dapperSorts = sorts.Select(t => new Sort { Ascending = t.Ascending, PropertyName = t.PropertyName })
+                dapperSorts = sorts.Select(t => new Sort { Ascending = t.IsAsc, PropertyName = t.Field })
                     .ToArray();
             }
             var result=await this.DBMain.GetListAsync<TEntity>(predicate, dapperSorts);
@@ -441,7 +366,7 @@ namespace NPlatform.Repositories
             IList<ISort> dapperSorts = null;
             if (sorts != null)
             {
-                dapperSorts = sorts.Select(t => new Sort { Ascending = t.Ascending, PropertyName = t.PropertyName })
+                dapperSorts = sorts.Select(t => new Sort { Ascending = t.IsAsc, PropertyName = t.Field })
                     .ToArray();
             }
             var result = await this.DBMain.GetListAsync<TEntity>(predicate, dapperSorts);
@@ -472,7 +397,7 @@ namespace NPlatform.Repositories
             IList<ISort> dapperSorts = null;
             if (sorts != null)
             {
-                dapperSorts = sorts.Select(t => new Sort { Ascending = t.Ascending, PropertyName = t.PropertyName })
+                dapperSorts = sorts.Select(t => new Sort { Ascending = t.IsAsc, PropertyName = t.Field })
                     .ToArray();
             }
 
@@ -508,7 +433,7 @@ namespace NPlatform.Repositories
             IList<ISort> dapperSorts = null;
             if (sorts != null)
             {
-                dapperSorts = sorts.Select(t => new Sort { Ascending = t.Ascending, PropertyName = t.PropertyName })
+                dapperSorts = sorts.Select(t => new Sort { Ascending = t.IsAsc, PropertyName = t.Field })
                     .ToArray();
             }
             else

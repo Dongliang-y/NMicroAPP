@@ -33,10 +33,11 @@ namespace NPlatform.AppAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          //  services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+
+            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
             var svcConfig = Configuration.GetServiceConfig();
             services.AddHealthChecks().AddCheck<NHealthChecks>(svcConfig.ServiceName); ;
-
+          
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

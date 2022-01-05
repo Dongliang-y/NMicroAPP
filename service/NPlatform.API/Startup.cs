@@ -34,36 +34,36 @@ namespace NPlatform.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var serviceConfig=Configuration.GetServiceConfig();
+            // 1.替换controller管理对象。
+            // 2.注入 API.DLL 并注入 controller。
+            // controller 内就可以使用属性注入了。
+            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+
+            var serviceConfig = Configuration.GetServiceConfig();
             string serviceName = serviceConfig.ServiceName;
             services.AddHealthChecks().AddCheck<NHealthChecks>(serviceName); ;
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NPlatform.API",  Version = "v1" });
+                c.SwaggerDoc($"{ serviceConfig.ServiceName}_{ serviceConfig.ServiceVersion }", new OpenApiInfo { Title = serviceConfig.ServiceName, Version = serviceConfig.ServiceVersion });
             });
         }
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            NPlatformStartup.Configure(builder, new Repositories.RepositoryOptions()
-            {
-                DBProvider = DBProvider.MySqlClient,
-                MainConection = Configuration.GetConnectionString("MainConection"), //使用简单的数据库集群
-                MinorConnection = Configuration.GetConnectionString("MinorConnection")
-            }, Configuration);
-       //     builder.RegisterType<Configuration>().As<IConfiguration>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
-        //    builder.RegisterType<IConfiguration>().AsImplementedInterfaces().PropertiesAutowired().InstancePerLifetimeScope();
-        }
 
+        public void ConfigureContainer(ContainerBuilder builder) => builder.Configure(Configuration);
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.Extensions.Hosting.IHostApplicationLifetime aft)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+            Microsoft.Extensions.Hosting.IHostApplicationLifetime aft, ILoggerFactory loggerFactory)
         {
+            var serviceConfig = Configuration.GetServiceConfig();
+            // 添加日志Provider
+            loggerFactory.AddLog4Net();
+
             if (env.IsDevelopment())
             {
                  app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NPlatform.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/"+ $"{ serviceConfig.ServiceName}_{ serviceConfig.ServiceVersion }" + "/swagger.json", serviceConfig.ServiceName));
             }
             aft.ApplicationStarted.Register(() =>
             {

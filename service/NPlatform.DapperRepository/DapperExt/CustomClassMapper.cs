@@ -19,6 +19,7 @@ namespace NPlatform.Repositories.DapperExt
     using System.ComponentModel.DataAnnotations.Schema;
     using DapperExtensions.Mapper;
     using NPlatform.Domains;
+    using System.Reflection;
 
     /// <summary>
     /// Dapper Class Mapper
@@ -38,9 +39,17 @@ namespace NPlatform.Repositories.DapperExt
             // set tableName
             if (val != null)
             {
-                var schema = val.NamedArguments.FirstOrDefault(t => t.MemberName == "Schema").TypedValue.ToString();
-                var tableName = val.NamedArguments.FirstOrDefault(t => t.MemberName == "Name").TypedValue.ToString();
-                Schema(schema);
+
+                if (val.NamedArguments.Any(t => t.MemberName == "Schema"))
+                {
+                    var schema = val.NamedArguments.FirstOrDefault(t => t.MemberName == "Schema");
+                    if (schema.TypedValue.Value != null)
+                    {
+                        Schema(schema.TypedValue.Value.ToString());
+                    }
+                }
+
+                var tableName = val.ConstructorArguments.FirstOrDefault().Value.ToString();
                 Table(tableName);
             }
             // 3.自动映射GUID类型ID 成Varchar2,并把 IdString 设置为主键

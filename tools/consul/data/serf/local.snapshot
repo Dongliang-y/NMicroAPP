@@ -24,3 +24,11 @@ alive: foobar 127.0.0.1:8301
 event-clock: 12
 alive: foobar 127.0.0.1:8301
 event-clock: 13
+alive: foobar 127.0.0.1:8301
+event-clock: 14
+alive: foobar 127.0.0.1:8301
+event-clock: 15
+alive: foobar 127.0.0.1:8301
+event-clock: 16
+alive: foobar 127.0.0.1:8301
+event-clock: 17

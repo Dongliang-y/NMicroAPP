@@ -1,6 +1,6 @@
 ﻿/**************************************************************
  *  Filename:    HomeController.cs
- *  Copyright:    Co., Ltd.
+ *  Copyright:   .
  *
  *  Description: HomeController ClassFile.
  *
