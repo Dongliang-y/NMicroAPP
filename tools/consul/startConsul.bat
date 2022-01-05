@@ -1,1 +1,0 @@
-consul.exe agent -server -datacenter=dc1 -bootstrap  -ui -config-file ./consul.json -bind 127.0.0.1 -client=0.0.0.0
